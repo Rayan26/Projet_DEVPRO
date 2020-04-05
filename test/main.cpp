@@ -11,10 +11,9 @@ using namespace std;
 
 int main()
 {
-    vector<string> comp;
-    string* str = new string("C++");
-    Personne rayan("Kallab","Rayan","kallabr@gmail.com",13011,str);
-
+    //TEST FONCTION AFFICHAGE INFORMATION
+    vector<string> competence(4,"C++");
+    Personne rayan("Kallab","Rayan","kallabr@gmail.com",13011,competence);
     rayan.printInfo();
     
     return 0;

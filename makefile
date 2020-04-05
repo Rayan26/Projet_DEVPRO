@@ -1,6 +1,6 @@
 cc := g++
 
-.DEFAULT_GOAL := check
+.DEFAULT_GOAL := test
 
 # Efface tout les fichiers temporaires et les produits finaux.
 clean:
@@ -17,12 +17,9 @@ build/main.o: test/main.cpp | build/
 	$(cc) -Wall -pedantic -g -c test/main.cpp -I ./lib -o build/main.o
 
 build/test: build/main.o build/Personne.o | build/
-	$(cc) -o build/test build/main.o build/Personne.o
+	$(cc) -o build/test build/Personne.o build/main.o
 
 # S'assure de l'existence tout les programmes finaux (application, test, etc.)
 # Par exemple : all: build/test build/appli
 test: build/test
 
-# Lance le programme de test.
-check: build/test
-	build/test

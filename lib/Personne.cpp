@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-Personne::Personne(string nom, string prenom, string mail, int code,string* skill) : _nom(nom), _prenom(prenom), _mail(mail), _code(code),_skill(skill)
+Personne::Personne(string nom, string prenom, string mail, int code, vector<string> const& skill) : _nom(nom), _prenom(prenom), _mail(mail), _code(code),_skill(skill)
 {
 
 }
@@ -43,10 +43,10 @@ int Personne::getCode() const
     return this->_code;
 }
 
-string* Personne::getSkill() const
+vector<string> Personne::getSkill() const
 {   
     
-    return _skill;
+    return this->_skill;
 }
 
 void Personne::addCompetence(string const newcompetence)
@@ -61,10 +61,9 @@ void Personne::printInfo() const
     cout << "Mail : " << _mail << endl;
     cout << "Code Postal : " << _code << endl;
 
-    for(int i(0); i <= MAX_SKILL; ++i)
+    for(int i(1); i <= _skill.size(); ++i)
    {   
-    
-     cout << "Compétence : " << _skill[i] << endl;
+    cout << "Compétence " << i << " : " << _skill[i-1] << endl;
    }
     
 }
