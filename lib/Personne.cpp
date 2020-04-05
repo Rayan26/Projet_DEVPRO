@@ -4,17 +4,13 @@
 using namespace std;
 
 
-Personne::Personne() : nom("sans nom"), prenom("sans prenom"), mail("sans mail"),code(0),skill(vector<char> skill(5,"aucune"))
+
+Personne::Personne(string nom, string prenom, string mail, int code, vector<string>& skill) : _nom(nom), _prenom(prenom), _mail(mail), _code(code)
 {
 
 }
 
-Personne::Personne(string nom, string prenom, string mail, int code, std::vector<string>& skill) : nom(nom), prenom(prenom), mail(mail), code(code),skill(skill)
-{
-
-}
-
-Personne::Personne(const Personne &personne) : nom(personne.getNom), prenom(personne.getPrenom), mail(personne.getMail),code(personne.getCode),skill(personne.getSkill)
+Personne::Personne(const Personne &personne) : _nom(personne.getNom()), _prenom(personne.getPrenom()), _mail(personne.getMail()), _code(personne.getCode())
 {
 
 }
@@ -26,25 +22,31 @@ Personne::~Personne()
 
 string Personne::getNom() const
 {
-    return this->nom;
+    return this->_nom;
 }
 
 string Personne::getPrenom() const
 {
-    return this->prenom;
+    return this->_prenom;
 }
 
 string Personne::getMail() const
 {
-    return this->mail;
+    return this->_mail;
 }
 
 int Personne::getCode() const
 {
-    return this->code
+    return this->_code;
 }
 
-string Personne::getSkill() const
+vector<string> Personne::getSkill() const
 {
-    return this->skill;
+    return this->_skill;
 }
+
+void Personne::addCompetence(string const newcompetence)
+{   
+    this->_skill.push_back(newcompetence);
+}
+

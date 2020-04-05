@@ -10,7 +10,7 @@ Vous n'êtes pas dans l'obligation de garder exactment les mêmes équipes que p
 - [Objectif](#objectif)
 - [Spécifications fonctionelles](#sp%C3%A9cifications-fonctionelles)
     - [Fonctionalités pour une entreprise](#fonctionalit%C3%A9s-pour-une-entreprise)
-    - [Fonctionalités pour un chercheur d'emploi](#fonctionalit%C3%A9s-pour-un-chercheur-demploi)
+    - [Fonctionalités pour un chercheur d'emploi](#fonctionalit% C3%A9s-pour-un-chercheur-demploi)
     - [Fonctionalité pour un employé](#fonctionalit%C3%A9-pour-un-employ%C3%A9)
 - [Spécifications de conception](#sp%C3%A9cifications-de-conception)
     - [Interface](#interface)
