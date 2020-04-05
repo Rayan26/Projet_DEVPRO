@@ -1,11 +1,14 @@
 #include "Personne.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
 
 using namespace std;
 
 
 
-Personne::Personne(string nom, string prenom, string mail, int code, vector<string>& skill) : _nom(nom), _prenom(prenom), _mail(mail), _code(code)
+Personne::Personne(string nom, string prenom, string mail, int code,string* skill) : _nom(nom), _prenom(prenom), _mail(mail), _code(code),_skill(skill)
 {
 
 }
@@ -40,13 +43,28 @@ int Personne::getCode() const
     return this->_code;
 }
 
-vector<string> Personne::getSkill() const
-{
-    return this->_skill;
+string* Personne::getSkill() const
+{   
+    
+    return _skill;
 }
 
 void Personne::addCompetence(string const newcompetence)
 {   
-    this->_skill.push_back(newcompetence);
+    return;
 }
 
+void Personne::printInfo() const
+{   
+    cout <<""<< endl;
+    cout << "Monsieur : " << _nom <<"  "<< _prenom << endl;
+    cout << "Mail : " << _mail << endl;
+    cout << "Code Postal : " << _code << endl;
+
+    for(int i(0); i <= MAX_SKILL; ++i)
+   {   
+    
+     cout << "Compétence : " << _skill[i] << endl;
+   }
+    
+}

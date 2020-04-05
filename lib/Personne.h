@@ -4,23 +4,25 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#define MAX_SKILL 10
 
 class Personne
 {
     public:
 
-    Personne() : _skill(5) {};
-    Personne(std::string nom,std::string prenom,std::string mail, int code, std::vector<std::string>& skill);
+    Personne();
+    Personne(std::string nom,std::string prenom,std::string mail, int code,std::string* skill);
     Personne(Personne const &personne);
     ~Personne();
     
-   
+    
     std::string getNom() const;
     std::string getPrenom() const;
     std::string getMail() const;
     int getCode() const;
-    std::vector<std::string> getSkill() const;
+    std::string* getSkill() const;
     void addCompetence(std::string const newcompetence);
+    void printInfo() const;
 
     private:
 
@@ -28,7 +30,7 @@ class Personne
     std::string _prenom;
     std::string _mail;
     int _code;
-    std::vector<std::string> _skill;
+    std::string* _skill;
 };
 
 #endif
