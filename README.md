@@ -134,7 +134,7 @@ Lorsqu'un un employé quitte ou perd son emploi et est en recherche d'emploi, so
 - [ ] Transitionner le profil «employé» vers «chercheur d'emploi»
     - [ ] Les employé(e)s de l'entreprise quittée s'ajoutent automatiquement à liste des ancien(ne)s collègues de travail
 - [ ] Supprimer le profil
-- [ ] Rechercher parmi les les postes à pourvoir qui correspondent au profil de l'employé
+- [ ] Rechercher parmi les postes à pourvoir qui correspondent au profil de l'employé
     - [ ] Recherche par compétences
     - [ ] Recherche par compétences et code postal
     - [ ] Résultats

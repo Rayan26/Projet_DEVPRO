@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Entreprise.h"
+#include "Poste.h"
 #define MAX_SKILL 4
 
 class Personne
@@ -23,6 +25,13 @@ class Personne
     std::vector<std::string> getSkill() const;
     void addCompetence(std::string const newcompetence);
     void printInfo() const;
+    void setCode(int newcode);
+
+    Poste searchJobBySkill(std::vector<std::string> skill);
+    Poste searchJobByCodeSkill(std::vector<std::string> skill, int code);
+    Personne searchFriendByEnterprise(Entreprise entreprise);
+    Personne searchFriendBySkill(std::vector<std::string> skill);
+
 
     private:
 

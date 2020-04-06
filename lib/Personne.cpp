@@ -51,7 +51,7 @@ vector<string> Personne::getSkill() const
 
 void Personne::addCompetence(string const newcompetence)
 {   
-    return;
+    this->_skill.push_back(newcompetence);
 }
 
 void Personne::printInfo() const
@@ -66,4 +66,9 @@ void Personne::printInfo() const
     cout << "Compétence " << i << " : " << _skill[i-1] << endl;
    }
     
+}
+
+void Personne::setCode(int newcode)
+{
+    this->_code = newcode;
 }
