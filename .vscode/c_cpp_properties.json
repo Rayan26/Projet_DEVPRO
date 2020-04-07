@@ -3,7 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/"
             ],
             "defines": [],
             "macFrameworkPath": [
@@ -16,7 +16,10 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/",
+                "/usr/include",
+                "/usr/lib/gcc/x86_64-redhat-linux/9/include",
+                "/usr/include/sys"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

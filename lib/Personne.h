@@ -13,7 +13,6 @@ class Personne
 {
     public:
 
-    Personne();
     Personne(std::string nom,std::string prenom,std::string mail, int code,std::vector<std::string> const& skill);
     Personne(Personne const &personne);
     ~Personne();
