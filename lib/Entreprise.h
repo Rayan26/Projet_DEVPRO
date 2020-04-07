@@ -6,18 +6,13 @@
 #include <vector>
 #include "Poste.h"
 
-
-
 class Entreprise
 {
-    public:
-
-    Entreprise();
-    Entreprise(std::string nom,int code,std::string mail,std::vector<Poste> Jobs);
+public:
+    Entreprise(std::string nom, int code, std::string mail);
     Entreprise(Entreprise const &entreprise);
     ~Entreprise();
-    
-    
+
     std::string getNom() const;
     std::string getMail() const;
     int getCode() const;
@@ -25,16 +20,12 @@ class Entreprise
     void addJob(std::string const newjob);
     void deleteJob(Poste poste);
     void printEntreprise() const;
-   
 
-    
-
-    private:
-
+private:
     std::string _nom;
     int _code;
     std::string _mail;
-    
+
     std::vector<Poste> _Jobs;
 };
 

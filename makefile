@@ -33,3 +33,4 @@ build/test: build/main.o build/Poste.o build/Entreprise.o build/Personne.o build
 # S'assure de l'existence tout les programmes finaux (application, test, etc.)
 # Par exemple : all: build/test build/appli
 test: build/test
+
