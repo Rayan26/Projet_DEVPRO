@@ -4,16 +4,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Personne.h>
-#include <Employer.h>
+#include "Employer.h"
 
-class Chomeur: public Personne
+#include "Personne.h"
+
+
+class Chomeur : public Personne
 {
     public:
+    
     Chomeur();
-    Chomeur(Personne const &personne);
+
     ~Chomeur();
-    Employer transition();
     
     private:
 

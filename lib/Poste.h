@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Entreprise.h"
 
 
 class Poste
@@ -13,7 +12,6 @@ class Poste
 
     Poste();
     Poste(std::string nom,std::string entreprise,std::string mail_entreprise,int code);
-    Poste(Entreprise const &entreprise);
     ~Poste();
     
     
@@ -30,7 +28,6 @@ class Poste
     std::string _Mail_Entreprise;
     int _code_Entreprise; 
     
-    std::vector<Poste> _Jobs;
 };
 
 #endif

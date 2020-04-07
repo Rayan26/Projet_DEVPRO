@@ -4,6 +4,10 @@
 #include <cmath>
 #include <vector>
 #include "Personne.h"
+#include "Entreprise.h"
+#include "Poste.h"
+#include "Chomeur.h"
+#include "Employer.h"
 
 
 

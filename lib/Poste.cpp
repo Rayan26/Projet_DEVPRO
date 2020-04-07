@@ -12,12 +12,6 @@ Poste::Poste(std::string nom, std::string entreprise, std::string mail_entrepris
 
 }
 
-Poste::Poste(Entreprie const & entreprise)
-{
-
-}
-
-
 string Poste::getTitre() const
 {
 

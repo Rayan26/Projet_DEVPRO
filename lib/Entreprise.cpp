@@ -6,31 +6,31 @@ Entreprise::Entreprise()
 {
 
 }
-Entreprise::Entreprise(std::string nom, int code, std::string mail, std::vector<std::Poste> Jobs)
+Entreprise::Entreprise(std::string nom, int code, std::string mail, std::vector<Poste> Jobs)
 {
 
 }
-Entreprise::Entreprise(Entreprie const & entreprise)
-{
-
-}
-
-string Personne::getNom() const
+Entreprise::Entreprise(Entreprise const & entreprise)
 {
 
 }
 
-string Personne::getMail() const
+string Entreprise::getNom() const
 {
 
 }
 
-int Personne::getCode() const
+string Entreprise::getMail() const
 {
 
 }
 
-vector<Poste> getJobs() const
+int Entreprise::getCode() const
+{
+
+}
+
+vector<Poste> getJobs() 
 {
 
 }
@@ -47,5 +47,6 @@ void Entreprise::deleteJob(Poste poste)
 
 void Entreprise::printEntreprise() const
 {
-    
+
 }
+

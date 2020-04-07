@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "Poste.h"
-#include "Chomeur.h"
+
 
 
 class Entreprise
@@ -21,14 +21,12 @@ class Entreprise
     std::string getNom() const;
     std::string getMail() const;
     int getCode() const;
-    std::vector<Poste> getJobs() const;
+    std::vector<Poste> getJobs();
     void addJob(std::string const newjob);
     void deleteJob(Poste poste);
     void printEntreprise() const;
    
 
-    Chomeur searchBySkill(std::vector<std::string> skill);
-    Chomeur searchJobByCodeSkill(std::vector<std::string> skill, int code);
     
 
     private:
