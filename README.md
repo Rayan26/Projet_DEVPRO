@@ -1,4 +1,4 @@
-![](https://github.com/thierryseegers/DevCommeLesPros-2020-Projet/workflows/Test%20master/badge.svg)
+![](https://github.com/Rayan26/DevCommeLesPros-2020-Projet/workflows/Test%20master/badge.svg)
 
 # DevCommeLesPros-2020-Projet
 
@@ -10,7 +10,7 @@ Vous n'êtes pas dans l'obligation de garder exactment les mêmes équipes que p
 - [Objectif](#objectif)
 - [Spécifications fonctionelles](#sp%C3%A9cifications-fonctionelles)
     - [Fonctionalités pour une entreprise](#fonctionalit%C3%A9s-pour-une-entreprise)
-    - [Fonctionalités pour un chercheur d'emploi](#fonctionalit%C3%A9s-pour-un-chercheur-demploi)
+    - [Fonctionalités pour un chercheur d'emploi](#fonctionalit% C3%A9s-pour-un-chercheur-demploi)
     - [Fonctionalité pour un employé](#fonctionalit%C3%A9-pour-un-employ%C3%A9)
 - [Spécifications de conception](#sp%C3%A9cifications-de-conception)
     - [Interface](#interface)
@@ -134,7 +134,7 @@ Lorsqu'un un employé quitte ou perd son emploi et est en recherche d'emploi, so
 - [ ] Transitionner le profil «employé» vers «chercheur d'emploi»
     - [ ] Les employé(e)s de l'entreprise quittée s'ajoutent automatiquement à liste des ancien(ne)s collègues de travail
 - [ ] Supprimer le profil
-- [ ] Rechercher parmi les les postes à pourvoir qui correspondent au profil de l'employé
+- [ ] Rechercher parmi les postes à pourvoir qui correspondent au profil de l'employé
     - [ ] Recherche par compétences
     - [ ] Recherche par compétences et code postal
     - [ ] Résultats
