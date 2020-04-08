@@ -38,3 +38,6 @@ build/test: build/main.o build/Poste.o build/Entreprise.o build/Personne.o build
 test: build/test
 
 all: test
+
+check: test 
+	build/test
