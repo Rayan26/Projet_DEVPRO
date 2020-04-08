@@ -9,11 +9,12 @@
 #include "Personne.h"
 
 
+
 class Chomeur : public Personne
 {
     public:
     
-    Chomeur();
+    Chomeur(std::string nom, std::string prenom, std::string mail, int code, std::vector<std::string> const& skill);
 
     ~Chomeur();
     
