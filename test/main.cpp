@@ -8,6 +8,7 @@
 #include "Poste.h"
 #include "Chomeur.h"
 #include "Employer.h"
+#include "menu.h"
 
 
 
@@ -16,6 +17,7 @@ using namespace std;
 
 int main()
 {
+/*
     //TEST FONCTION AFFICHAGE INFORMATION
     vector<string> competence(1,"C++");
     Personne rayan("Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
@@ -34,5 +36,8 @@ int main()
     vector<string> competence_julien(1,"Python");
     Chomeur julien("Raige-Verger", "Julien", "julien.raige@gmail.com", 06600, competence_julien);
     julien.printInfo();
+*/
+    affichage_menu_principal();
+    
     return 0;
 }
