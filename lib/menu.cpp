@@ -7,6 +7,7 @@ using namespace std;
 
 int onInputPrincipal()
 {
+	int i = 0 ;
 	char input ;
 	
 	cin >> input ;
