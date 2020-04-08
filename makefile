@@ -6,7 +6,7 @@ cc := g++
 clean:
 	rm -rf build
 # Crée le répertoire qui acceuille les fichiers temporaires et les produits finaux.
-build:
+build/:
 	mkdir -p build
 
 build/Poste.o: lib/Poste.cpp | build/
@@ -33,3 +33,4 @@ build/test: build/main.o build/Poste.o build/Entreprise.o build/Personne.o build
 # S'assure de l'existence tout les programmes finaux (application, test, etc.)
 # Par exemple : all: build/test build/appli
 test: build/test
+
