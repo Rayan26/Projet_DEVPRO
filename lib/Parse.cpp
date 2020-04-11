@@ -15,7 +15,7 @@ using namespace std;
 vector<Chomeur> Create_Chomeur()
 {   
    vector<Chomeur> Chomeurs;
-   string info;
+   
    ifstream fichier("CSV/chomeur.csv");
    int i=0; //numero ligne
 
@@ -27,14 +27,17 @@ vector<Chomeur> Create_Chomeur()
       while(getline(fichier, ligne)) 
       {  
          stringstream ss(ligne);
+         
+         string info;
          int j=0; //numero colonne
-         vector<string> competence(1,"C++"); 
-         Chomeur new_Chomeur(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
+         vector<string> competence(0); 
+         Chomeur new_Chomeur(1," "," "," ",0,competence);
 
 
          while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
         {  
-           
+           stringstream zz(info);
+           string comp;
             switch ( j )
                {
                   case 0:
@@ -57,12 +60,28 @@ vector<Chomeur> Create_Chomeur()
                   new_Chomeur.setCode(stoi(info));
                   ++j;
                      break;
+                  case 5:
+                  while(getline(zz,comp,';')) 
+                  {  
+                     new_Chomeur.addCompetence(comp);
+                  }
+                  ++j;
+                     break;
+                  case 6:
+                  while(getline(zz,comp,';')) 
+                  {  
+                     new_Chomeur.addCollegue(stoi(info));
+                  }
+                  ++j;
+                     break;
                   default:
                      break;
                }
                
         }
         new_Chomeur.printInfo();
+        Chomeurs.push_back(new_Chomeur);
+
         ++i;
       }
       

@@ -82,10 +82,15 @@ void Personne::addCompetence(string const newcompetence)
     this->_skill.push_back(newcompetence);
 }
 
+void Personne::addCollegue(int const newcollegue)
+{
+    this->_IdCollegue.push_back(newcollegue);
+}
+
 void Personne::printInfo() const
 {   
     cout <<""<< endl;
-    cout << "ID : " << _id <<"  "<< _prenom << endl;
+    cout << "ID : " << _id << endl;
     cout << "Monsieur : " << _nom <<"  "<< _prenom << endl;
     cout << "Mail : " << _mail << endl;
     cout << "Code Postal : " << _code << endl;
@@ -93,6 +98,11 @@ void Personne::printInfo() const
     for(int i(1); i <= _skill.size(); ++i)
    {   
     cout << "Compétence " << i << " : " << _skill[i-1] << endl;
+   }
+
+   for(int i(1); i <= _IdCollegue.size(); ++i)
+   {   
+    cout << "ID du collègue n°" << i << " : " << _IdCollegue[i-1] << endl;
    }
     
 }

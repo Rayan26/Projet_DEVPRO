@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include "Entreprise.h"
 
 #include "Personne.h"
 

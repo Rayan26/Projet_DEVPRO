@@ -4,12 +4,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Entreprise.h"
-#include "Poste.h"
+
+
 
 #define MAX_SKILL 4
 
-class Personne
+class Personne 
 {
     public:
 
@@ -29,6 +29,7 @@ class Personne
     void setMail(std::string newmail);
     void setCode(int newcode);
     void addCompetence(std::string const newcompetence);
+    void addCollegue(int const newcollegue);
     void printInfo() const;
     
 
@@ -42,6 +43,7 @@ class Personne
     std::string _mail;
     int _code;
     std::vector<std::string> _skill;
+    std::vector<int> _IdCollegue;
 };
 
 #endif
