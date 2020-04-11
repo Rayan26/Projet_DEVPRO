@@ -9,6 +9,7 @@
 #include "Chomeur.h"
 #include "Employer.h"
 #include "menu.h"
+#include "Parse.h"
 
 
 
@@ -36,8 +37,10 @@ int main()
     vector<string> competence_julien(1,"Python");
     Chomeur julien("Raige-Verger", "Julien", "julien.raige@gmail.com", 06600, competence_julien);
     julien.printInfo();
-*/
-    affichage_menu_principal();
-    
+*/  
+   // affichage_menu_principal();
+
+   
+    vector<Chomeur> Chomeurs = Create_Chomeur();  
     return 0;
 }
