@@ -12,7 +12,6 @@ class Employer : public Personne
 {
     public:
    
-    
     private:
     Entreprise _enterprise;
 };

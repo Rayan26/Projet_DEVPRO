@@ -6,10 +6,16 @@ Entreprise::Entreprise()
 {
 
 }
-Entreprise::Entreprise(std::string nom, int code, std::string mail, std::vector<Poste> Jobs)
+Entreprise::Entreprise(int id, std::string nom, int code, std::string mail, std::vector<Poste> Jobs)
 {
 
 }
+
+int Entreprise::getId() const
+{
+
+}
+
 Entreprise::Entreprise(Entreprise const & entreprise)
 {
 

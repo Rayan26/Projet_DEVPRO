@@ -21,7 +21,7 @@ int main()
 /*
     //TEST FONCTION AFFICHAGE INFORMATION
     vector<string> competence(1,"C++");
-    Personne rayan("Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
+    Personne rayan(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
     rayan.printInfo();
 
     //TEST FONCTION AJOUT COMPETENCE

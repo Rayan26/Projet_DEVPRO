@@ -13,11 +13,11 @@ class Entreprise
     public:
 
     Entreprise();
-    Entreprise(std::string nom,int code,std::string mail,std::vector<Poste> Jobs);
+    Entreprise(int id,std::string nom,int code,std::string mail,std::vector<Poste> Jobs);
     Entreprise(Entreprise const &entreprise);
     ~Entreprise();
     
-    
+    int getId() const;
     std::string getNom() const;
     std::string getMail() const;
     int getCode() const;
