@@ -4,16 +4,22 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Entreprise.h"
+
 
 #include "Personne.h"
 
 class Employer : public Personne
 {
     public:
-   
+    
+    Employer(int id, std::string nom, std::string prenom, std::string mail, int code, std::vector<std::string> const& skill);
+    int getIdEntreprise() const;
+    void setIdEntreprise(int newid);
+    void printEmployeur() const;
+
+
     private:
-    Entreprise _enterprise;
+    int _idEntreprise;
 };
 
 #endif

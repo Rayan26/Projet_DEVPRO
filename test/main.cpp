@@ -41,6 +41,12 @@ int main()
    // affichage_menu_principal();
 
    
-    vector<Chomeur> Chomeurs = Create_Chomeur();  
+    cout << "Génération des personnes sans-emplois ..." << endl << endl;
+    vector<Chomeur> Chomeurs = Create_Chomeur(); 
+    cout << " " << endl;
+
+    cout << "Génération des employés ..." << endl << endl;
+    vector<Employer> Employers = Create_Employer();  
+    cout << " " << endl;
     return 0;
 }
