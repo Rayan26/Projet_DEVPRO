@@ -10,19 +10,22 @@ class Poste
 {
     public:
 
-    Poste();
-    Poste(std::string nom,std::string entreprise,std::string mail_entreprise,int code);
+    
+    Poste(int id, std::string Titre,std::string entreprise,std::string mail_entreprise,int code);
     ~Poste();
     
-    
+    int getId() const;
     std::string getTitre() const;
     std::string getEntreprise() const;
     std::string getMail() const;
     int getCode() const;
+    void setId(int newId); 
     void printPoste() const;
    
     private:
 
+    int _id;
+    int _code;
     std::string _Titre;
     std::string _Entreprise;
     std::string _Mail_Entreprise;

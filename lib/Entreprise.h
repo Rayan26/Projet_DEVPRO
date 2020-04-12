@@ -6,36 +6,37 @@
 #include <vector>
 #include "Poste.h"
 
-
-
 class Entreprise
 {
-    public:
-
-    Entreprise();
-    Entreprise(int id,std::string nom,int code,std::string mail,std::vector<Poste> Jobs);
+public:
+    Entreprise(int ID, std::string nom, int code, std::string mail);
     Entreprise(Entreprise const &entreprise);
     ~Entreprise();
-    
+
     int getId() const;
     std::string getNom() const;
     std::string getMail() const;
     int getCode() const;
     std::vector<Poste> getJobs();
-    void addJob(std::string const newjob);
+    void setId(int newid);
+    void setNom(std::string newnom);
+    void setMail(std::string newmail);
+    void setCode(int newcode);
+    void printInfo() const;
+
+    void addJob(int Id,std::string const newjob);
     void deleteJob(Poste poste);
-    void printEntreprise() const;
-   
+    void addEmploye(int Id_employe);
+    void deleteEmploye(int Id_employe);
 
-    
-
-    private:
-
+private:
+    int _id;
     std::string _nom;
-    int _code;
     std::string _mail;
-    
+    int _code;
+
     std::vector<Poste> _Jobs;
+    std::vector<int> _idEmployer;
 };
 
 #endif
