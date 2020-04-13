@@ -34,9 +34,9 @@ int Entreprise::getCode() const
 	return this->_code;
 }
 
-vector<Poste> Entreprise::getJobs()
+vector<int> Entreprise::getJobs()
 {
-	return this->_Jobs;
+	return this->_idJobs;
 }
 
 void Entreprise::setId(int newid)
@@ -67,17 +67,20 @@ void Entreprise::printInfo() const
 	cout << "Mail : " << _mail << endl;
 	cout << "Code Postal : " << _code << endl;
 
+
 	cout << "Liste des Employés de l'entreprise :" << endl;
 	for (int i(1); i <= _idEmployer.size(); ++i)
 	{
 		cout << "ID de l'employé n°" << i << " : " << _idEmployer[i - 1] << endl;
 	}
 
-	cout << "Liste des Postes à Pourvoir par l'entreprise" << endl;
-	for (int i(1); i <= _Jobs.size(); ++i)
+	cout << "Liste des Postes à Pourvoir par l'entreprise : " << endl;
+	for (int i(1); i <= _idJobs.size(); ++i)
 	{
-		cout << "Titre : " << _Jobs[i - 1].getTitre() << endl;
+		cout << "ID du Poste : " << _idJobs[i - 1] << endl;
 	}
+
+	
 }
 
 

@@ -48,5 +48,10 @@ int main()
     cout << "Génération des employés ..." << endl << endl;
     vector<Employer> Employers = Create_Employer();  
     cout << " " << endl;
+
+    cout << "Génération des entreprises ..." << endl << endl;
+    vector<Entreprise> Entreprises = Create_Entreprise();  
+    cout << " " << endl;
+    
     return 0;
 }

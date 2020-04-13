@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Poste.h"
+
+
 
 class Entreprise
 {
@@ -17,7 +18,7 @@ public:
     std::string getNom() const;
     std::string getMail() const;
     int getCode() const;
-    std::vector<Poste> getJobs();
+    std::vector<int> getJobs();
     void setId(int newid);
     void setNom(std::string newnom);
     void setMail(std::string newmail);
@@ -25,7 +26,7 @@ public:
     void printInfo() const;
 
     void addJob(int Id,std::string const newjob);
-    void deleteJob(Poste poste);
+    void deleteJob(int idPoste);
     void addEmploye(int Id_employe);
     void deleteEmploye(int Id_employe);
 
@@ -35,7 +36,7 @@ private:
     std::string _mail;
     int _code;
 
-    std::vector<Poste> _Jobs;
+    std::vector<int> _idJobs;
     std::vector<int> _idEmployer;
 };
 

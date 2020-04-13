@@ -7,6 +7,7 @@
 
 
 #include "Employer.h"
+#include "Entreprise.h"
 
 #include "Chomeur.h"
 using namespace std; 
@@ -189,3 +190,69 @@ vector<Employer> Create_Employer()
    return Employers;
 }
 
+vector<Entreprise> Create_Entreprise()
+{   
+   vector<Entreprise> Entreprises;
+   
+   ifstream fichier("CSV/entreprise.csv");
+   int i=0; //numero ligne
+
+   if(fichier)
+   {  
+      
+      string ligne; 
+
+      while(getline(fichier, ligne)) 
+      {  
+         stringstream ss(ligne);
+         
+         string info;
+         int j=0; //numero colonne
+         Entreprise new_Entreprise(1," ",0," ");
+
+
+         while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
+        {  
+           
+            switch ( j )
+               {
+                  case 0:
+                  new_Entreprise.setId(stoi(info));
+                  ++j;
+                     break;
+                  case 1:
+                  new_Entreprise.setNom(info);
+                  ++j;
+                     break;
+                  case 2:
+                  new_Entreprise.setCode(stoi(info));
+                  ++j;
+                     break;
+                  case 3:
+                  new_Entreprise.setMail(info);
+                  ++j;
+                     break;
+                 
+                  default:
+                     break;
+               }
+               
+        }
+
+        if( i != 0 )
+        {
+           new_Entreprise.printInfo();
+           Entreprises.push_back(new_Entreprise);
+        }
+
+        ++i;
+      }
+      
+   }
+   else
+   {
+      cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
+   }
+
+   return Entreprises;
+}
