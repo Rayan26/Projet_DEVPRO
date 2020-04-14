@@ -60,6 +60,13 @@
         "locale": "cpp",
         "mutex": "cpp",
         "ratio": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "fstream": "cpp",
+        "__errc": "cpp",
+        "__node_handle": "cpp",
+        "bit": "cpp",
+        "deque": "cpp",
+        "optional": "cpp",
+        "stack": "cpp"
     }
 }
