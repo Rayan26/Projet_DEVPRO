@@ -53,5 +53,10 @@ int main()
     vector<Entreprise> Entreprises = Create_Entreprise();  
     cout << " " << endl;
     
+    cout << "Génération des postes à pourvoir ..." << endl << endl;
+    vector<Poste> Postes = Create_Poste();  
+    cout << " " << endl;
+    
+
     return 0;
 }

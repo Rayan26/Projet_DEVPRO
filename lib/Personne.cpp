@@ -90,7 +90,7 @@ void Personne::addCollegue(int const newcollegue)
 void Personne::printInfo() const
 {   
     cout <<""<< endl;
-    cout << "ID : " << _id << endl;
+    cout << "ID de la personne : " << _id << endl;
     cout << "Monsieur : " << _nom <<"  "<< _prenom << endl;
     cout << "Mail : " << _mail << endl;
     cout << "Code Postal : " << _code << endl;

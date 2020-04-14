@@ -10,27 +10,26 @@ class Poste
 {
     public:
 
-    
-    Poste(int id, std::string Titre,std::string entreprise,std::string mail_entreprise,int code);
+    Poste(int id, std::string Titre,int idEntreprise);
     ~Poste();
     
     int getId() const;
     std::string getTitre() const;
-    std::string getEntreprise() const;
+    int getIdEntreprise() const;
     std::string getMail() const;
-    int getCode() const;
     void setId(int newId); 
-    void printPoste() const;
+    void setTitre(std::string newTitre);
+    void setIdEntreprise(int newId);
+    void addCompetence(std::string newcomp);
+    void printInfo() const;
    
     private:
 
     int _id;
-    int _code;
     std::string _Titre;
-    std::string _Entreprise;
-    std::string _Mail_Entreprise;
-    int _code_Entreprise; 
-    
+    int _idEntreprise; 
+    std::vector<std::string> _Competences; 
 };
 
 #endif
+

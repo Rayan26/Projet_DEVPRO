@@ -2,14 +2,16 @@
 
 using namespace std;
 
-Poste::Poste(int id, std::string Titre, std::string entreprise, std::string mail_entreprise, int code): _id(id), _Titre(Titre),_Entreprise(entreprise), _Mail_Entreprise(mail_entreprise), _code(code)
+Poste::Poste(int id, std::string Titre, int idEntreprise): _id(id), _Titre(Titre),_idEntreprise(idEntreprise)
 {
+
 }
 
 Poste::~Poste()
 {
 
 }
+
 int Poste::getId() const
 {
 	return this->_id;  
@@ -20,19 +22,9 @@ string Poste::getTitre() const
 	return this->_Titre;
 }
 
-string Poste::getEntreprise() const
+int Poste::getIdEntreprise() const
 {
-	return this->_Entreprise;
-}
-
-string Poste::getMail() const
-{
-	return this->_Mail_Entreprise;
-}
-
-int Poste::getCode() const
-{
-	    return this->_code;
+	return this->_idEntreprise;
 }
 
 void Poste::setId(int newId)
@@ -40,6 +32,33 @@ void Poste::setId(int newId)
 	this->_id = newId;
 }
 
-void Poste::printPoste() const
+void Poste::setTitre(string newTitre)
 {
+	this->_Titre = newTitre;
+}
+
+void Poste::setIdEntreprise(int newId)
+{
+	this->_idEntreprise = newId;
+}
+
+void Poste::addCompetence(string const newcompetence)
+{
+	this->_Competences.push_back(newcompetence);
+}
+
+void Poste::printInfo() const
+{ 
+	cout <<""<< endl;
+    cout << "ID du poste : " << _id << endl;
+    cout << "Titre du poste : " << _Titre << endl;
+    
+    
+cout << " Compétence requise pour ce poste : "<< endl;
+    for(int i(1); i <= _Competences.size(); ++i)
+   {   
+    cout << "  " << _Competences[i-1] << endl;
+   }
+
+   cout << "ID de l'entreprise chez qui le poste est à pourvoir : " << _idEntreprise << endl;
 }
