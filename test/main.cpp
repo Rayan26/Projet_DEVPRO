@@ -10,15 +10,13 @@
 #include "Employer.h"
 #include "menu.h"
 #include "Parse.h"
-
-
+#include "Service.h"
 
 using namespace std;
 
-
 int main()
 {
-/*
+    /*
     //TEST FONCTION AFFICHAGE INFORMATION
     vector<string> competence(1,"C++");
     Personne rayan(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
@@ -37,26 +35,31 @@ int main()
     vector<string> competence_julien(1,"Python");
     Chomeur julien("Raige-Verger", "Julien", "julien.raige@gmail.com", 06600, competence_julien);
     julien.printInfo();
-*/  
-   // affichage_menu_principal();
+*/
+    // affichage_menu_principal();
 
-   
-    cout << "Génération des personnes sans-emplois ..." << endl << endl;
-    vector<Chomeur> Chomeurs = Create_Chomeur(); 
-    cout << " " << endl;
-
-    cout << "Génération des employés ..." << endl << endl;
-    vector<Employer> Employers = Create_Employer();  
+    cout << "Génération des personnes sans-emplois ..." << endl
+         << endl;
+    vector<Chomeur> Chomeurs = Create_Chomeur();
     cout << " " << endl;
 
-    cout << "Génération des entreprises ..." << endl << endl;
-    vector<Entreprise> Entreprises = Create_Entreprise();  
+    cout << "Génération des employés ..." << endl
+         << endl;
+    vector<Employer> Employers = Create_Employer();
     cout << " " << endl;
-    
-    cout << "Génération des postes à pourvoir ..." << endl << endl;
-    vector<Poste> Postes = Create_Poste();  
+
+    cout << "Génération des entreprises ..." << endl
+         << endl;
+    vector<Entreprise> Entreprises = Create_Entreprise();
     cout << " " << endl;
-    
+
+    cout << "Génération des postes à pourvoir ..." << endl
+         << endl;
+    vector<Poste> Postes = Create_Poste();
+    cout << " bite " << endl;
+
+    Entreprise entre = *get_entreprise(2, Entreprises);
+    entre.printInfo();
 
     return 0;
 }

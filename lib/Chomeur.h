@@ -13,11 +13,13 @@ class Chomeur : public Personne
 {
     public:
     
-    Chomeur(int id, std::string nom, std::string prenom, std::string mail, int code, std::vector<std::string> const& skill);
-
-    ~Chomeur();
     
+    
+    Chomeur(int id, std::string nom, std::string prenom, std::string mail, int code, std::vector<std::string> const& skill);
+    ~Chomeur();
+
     private:
+    
 
 };
 

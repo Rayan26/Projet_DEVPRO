@@ -41,7 +41,10 @@ void Poste::setIdEntreprise(int newId)
 {
 	this->_idEntreprise = newId;
 }
-
+std::vector<std::string> Poste::get_competences()const
+{
+	return this->_Competences;
+}
 void Poste::addCompetence(string const newcompetence)
 {
 	this->_Competences.push_back(newcompetence);

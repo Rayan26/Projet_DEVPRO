@@ -22,7 +22,7 @@ class Poste
     void setIdEntreprise(int newId);
     void addCompetence(std::string newcomp);
     void printInfo() const;
-   
+    std::vector<std::string> get_competences()const;
     private:
 
     int _id;
