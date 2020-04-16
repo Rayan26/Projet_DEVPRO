@@ -33,7 +33,7 @@ vector<Chomeur> Create_Chomeur()
          string info;
          int j=0; //numero colonne
          vector<string> competence(0); 
-         Chomeur new_Chomeur(1," "," "," ",0,competence);
+         Chomeur new_Chomeur(1," "," "," "," ",competence);
 
 
          while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
@@ -59,7 +59,7 @@ vector<Chomeur> Create_Chomeur()
                   ++j;
                      break;
                   case 4:
-                  new_Chomeur.setCode(stoi(info));
+                  new_Chomeur.setCode(info);
                   ++j;
                      break;
                   case 5:
@@ -118,7 +118,7 @@ vector<Employer> Create_Employer()
          string info;
          int j=0; //numero colonne
          vector<string> competence(0); 
-         Employer new_Employer(1," "," "," ",0,competence);
+         Employer new_Employer(1," "," "," "," ",competence);
 
 
          while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
@@ -144,7 +144,7 @@ vector<Employer> Create_Employer()
                   ++j;
                      break;
                   case 4:
-                  new_Employer.setCode(stoi(info));
+                  new_Employer.setCode(info);
                   ++j;
                      break;
                   case 5:
@@ -208,7 +208,7 @@ vector<Entreprise> Create_Entreprise()
          
          string info;
          int j=0; //numero colonne
-         Entreprise new_Entreprise(1," ",0," ");
+         Entreprise new_Entreprise(1," "," "," ");
 
 
          while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
@@ -225,7 +225,7 @@ vector<Entreprise> Create_Entreprise()
                   ++j;
                      break;
                   case 2:
-                  new_Entreprise.setCode(stoi(info));
+                  new_Entreprise.setCode(info);
                   ++j;
                      break;
                   case 3:

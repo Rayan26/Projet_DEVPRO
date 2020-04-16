@@ -6,7 +6,7 @@ using namespace std;
 
 
 
-Personne::Personne(int id, string nom, string prenom, string mail, int code, vector<string> const& skill) : _nom(nom), _prenom(prenom), _mail(mail), _code(code),_skill(skill)
+Personne::Personne(int id, string nom, string prenom, string mail, string code, vector<string> const& skill) :_id(id), _nom(nom), _prenom(prenom), _mail(mail), _code(code),_skill(skill)
 {
 
 }
@@ -41,7 +41,7 @@ string Personne::getMail() const
     return this->_mail;
 }
 
-int Personne::getCode() const
+string Personne::getCode() const
 {
     return this->_code;
 }
@@ -72,7 +72,7 @@ void Personne::setMail(string newmail)
     this->_mail = newmail;
 }
 
-void Personne::setCode(int newcode)
+void Personne::setCode(string newcode)
 {
     this->_code = newcode;
 }

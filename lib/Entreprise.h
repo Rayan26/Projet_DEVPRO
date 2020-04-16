@@ -10,19 +10,20 @@
 class Entreprise
 {
 public:
-    Entreprise(int ID, std::string nom, int code, std::string mail);
+    Entreprise();
+    Entreprise(int ID, std::string nom, std::string code, std::string mail);
     Entreprise(Entreprise const &entreprise);
     ~Entreprise();
 
     int getId() const;
     std::string getNom() const;
     std::string getMail() const;
-    int getCode() const;
+    std::string getCode() const;
     std::vector<int> getJobs();
     void setId(int newid);
     void setNom(std::string newnom);
     void setMail(std::string newmail);
-    void setCode(int newcode);
+    void setCode(std::string newcode);
     void printInfo() const;
 
     void addJob(int Id,std::string const newjob);
@@ -34,7 +35,7 @@ private:
     int _id;
     std::string _nom;
     std::string _mail;
-    int _code;
+    std::string _code;
 
     std::vector<int> _idJobs;
     std::vector<int> _idEmployer;

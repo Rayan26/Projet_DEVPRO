@@ -31,13 +31,16 @@ int main()
     int newCode = 13009;
     rayan.setCode(newCode);
     rayan.printInfo();
-    
-    vector<string> competence_julien(1,"Python");
-    Chomeur julien("Raige-Verger", "Julien", "julien.raige@gmail.com", 06600, competence_julien);
-    julien.printInfo();
 */
-    // affichage_menu_principal();
+/*    
+    vector<string> competence_julien(1,"Python");
+    Chomeur julien(3,"Raige-Verger", "Julien", "julien.raige@gmail.com", "06600", competence_julien);
+    julien.printInfo();
 
+    julien.setIdEntreprise(3) ;
+
+    affichage_menu_principal();
+*/
     cout << "Génération des personnes sans-emplois ..." << endl
          << endl;
     vector<Chomeur> Chomeurs = Create_Chomeur();
@@ -56,10 +59,27 @@ int main()
     cout << "Génération des postes à pourvoir ..." << endl
          << endl;
     vector<Poste> Postes = Create_Poste();
-    cout << " bite " << endl;
+    
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
+// problème pointeur : marche si on définit entre en objet directement, mais dans ce cas ça ne marche plus pour le NULL (si l'entreprise n'existe pas) -> dilemme cornelien
+     Entreprise * entre = get_entreprise(1, Entreprises);
+     (*entre).printInfo();
+     cout << "ID de entre : " << endl ;
+     cout << (*entre).getId() << endl ;
 
-    Entreprise entre = *get_entreprise(2, Entreprises);
-    entre.printInfo();
+     Entreprise etr = *entre ;
+     etr.printInfo();
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
+   
 
+/*
+     vector <Employer> zboub = get_employers_de_entreprise(1, Employers);
+     for(int i = 0 ; i < zboub.size(); i++)
+     {
+          zboub[i].printInfo();
+     }
+     cout << "hello world" << endl ;
+
+*/
     return 0;
 }
