@@ -22,7 +22,7 @@ class Poste
     void setIdEntreprise(int newId);
     void addCompetence(std::string newcomp);
     void printInfo() const;
-   
+    std::vector<std::string> get_competences()const;
     private:
 
     int _id;
@@ -31,5 +31,6 @@ class Poste
     std::vector<std::string> _Competences; 
 };
 
+void affichage_vecteur_Poste(std::vector<Poste> empl);
 #endif
 

@@ -2,7 +2,11 @@
 
 using namespace std;
 
-Entreprise::Entreprise(int ID, std::string nom, int code, std::string mail) : _id(ID), _nom(nom), _mail(mail), _code(code)
+Entreprise::Entreprise()
+{
+}
+
+Entreprise::Entreprise(int ID, string nom, string code, string mail) : _id(ID), _nom(nom), _mail(mail), _code(code)
 {
 }
 
@@ -29,7 +33,7 @@ string Entreprise::getMail() const
 	return this->_mail;
 }
 
-int Entreprise::getCode() const
+string Entreprise::getCode() const
 {
 	return this->_code;
 }
@@ -54,35 +58,40 @@ void Entreprise::setMail(std::string newmail)
 	this->_mail = newmail;
 }
 
-void Entreprise::setCode(int newcode)
+void Entreprise::setCode(std::string newcode)
 {
 	this->_code = newcode;
 }
 
 void Entreprise::printInfo() const
 {
+
 	cout << "" << endl;
 	cout << "ID : " << _id << endl;
 	cout << "Entreprise : " << _nom << endl;
 	cout << "Mail : " << _mail << endl;
 	cout << "Code Postal : " << _code << endl;
 
-
 	cout << "Liste des Employés de l'entreprise :" << endl;
-	for (int i(1); i <= _idEmployer.size(); ++i)
+	for (size_t i(1); i <= _idEmployer.size(); ++i)
 	{
 		cout << "ID de l'employé n°" << i << " : " << _idEmployer[i - 1] << endl;
 	}
 
 	cout << "Liste des Postes à Pourvoir par l'entreprise : " << endl;
-	for (int i(1); i <= _idJobs.size(); ++i)
+	for (size_t i(1); i <= _idJobs.size(); ++i)
 	{
 		cout << "ID du Poste : " << _idJobs[i - 1] << endl;
 	}
-
-	
 }
 
+void affichage_vecteur_entreprise(vector<Entreprise> entre)
+{
+	for (int i = 0; i < (int)entre.size(); i++)
+	{
+	     entre[i].printInfo();
+	}
+}
 
 ////Je n'ai pas réussi a finir ces quatres fonctions
 

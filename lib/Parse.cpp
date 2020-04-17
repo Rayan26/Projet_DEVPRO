@@ -33,7 +33,7 @@ vector<Chomeur> Create_Chomeur()
          string info;
          int j=0; //numero colonne
          vector<string> competence(0); 
-         Chomeur new_Chomeur(1," "," "," ",0,competence);
+         Chomeur new_Chomeur(1," "," "," "," ",competence);
 
 
          while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
@@ -59,7 +59,7 @@ vector<Chomeur> Create_Chomeur()
                   ++j;
                      break;
                   case 4:
-                  new_Chomeur.setCode(stoi(info));
+                  new_Chomeur.setCode(info);
                   ++j;
                      break;
                   case 5:
@@ -84,7 +84,7 @@ vector<Chomeur> Create_Chomeur()
 
          if( i != 0 )
         {
-        new_Chomeur.printInfo();
+      //   new_Chomeur.printInfo();
         Chomeurs.push_back(new_Chomeur);
         }
         ++i;
@@ -118,7 +118,7 @@ vector<Employer> Create_Employer()
          string info;
          int j=0; //numero colonne
          vector<string> competence(0); 
-         Employer new_Employer(1," "," "," ",0,competence);
+         Employer new_Employer(1," "," "," "," ",competence);
 
 
          while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
@@ -144,7 +144,7 @@ vector<Employer> Create_Employer()
                   ++j;
                      break;
                   case 4:
-                  new_Employer.setCode(stoi(info));
+                  new_Employer.setCode(info);
                   ++j;
                      break;
                   case 5:
@@ -173,8 +173,8 @@ vector<Employer> Create_Employer()
 
         if( i != 0 )
         {
-           new_Employer.printInfo();
-           new_Employer.printEmployeur();
+         //   new_Employer.printInfo();
+         //   new_Employer.printEmployeur();
            Employers.push_back(new_Employer);
         }
 
@@ -208,7 +208,7 @@ vector<Entreprise> Create_Entreprise()
          
          string info;
          int j=0; //numero colonne
-         Entreprise new_Entreprise(1," ",0," ");
+         Entreprise new_Entreprise(1," "," "," ");
 
 
          while(getline(ss,info,',') && i>0) // i>0 pour sauter la première ligne
@@ -225,7 +225,7 @@ vector<Entreprise> Create_Entreprise()
                   ++j;
                      break;
                   case 2:
-                  new_Entreprise.setCode(stoi(info));
+                  new_Entreprise.setCode(info);
                   ++j;
                      break;
                   case 3:
@@ -241,7 +241,7 @@ vector<Entreprise> Create_Entreprise()
 
         if( i != 0 )
         {
-           new_Entreprise.printInfo();
+         //   new_Entreprise.printInfo();
            Entreprises.push_back(new_Entreprise);
         }
 
@@ -312,7 +312,7 @@ vector<Poste> Create_Poste()
 
         if( i != 0 )
         {
-           new_Poste.printInfo();
+         //   new_Poste.printInfo();
            Postes.push_back(new_Poste);
         }
 

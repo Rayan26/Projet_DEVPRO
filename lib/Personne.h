@@ -13,7 +13,7 @@ class Personne
 {
     public:
 
-    Personne(int id, std::string nom,std::string prenom,std::string mail, int code,std::vector<std::string> const& skill);
+    Personne(int id, std::string nom,std::string prenom,std::string mail, std::string code,std::vector<std::string> const& skill);
     Personne(Personne const &personne);
     ~Personne();
     
@@ -22,12 +22,12 @@ class Personne
     std::string getPrenom() const;
     std::string getMail() const;
     std::vector<std::string> getSkill() const;
-    int getCode() const;
+    std::string getCode() const;
     void setId(int newid);
     void setNom(std::string newnom);
     void setPrenom(std::string newprenom);
     void setMail(std::string newmail);
-    void setCode(int newcode);
+    void setCode(std::string newcode);
     void addCompetence(std::string const newcompetence);
     void addCollegue(int const newcollegue);
     void printInfo() const;
@@ -41,7 +41,7 @@ class Personne
     std::string _nom;
     std::string _prenom;
     std::string _mail;
-    int _code;
+    std::string _code;
     std::vector<std::string> _skill;
     std::vector<int> _IdCollegue;
 };
