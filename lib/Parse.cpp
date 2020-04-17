@@ -84,7 +84,7 @@ vector<Chomeur> Create_Chomeur()
 
          if( i != 0 )
         {
-        new_Chomeur.printInfo();
+      //   new_Chomeur.printInfo();
         Chomeurs.push_back(new_Chomeur);
         }
         ++i;
@@ -173,8 +173,8 @@ vector<Employer> Create_Employer()
 
         if( i != 0 )
         {
-           new_Employer.printInfo();
-           new_Employer.printEmployeur();
+         //   new_Employer.printInfo();
+         //   new_Employer.printEmployeur();
            Employers.push_back(new_Employer);
         }
 
@@ -241,7 +241,7 @@ vector<Entreprise> Create_Entreprise()
 
         if( i != 0 )
         {
-           new_Entreprise.printInfo();
+         //   new_Entreprise.printInfo();
            Entreprises.push_back(new_Entreprise);
         }
 
@@ -312,7 +312,7 @@ vector<Poste> Create_Poste()
 
         if( i != 0 )
         {
-           new_Poste.printInfo();
+         //   new_Poste.printInfo();
            Postes.push_back(new_Poste);
         }
 

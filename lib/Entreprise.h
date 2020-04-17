@@ -25,11 +25,13 @@ public:
     void setMail(std::string newmail);
     void setCode(std::string newcode);
     void printInfo() const;
-
+    
     void addJob(int Id,std::string const newjob);
     void deleteJob(int idPoste);
     void addEmploye(int Id_employe);
     void deleteEmploye(int Id_employe);
+
+
 
 private:
     int _id;
@@ -40,5 +42,7 @@ private:
     std::vector<int> _idJobs;
     std::vector<int> _idEmployer;
 };
+
+void affichage_vecteur_entreprise(std::vector<Entreprise> entre);
 
 #endif

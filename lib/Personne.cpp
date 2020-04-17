@@ -95,12 +95,12 @@ void Personne::printInfo() const
     cout << "Mail : " << _mail << endl;
     cout << "Code Postal : " << _code << endl;
 
-    for(int i(1); i <= _skill.size(); ++i)
+    for(size_t i(1); i <= _skill.size(); ++i)
    {   
     cout << "Compétence " << i << " : " << _skill[i-1] << endl;
    }
 
-   for(int i(1); i <= _IdCollegue.size(); ++i)
+   for(size_t i(1); i <= _IdCollegue.size(); ++i)
    {   
     cout << "ID du collègue n°" << i << " : " << _IdCollegue[i-1] << endl;
    }

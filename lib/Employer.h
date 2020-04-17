@@ -19,4 +19,6 @@ private:
     int _idEntreprise;
 };
 
+void affichage_vecteur_employer(std::vector<Employer> empl);
+
 #endif

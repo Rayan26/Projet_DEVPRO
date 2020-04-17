@@ -4,7 +4,6 @@ using namespace std;
 
 Entreprise::Entreprise()
 {
-
 }
 
 Entreprise::Entreprise(int ID, string nom, string code, string mail) : _id(ID), _nom(nom), _mail(mail), _code(code)
@@ -66,35 +65,33 @@ void Entreprise::setCode(std::string newcode)
 
 void Entreprise::printInfo() const
 {
-	if (this == NULL)
+
+	cout << "" << endl;
+	cout << "ID : " << _id << endl;
+	cout << "Entreprise : " << _nom << endl;
+	cout << "Mail : " << _mail << endl;
+	cout << "Code Postal : " << _code << endl;
+
+	cout << "Liste des Employés de l'entreprise :" << endl;
+	for (size_t i(1); i <= _idEmployer.size(); ++i)
 	{
-		cout << "L'entreprise n'existe pas" << endl ;
-	}
-	else
-	{	
-		cout << "" << endl;
-		cout << "ID : " << _id << endl;
-		cout << "Entreprise : " << _nom << endl;
-		cout << "Mail : " << _mail << endl;
-		cout << "Code Postal : " << _code << endl;
-
-
-		cout << "Liste des Employés de l'entreprise :" << endl;
-		for (int i(1); i <= _idEmployer.size(); ++i)
-		{
-			cout << "ID de l'employé n°" << i << " : " << _idEmployer[i - 1] << endl;
-		}
-
-		cout << "Liste des Postes à Pourvoir par l'entreprise : " << endl;
-		for (int i(1); i <= _idJobs.size(); ++i)
-		{
-			cout << "ID du Poste : " << _idJobs[i - 1] << endl;
-		}
+		cout << "ID de l'employé n°" << i << " : " << _idEmployer[i - 1] << endl;
 	}
 
-	
+	cout << "Liste des Postes à Pourvoir par l'entreprise : " << endl;
+	for (size_t i(1); i <= _idJobs.size(); ++i)
+	{
+		cout << "ID du Poste : " << _idJobs[i - 1] << endl;
+	}
 }
 
+void affichage_vecteur_entreprise(vector<Entreprise> entre)
+{
+	for (int i = 0; i < (int)entre.size(); i++)
+	{
+	     entre[i].printInfo();
+	}
+}
 
 ////Je n'ai pas réussi a finir ces quatres fonctions
 

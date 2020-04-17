@@ -16,7 +16,7 @@ using namespace std;
 
 int main()
 {
-    /*
+     /*
     //TEST FONCTION AFFICHAGE INFORMATION
     vector<string> competence(1,"C++");
     Personne rayan(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
@@ -32,7 +32,7 @@ int main()
     rayan.setCode(newCode);
     rayan.printInfo();
 */
-/*    
+     /*    
     vector<string> competence_julien(1,"Python");
     Chomeur julien(3,"Raige-Verger", "Julien", "julien.raige@gmail.com", "06600", competence_julien);
     julien.printInfo();
@@ -41,45 +41,79 @@ int main()
 
     affichage_menu_principal();
 */
-    cout << "Génération des personnes sans-emplois ..." << endl
-         << endl;
-    vector<Chomeur> Chomeurs = Create_Chomeur();
-    cout << " " << endl;
+     cout << "Génération des personnes sans-emplois ..." << endl
+          << endl;
+     vector<Chomeur> Chomeurs = Create_Chomeur();
+     cout << " " << endl;
 
-    cout << "Génération des employés ..." << endl
-         << endl;
-    vector<Employer> Employers = Create_Employer();
-    cout << " " << endl;
+     cout << "Génération des employés ..." << endl
+          << endl;
+     vector<Employer> Employers = Create_Employer();
+     cout << " " << endl;
 
-    cout << "Génération des entreprises ..." << endl
-         << endl;
-    vector<Entreprise> Entreprises = Create_Entreprise();
-    cout << " " << endl;
+     cout << "Génération des entreprises ..." << endl
+          << endl;
+     vector<Entreprise> Entreprises = Create_Entreprise();
+     cout << " " << endl;
 
-    cout << "Génération des postes à pourvoir ..." << endl
-         << endl;
-    vector<Poste> Postes = Create_Poste();
-    
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
-// problème pointeur : marche si on définit entre en objet directement, mais dans ce cas ça ne marche plus pour le NULL (si l'entreprise n'existe pas) -> dilemme cornelien
-     Entreprise * entre = get_entreprise(1, Entreprises);
-     (*entre).printInfo();
-     cout << "ID de entre : " << endl ;
-     cout << (*entre).getId() << endl ;
+     cout << "Génération des postes à pourvoir ..." << endl
+          << endl;
+     vector<Poste> Postes = Create_Poste();
 
-     Entreprise etr = *entre ;
-     etr.printInfo();
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  
-   
+     cout << "fin de déclaration" << endl;
 
-/*
-     vector <Employer> zboub = get_employers_de_entreprise(1, Employers);
-     for(int i = 0 ; i < zboub.size(); i++)
-     {
-          zboub[i].printInfo();
-     }
-     cout << "hello world" << endl ;
+     //TEST GET_ENTREPRISE
+     // Entreprise *entre = get_entreprise(5, Entreprises);
+     // if (entre)
+     //      entre->printInfo();
+     // else
+     // {
+     //      cout<<"Aie";
+     //      return 0;
+     // }
 
-*/
-    return 0;
+     // //TEST GET_EMPLOYER_DE_LENTREPRISE
+     // vector<Employer> employer_de_lent = get_employers_de_entreprise(1, Employers);
+     // affichage_vecteur_employer(employer_de_lent);
+
+     //TEST GET_EMPLOYER
+     // Employer *empl = get_employers(5 ,Employers);
+     //  if (empl)
+     //      empl->printInfo();
+     // else
+     // {
+     //      cout<<"Aie ça existe ap" <<endl ;
+     //      return 0;
+     // }
+
+     //TEST GET CHOMEUR
+     // Chomeur *chom = get_chomeur(2 ,Chomeurs);
+     //  if (chom)
+     //      chom->printInfo();
+     // else
+     // {
+     //      cout<<"Aie ça existe ap" <<endl ;
+     //      return 0;
+     // }
+
+     // //TEST GET_POSTE
+     //      Poste *post = get_poste(5 ,Postes);
+     //       if (post)
+     //           post->printInfo();
+     //      else
+     //      {
+     //           cout<<"Aie ça existe ap" <<endl ;
+     //           return 0;
+     //      }
+
+
+     //TEST RECHERCHEPAR_COMP
+     // vector<Poste> postes_recherche = recherche_par_comp("C",Postes);
+     // affichage_vecteur_Poste(postes_recherche);
+
+     // //TEST RECHERCHE_COMP_CP
+     // vector<Poste> postes_recherche = recherche_par_comp_CP("C","75009",Postes,Entreprises);
+     // affichage_vecteur_Poste(postes_recherche);
+
+     return 0;
 }

@@ -2,23 +2,23 @@
 
 using namespace std;
 
-Entreprise *get_entreprise(int id, vector<Entreprise> entreprises)
+Entreprise *get_entreprise(int id, vector<Entreprise> &entreprises)
 {
-	if (id > entreprises.size() || id < 0)
-		return NULL ;
+	if (id > (int)entreprises.size() || id < 0)
+		return NULL;
 	for (size_t i = 0; i < entreprises.size(); i++)
 	{
 		//entreprises[i].printInfo();
 		if (id == entreprises[i].getId())
 			return &entreprises[i];
 	}
-	return NULL ;
+	return NULL;
 }
 
-Employer* get_employers(int id, vector<Employer> employers)
+Employer *get_employers(int id, vector<Employer> &employers)
 {
-	if (id > employers.size() || id < 0)
-		return NULL ;
+	if (id > (int)employers.size() || id < 0)
+		return NULL;
 	for (size_t i = 0; i < employers.size(); i++)
 	{
 		if (id == employers[i].getIdPersonne())
@@ -28,10 +28,10 @@ Employer* get_employers(int id, vector<Employer> employers)
 	}
 	return NULL;
 }
-Chomeur* get_chomeur(int id, vector<Chomeur> chomeurs)
+Chomeur *get_chomeur(int id, vector<Chomeur> &chomeurs)
 {
-	if (id > chomeurs.size() || id < 0)
-		return NULL ;
+	if (id > (int)chomeurs.size() || id < 0)
+		return NULL;
 	for (size_t i = 0; i < chomeurs.size(); i++)
 	{
 		if (id == chomeurs[i].getIdPersonne())
@@ -42,10 +42,10 @@ Chomeur* get_chomeur(int id, vector<Chomeur> chomeurs)
 	return NULL;
 }
 
-Poste* get_poste(int id, vector<Poste> postes)
+Poste *get_poste(int id, vector<Poste> &postes)
 {
-	if (id > postes.size() || id < 0)
-		return NULL ;
+	if (id > (int)postes.size() || id < 0)
+		return NULL;
 	for (size_t i = 0; i < postes.size(); i++)
 	{
 		if (id == postes[i].getId())
@@ -56,7 +56,7 @@ Poste* get_poste(int id, vector<Poste> postes)
 	return NULL;
 }
 
-vector<Employer> get_employers_de_entreprise(int id_entr, vector<Employer> employers)
+vector<Employer> get_employers_de_entreprise(int id_entr, vector<Employer> &employers)
 {
 	vector<Employer> employers_entreprise;
 
@@ -70,7 +70,7 @@ vector<Employer> get_employers_de_entreprise(int id_entr, vector<Employer> emplo
 	return employers_entreprise;
 }
 
-vector<Poste> recherche_par_comp(string competence_recherche, string CP, vector<Poste> postes, vector<Entreprise> entreprises)
+vector<Poste> recherche_par_comp(string competence_recherche, vector<Poste> postes)
 {
 	vector<Poste> liste_poste_correspondants;
 
@@ -80,8 +80,25 @@ vector<Poste> recherche_par_comp(string competence_recherche, string CP, vector<
 		{
 			if (competence_recherche.compare(postes[i].get_competences()[j]) == 0)
 			{
-				Entreprise cible = *get_entreprise(postes[i].getIdEntreprise(),entreprises);
-				if (cible.getCode() == CP)
+				liste_poste_correspondants.push_back(postes[i]);
+			}
+		}
+	}
+	return liste_poste_correspondants;
+}
+
+vector<Poste> recherche_par_comp_CP(string competence_recherche, string CP, vector<Poste> postes, vector<Entreprise> entreprises)
+{
+	vector<Poste> liste_poste_correspondants;
+
+	for (size_t i = 0; i < postes.size(); i++)
+	{
+		for (size_t j = 0; j < postes[i].get_competences().size(); j++)
+		{
+			if (competence_recherche.compare(postes[i].get_competences()[j]) == 0)
+			{
+				Entreprise *cible = get_entreprise(postes[i].getIdEntreprise(), entreprises);
+				if (cible->getCode() == CP)
 					liste_poste_correspondants.push_back(postes[i]);
 			}
 		}

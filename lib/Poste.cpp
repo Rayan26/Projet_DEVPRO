@@ -2,19 +2,17 @@
 
 using namespace std;
 
-Poste::Poste(int id, std::string Titre, int idEntreprise): _id(id), _Titre(Titre),_idEntreprise(idEntreprise)
+Poste::Poste(int id, std::string Titre, int idEntreprise) : _id(id), _Titre(Titre), _idEntreprise(idEntreprise)
 {
-
 }
 
 Poste::~Poste()
 {
-
 }
 
 int Poste::getId() const
 {
-	return this->_id;  
+	return this->_id;
 }
 
 string Poste::getTitre() const
@@ -41,7 +39,7 @@ void Poste::setIdEntreprise(int newId)
 {
 	this->_idEntreprise = newId;
 }
-std::vector<std::string> Poste::get_competences()const
+std::vector<std::string> Poste::get_competences() const
 {
 	return this->_Competences;
 }
@@ -51,17 +49,24 @@ void Poste::addCompetence(string const newcompetence)
 }
 
 void Poste::printInfo() const
-{ 
-	cout <<""<< endl;
-    cout << "ID du poste : " << _id << endl;
-    cout << "Titre du poste : " << _Titre << endl;
-    
-    
-cout << " Compétence requise pour ce poste : "<< endl;
-    for(int i(1); i <= _Competences.size(); ++i)
-   {   
-    cout << "  " << _Competences[i-1] << endl;
-   }
+{
+	cout << "" << endl;
+	cout << "ID du poste : " << _id << endl;
+	cout << "Titre du poste : " << _Titre << endl;
 
-   cout << "ID de l'entreprise chez qui le poste est à pourvoir : " << _idEntreprise << endl;
+	cout << " Compétence requise pour ce poste : " << endl;
+	for (size_t i(1); i <= _Competences.size(); ++i)
+	{
+		cout << "  " << _Competences[i - 1] << endl;
+	}
+
+	cout << "ID de l'entreprise chez qui le poste est à pourvoir : " << _idEntreprise << endl;
+}
+
+void affichage_vecteur_Poste(vector<Poste> post)
+{
+  for (int i = 0; i < (int)post.size(); i++)
+  {
+    post[i].printInfo();
+  }
 }

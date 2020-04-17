@@ -31,5 +31,6 @@ class Poste
     std::vector<std::string> _Competences; 
 };
 
+void affichage_vecteur_Poste(std::vector<Poste> empl);
 #endif
 
