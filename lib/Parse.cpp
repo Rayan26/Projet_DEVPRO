@@ -327,3 +327,4 @@ vector<Poste> Create_Poste()
 
    return Postes;
 }
+

@@ -19,3 +19,4 @@ vector<Employer> get_employers_de_entreprise(int id_entr, vector<Employer> &empl
 //Fonctions de recherches
 vector<Poste> recherche_par_comp(string competence_recherche,vector<Poste> postes);
 vector<Poste> recherche_par_comp_CP(string competence_recherche,string CP,vector<Poste> postes,vector<Entreprise> entreprises);
+

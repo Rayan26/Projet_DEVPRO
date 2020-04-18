@@ -359,3 +359,4 @@ void rechercher_demandeur_emploi()
 {
 	affichage_menu_intermediaire_entreprise();
 }
+

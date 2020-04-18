@@ -70,3 +70,4 @@ void affichage_vecteur_Poste(vector<Poste> post)
     post[i].printInfo();
   }
 }
+
