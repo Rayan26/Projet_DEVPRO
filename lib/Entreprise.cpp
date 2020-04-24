@@ -105,12 +105,12 @@ void affichage_vecteur_entreprise(vector<Entreprise> entre)
 // {
 // }
 
-// void Entreprise ::addEmploye(int Id_employe)
-// {
-// }
+void Entreprise::addEmploye(int Id_employe)
+{
+	this->_idEmployer.push_back(Id_employe) ;
+}
 
 // void Entreprise::deleteEmploye(int Id_employe)
 // {
 
 // }
-

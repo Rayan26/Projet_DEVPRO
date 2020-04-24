@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Personne.h"
+#include "Entreprise.h"
 
 class Employer : public Personne
 {

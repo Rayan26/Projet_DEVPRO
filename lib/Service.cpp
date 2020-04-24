@@ -1,4 +1,6 @@
 #include "Service.h"
+#include "Employer.h"
+#include <cassert>
 
 using namespace std;
 
@@ -104,4 +106,12 @@ vector<Poste> recherche_par_comp_CP(string competence_recherche, string CP, vect
 		}
 	}
 	return liste_poste_correspondants;
+}
+
+void ajout_employer_entreprise(Employer & empl, int id_entreprise, vector<Entreprise> &entreprises)
+{	
+	empl.setIdEntreprise(id_entreprise) ;
+	Entreprise *entre = get_entreprise(id_entreprise, entreprises);
+	assert(entre);
+	entre->addEmploye(empl.getIdPersonne());
 }

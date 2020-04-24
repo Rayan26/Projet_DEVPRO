@@ -16,9 +16,10 @@ using namespace std;
 
 int main()
 {
-     /*
+     
     //TEST FONCTION AFFICHAGE INFORMATION
     vector<string> competence(1,"C++");
+    /*
     Personne rayan(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
     rayan.printInfo();
 
@@ -115,6 +116,13 @@ int main()
      // vector<Poste> postes_recherche = recherche_par_comp_CP("C","75009",Postes,Entreprises);
      // affichage_vecteur_Poste(postes_recherche);
 
+     Employer Michel(5,"Michel","Dumas","michel@gmail.com","13011",competence);
+     ajout_employer_entreprise(Michel,1,Entreprises);
+     Employers.push_back(Michel);
+
+     vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
+     affichage_vecteur_employer(employers_entreprise);
+     addEmployerCSV(Michel,Employers);
      return 0;
 }
 

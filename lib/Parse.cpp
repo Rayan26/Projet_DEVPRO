@@ -5,11 +5,8 @@
 #include <vector>
 #include <sstream>
 
-
-#include "Employer.h"
-#include "Entreprise.h"
-#include "Poste.h"
-#include "Chomeur.h"
+#include "Parse.h"
+#include "Service.h"
 using namespace std; 
 
 
@@ -326,5 +323,46 @@ vector<Poste> Create_Poste()
    }
 
    return Postes;
+}
+
+void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
+{
+   ofstream fichier("CSV/employer.csv",ios::app);
+   if(fichier)
+   {  
+      fichier << "\n" << empl.getIdPersonne() << ',' << empl.getNom() << ',' << empl.getPrenom() << ',' << empl.getMail() << ',' << empl.getCode() << ',' ;
+
+      vector <string> skills = empl.getSkill();
+      fichier << skills[0];
+      for(size_t i = 1 ; i<skills.size(); i++)
+      {
+         fichier << ';' << skills[i];
+      }
+
+      fichier << ',' ;
+
+
+      int entre = empl.getIdEntreprise();
+      vector <Employer> employers_entreprise = get_employers_de_entreprise(entre,employers);
+      if(employers_entreprise[0].getIdPersonne() != empl.getIdPersonne())
+      {
+         fichier << employers_entreprise[0].getIdPersonne();
+      }
+      for(size_t i = 1 ; i<employers_entreprise.size(); i++)
+      {
+         if(employers_entreprise[i].getIdPersonne() != empl.getIdPersonne())
+         {
+            fichier << ';' << employers_entreprise[i].getIdPersonne() ;
+         }
+      }
+      fichier << ',';
+
+      fichier << entre ;
+   }
+}
+
+void addEntrepriseCSV(Entreprise entre)
+{
+
 }
 
