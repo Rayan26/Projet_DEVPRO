@@ -5,7 +5,8 @@
 #include "Personne.h"
 #include "Entreprise.h"
 #include "Poste.h"
-#include "Parse.h"
+#include "Employer.h"
+#include "Chomeur.h"
 
 using namespace std;
 
@@ -20,3 +21,5 @@ vector<Employer> get_employers_de_entreprise(int id_entr, vector<Employer> &empl
 vector<Poste> recherche_par_comp(string competence_recherche,vector<Poste> postes);
 vector<Poste> recherche_par_comp_CP(string competence_recherche,string CP,vector<Poste> postes,vector<Entreprise> entreprises);
 
+//Fonctions de MAJ
+void ajout_employer_entreprise(Employer & empl, int id_entreprise, vector<Entreprise> &entreprises);
