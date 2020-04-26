@@ -23,3 +23,4 @@ vector<Poste> recherche_par_comp_CP(string competence_recherche,string CP,vector
 
 //Fonctions de MAJ
 void ajout_employer_entreprise(Employer & empl, int id_entreprise, vector<Entreprise> &entreprises);
+

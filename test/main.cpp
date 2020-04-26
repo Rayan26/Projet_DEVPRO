@@ -118,7 +118,8 @@ int main()
 
      Employer Michel(5,"Michel","Dumas","michel@gmail.com","13011",competence);
      ajout_employer_entreprise(Michel,1,Entreprises);
-     Employers.push_back(Michel);
+     addEmployerCSV(Michel,Employers);
+     
 
      vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
      affichage_vecteur_employer(employers_entreprise);

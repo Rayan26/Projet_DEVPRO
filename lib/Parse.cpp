@@ -326,7 +326,25 @@ vector<Poste> Create_Poste()
 }
 
 void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
-{
+{  
+   for (int i = 0; i < (int)employers.size(); i++)
+   {
+     if(empl.getIdPersonne() == employers[i].getIdPersonne())
+     {
+         cout << "ID existe déjas dans la base de donnée" << endl;
+         return; 
+     }
+   }
+
+   for (int i = 0; i < (int)employers.size(); i++)
+   {
+     if(empl.getNom() == employers[i].getNom() && empl.getPrenom() == employers[i].getPrenom())
+     {
+         cout << "Employer existe déjas dans la base de donnée" << endl;
+         return; 
+     }
+   }
+
    ofstream fichier("CSV/employer.csv",ios::app);
    if(fichier)
    {  
@@ -359,6 +377,8 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
 
       fichier << entre ;
    }
+
+   employers.push_back(empl);
 }
 
 void addEntrepriseCSV(Entreprise entre)
