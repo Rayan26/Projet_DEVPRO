@@ -87,6 +87,11 @@ void Personne::addCollegue(int const newcollegue)
     this->_IdCollegue.push_back(newcollegue);
 }
 
+void Personne::addAncienCollegue(int const Anciencollegue)
+{
+    this->_IdAncienCollegue.push_back(Anciencollegue);
+}
+
 void Personne::printInfo() const
 {   
     cout <<""<< endl;
@@ -108,3 +113,28 @@ void Personne::printInfo() const
 }
 
 
+std::vector<int> Personne::get_collegues() const 
+{
+    vector<int> collegues ;
+
+    
+    for (size_t i = 0; i < _IdCollegue.size(); i++)
+    {
+        collegues.push_back(_IdCollegue[i]);
+    }
+    return collegues;
+    
+}
+
+
+std::vector<int> Personne::get_Anciens_collegues() const 
+{
+    vector<int> Anciens_collegues ;
+
+    
+    for (size_t i = 0; i < _IdAncienCollegue.size(); i++)
+    {
+        Anciens_collegues.push_back(_IdAncienCollegue[i]);
+    }
+    return Anciens_collegues;
+}
