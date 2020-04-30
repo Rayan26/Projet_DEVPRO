@@ -16,10 +16,10 @@ using namespace std;
 
 int main()
 {
-     
-    //TEST FONCTION AFFICHAGE INFORMATION
-    vector<string> competence(1,"C++");
-    /*
+
+     //TEST FONCTION AFFICHAGE INFORMATION
+     vector<string> competence(1, "C++");
+     /*
     Personne rayan(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
     rayan.printInfo();
 
@@ -107,7 +107,6 @@ int main()
      //           return 0;
      //      }
 
-
      //TEST RECHERCHEPAR_COMP
      // vector<Poste> postes_recherche = recherche_par_comp("C",Postes);
      // affichage_vecteur_Poste(postes_recherche);
@@ -116,14 +115,37 @@ int main()
      // vector<Poste> postes_recherche = recherche_par_comp_CP("C","75009",Postes,Entreprises);
      // affichage_vecteur_Poste(postes_recherche);
 
+     
+     //TEST ADDEMPLOYERCSV && TEST COLLEGUE
      Employer Michel(5,"Michel","Dumas","michel@gmail.com","13011",competence);
      ajout_employer_entreprise(Michel,1,Entreprises);
-     addEmployerCSV(Michel,Employers);
-     
-
      vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
-     affichage_vecteur_employer(employers_entreprise);
+     //affichage_vecteur_employer(employers_entreprise);
      addEmployerCSV(Michel,Employers);
+
+
+
+     //TEST ADDCHOMEURCSV & ADDANCIENCOLLEGUE
+     // Chomeur Michel(5,"Michel","Dumas","michel@gmail.com","13011",competence);
+     // Michel.addAncienCollegue(2);
+     // addChomeurCSV(Michel,Chomeurs);
+
+     // vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
+     // affichage_vecteur_employer(employers_entreprise);
+     // addEmployerCSV(Michel,Employers);
+
+     //TEST ADDENTREPRISECSV
+     // Entreprise MichelINC(5,"MichelINC","13009","michelinc@gmail.com");
+     // addEntrepriseCSV(MichelINC,Entreprises);
+
+     // Entreprise MigchelINC(5, "MicghelINC", "13009", "micghelinc@gmail.com");
+     // addEntrepriseCSV(MigchelINC, Entreprises);
+
+     //TEST ADDPOSTECSV
+     // Poste developer(5,"developer",5);
+     // developer.addCompetence("le style avant tout");
+     // developer.addCompetence("c++");
+     // addPosteCSV(developer,Postes); 
+
      return 0;
 }
-
