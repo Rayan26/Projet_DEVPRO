@@ -17,5 +17,9 @@ void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise>&entrepris
 void addChomeurCSV(const Chomeur &chom, std::vector<Chomeur> &chomeurs);
 void addPosteCSV(const Poste &post,std::vector<Poste> &postes);
 
+void delEmployerCSV(int ID);
+void delEntrepriseCSV(int ID);
+void delChomeurCSV(int ID);
+void delPosteCSV(int ID);
 #endif
 

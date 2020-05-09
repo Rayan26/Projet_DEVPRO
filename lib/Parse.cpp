@@ -370,7 +370,6 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
             }
          }
       }
-      
 
       fichier << ',';
       if ((empl.get_Anciens_collegues().size() > 0))
@@ -492,4 +491,247 @@ void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
    }
 
    postes.push_back(post);
+}
+
+void delEmployerCSV(int ID)
+{
+   fstream fichier("CSV/employer.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         i++;
+         if (j == ID)
+         {
+            cout << "Employé trouvé \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas d'employé avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/employer.csv");
+         rename("./CSV/temp.csv", "./CSV/employer.csv");
+         cout << "Les infos de l'employé ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void delEntrepriseCSV(int ID)
+{
+   fstream fichier("CSV/entreprise.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         cout << "j = " << j << "\n";
+         i++;
+         if (j == ID)
+         {
+            cout << "Entreprise trouvée \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas d'entreprise avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/entreprise.csv");
+         rename("./CSV/temp.csv", "./CSV/entreprise.csv");
+         cout << "Les infos de l'entreprise ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void delChomeurCSV(int ID)
+{
+   fstream fichier("CSV/chomeur.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         cout << "j = " << j << "\n";
+         i++;
+         if (j == ID)
+         {
+            cout << "Chomeur trouvé \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas de chomeur avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/chomeur.csv");
+         rename("./CSV/temp.csv", "./CSV/chomeur.csv");
+         cout << "Les infos du chomeur ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void delPosteCSV(int ID)
+{
+   fstream fichier("CSV/poste.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         cout << "j = " << j << "\n";
+         i++;
+         if (j == ID)
+         {
+            cout << "Poste trouvé \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas de poste avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/poste.csv");
+         rename("./CSV/temp.csv", "./CSV/poste.csv");
+         cout << "Les infos du poste ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
 }

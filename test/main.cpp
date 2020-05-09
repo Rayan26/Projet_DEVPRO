@@ -115,15 +115,12 @@ int main()
      // vector<Poste> postes_recherche = recherche_par_comp_CP("C","75009",Postes,Entreprises);
      // affichage_vecteur_Poste(postes_recherche);
 
-     
      //TEST ADDEMPLOYERCSV && TEST COLLEGUE
-     Employer Michel(5,"Michel","Dumas","michel@gmail.com","13011",competence);
-     ajout_employer_entreprise(Michel,1,Entreprises);
-     vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
+     Employer Michel(5, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
+     ajout_employer_entreprise(Michel, 1, Entreprises);
+     vector<Employer> employers_entreprise = get_employers_de_entreprise(1, Employers);
      //affichage_vecteur_employer(employers_entreprise);
-     addEmployerCSV(Michel,Employers);
-
-
+     //addEmployerCSV(Michel,Employers);
 
      //TEST ADDCHOMEURCSV & ADDANCIENCOLLEGUE
      // Chomeur Michel(5,"Michel","Dumas","michel@gmail.com","13011",competence);
@@ -145,7 +142,12 @@ int main()
      // Poste developer(5,"developer",5);
      // developer.addCompetence("le style avant tout");
      // developer.addCompetence("c++");
-     // addPosteCSV(developer,Postes); 
+     // addPosteCSV(developer,Postes);
+
+     delEmployerCSV(12);
+     delChomeurCSV(2);
+     delEntrepriseCSV(1);
+     delPosteCSV(0);
 
      return 0;
 }
