@@ -110,7 +110,15 @@ void Entreprise::addEmploye(int Id_employe)
 	this->_idEmployer.push_back(Id_employe) ;
 }
 
-// void Entreprise::deleteEmploye(int Id_employe)
-// {
-
-// }
+void Entreprise::deleteEmploye(int Id_employe)
+{
+	for (size_t i = 0; i < _idEmployer.size(); i++)
+	{
+		if (_idEmployer[i]==Id_employe)
+		{
+			_idEmployer.erase(_idEmployer.begin()+i);
+		}
+		
+	}
+	
+}

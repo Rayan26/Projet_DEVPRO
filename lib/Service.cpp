@@ -19,7 +19,7 @@ Entreprise *get_entreprise(int id, vector<Entreprise> &entreprises)
 
 Employer *get_employers(int id, vector<Employer> &employers)
 {
-	if (id > (int)employers.size() || id < 0)
+	if ( id < 0)
 		return NULL;
 	for (size_t i = 0; i < employers.size(); i++)
 	{

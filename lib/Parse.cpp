@@ -320,23 +320,6 @@ vector<Poste> Create_Poste()
 
 void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
 {
-   for (int i = 0; i < (int)employers.size(); i++)
-   {
-      if (empl.getIdPersonne() == employers[i].getIdPersonne())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
-
-   // for (int i = 0; i < (int)employers.size(); i++)
-   // {
-   //    if (empl.getNom() == employers[i].getNom() && empl.getPrenom() == employers[i].getPrenom())
-   //    {
-   //       cout << "Employer existe déja dans la base de donnée" << endl;
-   //       return;
-   //    }
-   // }
 
    ofstream fichier("CSV/employer.csv", ios::app);
    if (fichier)
@@ -390,20 +373,13 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
       fichier << ',' << entre;
    }
 
-   employers.push_back(empl);
+   
 }
 
 void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
 {
 
-   for (int i = 0; i < (int)chomeurs.size(); i++)
-   {
-      if (chom.getIdPersonne() == chomeurs[i].getIdPersonne())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
+  
 
    ofstream fichier("CSV/chomeur.csv", ios::app);
    if (fichier)
@@ -437,19 +413,11 @@ void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
       }
    }
 
-   chomeurs.push_back(chom);
+
 }
 
 void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise> &entreprises)
 {
-   for (int i = 0; i < (int)entreprises.size(); i++)
-   {
-      if (entre.getId() == entreprises[i].getId())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
 
    ofstream fichier("CSV/entreprise.csv", ios::app);
    if (fichier)
@@ -458,20 +426,12 @@ void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise> &entrepri
               << entre.getId() << ',' << entre.getNom() << ',' << entre.getCode() << ',' << entre.getMail();
    }
 
-   entreprises.push_back(entre);
+
 }
 
 void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
 {
 
-   for (int i = 0; i < (int)postes.size(); i++)
-   {
-      if (post.getId() == postes[i].getId())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
 
    ofstream fichier("CSV/poste.csv", ios::app);
    if (fichier)
@@ -490,7 +450,7 @@ void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
       fichier << post.getIdEntreprise();
    }
 
-   postes.push_back(post);
+
 }
 
 void delEmployerCSV(int ID)
@@ -734,4 +694,26 @@ void delPosteCSV(int ID)
    {
       cout << "Erreur impossible d'ouvrir le fichier \n";
    }
+}
+
+
+
+void MajCSVEmployer(std::vector<Employer> &employers)
+{
+
+}
+
+void MajCSVEntreprise(std::vector<Employer> &employers)
+{
+
+}
+
+void MajCSVChomeur(std::vector<Employer> &employers)
+{
+
+}
+
+void MajCSVPoste(std::vector<Employer> &employers)
+{
+
 }

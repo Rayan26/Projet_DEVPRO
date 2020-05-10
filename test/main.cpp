@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cmath>
 #include <vector>
+
 #include "Personne.h"
 #include "Entreprise.h"
 #include "Poste.h"
@@ -11,6 +12,7 @@
 #include "menu.h"
 #include "Parse.h"
 #include "Service.h"
+#include "ajout.h"
 
 using namespace std;
 
@@ -116,24 +118,24 @@ int main()
      // affichage_vecteur_Poste(postes_recherche);
 
      //TEST ADDEMPLOYERCSV && TEST COLLEGUE
-     Employer Michel(5, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
-     ajout_employer_entreprise(Michel, 1, Entreprises);
-     vector<Employer> employers_entreprise = get_employers_de_entreprise(1, Employers);
+     // Employer Michel(5, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
+     // ajout_employer_entreprise(Michel, 1, Entreprises);
+     // vector<Employer> employers_entreprise = get_employers_de_entreprise(1, Employers);
      //affichage_vecteur_employer(employers_entreprise);
      //addEmployerCSV(Michel,Employers);
 
      //TEST ADDCHOMEURCSV & ADDANCIENCOLLEGUE
-     // Chomeur Michel(5,"Michel","Dumas","michel@gmail.com","13011",competence);
+     // Chomeur Michel(6,"Michel","Dumas","michel@gmail.com","13011",competence);
      // Michel.addAncienCollegue(2);
-     // addChomeurCSV(Michel,Chomeurs);
+     // addChomeur(Michel,Chomeurs);
 
      // vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
      // affichage_vecteur_employer(employers_entreprise);
-     // addEmployerCSV(Michel,Employers);
+     // addEmployer(Michel,Employers);
 
      //TEST ADDENTREPRISECSV
-     // Entreprise MichelINC(5,"MichelINC","13009","michelinc@gmail.com");
-     // addEntrepriseCSV(MichelINC,Entreprises);
+     // Entreprise MichelINC(8,"MichelINC","13009","michelinc@gmail.com");
+     // addEntreprise(MichelINC,Entreprises);
 
      // Entreprise MigchelINC(5, "MicghelINC", "13009", "micghelinc@gmail.com");
      // addEntrepriseCSV(MigchelINC, Entreprises);
@@ -144,10 +146,30 @@ int main()
      // developer.addCompetence("c++");
      // addPosteCSV(developer,Postes);
 
-     delEmployerCSV(12);
-     delChomeurCSV(2);
-     delEntrepriseCSV(1);
-     delPosteCSV(0);
+     // delEmployerCSV(12);
+     // delChomeurCSV(2);
+     // delEntrepriseCSV(1);
+     // delPosteCSV(0);
+
+     // affichage_vecteur_employer(Employers);
+     delEmployer(Employers, Entreprises, 3);
+     // affichage_vecteur_employer(Employers);
+     // affichage_vecteur_employer(get_employers(2,Employers)->get_collegues())
+     // affichage_vecteur_employer(get_employers(5,Employers)->get_collegues())
+
+     // for (size_t i = 0; i < get_employers(2, Employers)->get_collegues().size(); i++)
+     // {
+     //      cout << get_employers(2, Employers)->get_collegues()[i] << endl;
+     // }
+
+     Employer *empl = get_employers(5, Employers);
+     if(empl->get_collegues[0])
+          cout<<"problème";
+     for (int i = 0; i < (int)empl->get_collegues().size(); i++)
+     {
+          // if (empl->get_collegues[i]!=3)
+          //      cout<< "c bon";
+     }
 
      return 0;
 }

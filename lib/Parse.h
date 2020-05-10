@@ -21,5 +21,11 @@ void delEmployerCSV(int ID);
 void delEntrepriseCSV(int ID);
 void delChomeurCSV(int ID);
 void delPosteCSV(int ID);
+
+void MajCSVEmployer(std::vector<Employer> &employers);
+void MajCSVEntreprise(std::vector<Employer> &employers);
+void MajCSVChomeur(std::vector<Employer> &employers);
+void MajCSVPoste(std::vector<Employer> &employers);
+
 #endif
 

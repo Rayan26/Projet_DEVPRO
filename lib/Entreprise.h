@@ -28,6 +28,7 @@ public:
     
     void addJob(int Id,std::string const newjob);
     void deleteJob(int idPoste);
+
     void addEmploye(int Id_employe);
     void deleteEmploye(int Id_employe);
 

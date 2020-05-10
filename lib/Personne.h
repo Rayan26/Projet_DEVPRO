@@ -31,6 +31,8 @@ public:
     void printInfo() const;
     std::vector<int> get_collegues() const;
     std::vector<int> get_Anciens_collegues() const;
+    void erase_collegue(int id);
+    void erase_ancien_collegue(int id);
 
 private:
     int _id;
