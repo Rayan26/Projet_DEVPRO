@@ -14,23 +14,37 @@ public:
     Personne(Personne const &personne);
     ~Personne();
 
+    /*
+     * Accesseurs caracteristiques Personnes 
+     */
     int getIdPersonne() const;
     std::string getNom() const;
     std::string getPrenom() const;
     std::string getMail() const;
     std::vector<std::string> getSkill() const;
     std::string getCode() const;
+    std::vector<int> get_collegues() const;
+    std::vector<int> get_Anciens_collegues() const;
+
+    /*
+     * Modificateurs caracteristiques Personnes 
+     */    
     void setId(int newid);
     void setNom(std::string newnom);
     void setPrenom(std::string newprenom);
     void setMail(std::string newmail);
     void setCode(std::string newcode);
+    
     void addCompetence(std::string const newcompetence);
     void addCollegue(int const newcollegue);
     void addAncienCollegue(int const Anciencollegue);
+    
+    // Affiche les caractéristique de la personnes
     void printInfo() const;
-    std::vector<int> get_collegues() const;
-    std::vector<int> get_Anciens_collegues() const;
+    
+    /*
+     * Modificateurs des vecteurs dans le cas de la suppression d'un autre profil dans la base de donnée
+     */
     void erase_collegue(int id);
     void erase_ancien_collegue(int id);
 
