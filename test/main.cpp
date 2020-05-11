@@ -163,7 +163,8 @@ int main()
      // }
 
      Employer *empl = get_employers(5, Employers);
-     if(empl->get_collegues[0])
+     vector<int> collegues_inexistants = empl->get_collegues();
+     if(collegues_inexistants[0])
           cout<<"problème";
      for (int i = 0; i < (int)empl->get_collegues().size(); i++)
      {

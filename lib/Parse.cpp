@@ -717,3 +717,4 @@ void MajCSVPoste(std::vector<Employer> &employers)
 {
 
 }
+
