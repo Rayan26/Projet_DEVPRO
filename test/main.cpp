@@ -152,7 +152,7 @@ int main()
      // delPosteCSV(0);
 
      // affichage_vecteur_employer(Employers);
-     delEmployer(Employers, Entreprises, 3);
+     // delEmployer(Employers, Entreprises, 3);
      // affichage_vecteur_employer(Employers);
      // affichage_vecteur_employer(get_employers(2,Employers)->get_collegues())
      // affichage_vecteur_employer(get_employers(5,Employers)->get_collegues())
@@ -162,15 +162,36 @@ int main()
      //      cout << get_employers(2, Employers)->get_collegues()[i] << endl;
      // }
 
-     Employer *empl = get_employers(5, Employers);
-     vector<int> collegues_inexistants = empl->get_collegues();
-     if(collegues_inexistants[0])
-          cout<<"problème";
-     for (int i = 0; i < (int)empl->get_collegues().size(); i++)
-     {
-          // if (empl->get_collegues[i]!=3)
-          //      cout<< "c bon";
-     }
+     // Employer *empl = get_employers(5, Employers);
+     // vector<int> collegues_inexistants = empl->get_collegues();
+     // if(collegues_inexistants[0])
+     //      cout<<"problème";
+     // for (int i = 0; i < (int)empl->get_collegues().size(); i++)
+     // {
+     //      // if (empl->get_collegues[i]!=3)
+     //      //      cout<< "c bon";
+     // }
+
+     // TEST MajObjetCSV()
+
+     // Entreprise MichelINC(8, "MichelINC", "13009", "michelinc@gmail.com");
+     // Entreprises.push_back(MichelINC);
+     // MajCSVEntreprise(Entreprises);
+
+     // Poste developer(5,"developer",5);
+     // developer.addCompetence("le style avant tout");
+     // developer.addCompetence("c++");
+     // Postes.push_back(developer);
+     // MajCSVPoste(Postes);
+
+     // Chomeur Michel(6,"Michel","Dumas","michel@gmail.com","13011",competence);
+     // Chomeurs.push_back(Michel);
+     // MajCSVChomeur(Chomeurs);
+
+     Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
+     ajout_employer_entreprise(Michel, 1, Entreprises);
+     Employers.push_back(Michel);
+     MajCSVEmployer(Employers);
 
      return 0;
 }

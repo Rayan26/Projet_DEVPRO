@@ -328,14 +328,15 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
               << empl.getIdPersonne() << ',' << empl.getNom() << ',' << empl.getPrenom() << ',' << empl.getMail() << ',' << empl.getCode() << ',';
 
       vector<string> skills = empl.getSkill();
-      fichier << skills[0];
-      for (size_t i = 1; i < skills.size(); i++)
+      if (skills.size()!=0)
       {
-         fichier << ';' << skills[i];
+
+         fichier << skills[0];
+         for (size_t i = 1; i < skills.size(); i++)
+         {
+            fichier << ';' << skills[i];
+         }
       }
-
-      fichier << ',';
-
       int entre = empl.getIdEntreprise();
       vector<Employer> employers_entreprise = get_employers_de_entreprise(entre, employers);
 
@@ -372,14 +373,10 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
 
       fichier << ',' << entre;
    }
-
-   
 }
 
 void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
 {
-
-  
 
    ofstream fichier("CSV/chomeur.csv", ios::app);
    if (fichier)
@@ -388,10 +385,14 @@ void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
               << chom.getIdPersonne() << ',' << chom.getNom() << ',' << chom.getPrenom() << ',' << chom.getMail() << ',' << chom.getCode() << ',';
 
       vector<string> skills = chom.getSkill();
-      fichier << skills[0];
-      for (size_t i = 1; i < skills.size(); i++)
+      if (skills.size()!=0)
       {
-         fichier << ';' << skills[i];
+
+         fichier << skills[0];
+         for (size_t i = 1; i < skills.size(); i++)
+         {
+            fichier << ';' << skills[i];
+         }
       }
 
       fichier << ',';
@@ -412,8 +413,6 @@ void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
          }
       }
    }
-
-
 }
 
 void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise> &entreprises)
@@ -425,13 +424,10 @@ void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise> &entrepri
       fichier << "\n"
               << entre.getId() << ',' << entre.getNom() << ',' << entre.getCode() << ',' << entre.getMail();
    }
-
-
 }
 
 void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
 {
-
 
    ofstream fichier("CSV/poste.csv", ios::app);
    if (fichier)
@@ -449,8 +445,6 @@ void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
       fichier << ',';
       fichier << post.getIdEntreprise();
    }
-
-
 }
 
 void delEmployerCSV(int ID)
@@ -696,25 +690,118 @@ void delPosteCSV(int ID)
    }
 }
 
-
-
 void MajCSVEmployer(std::vector<Employer> &employers)
 {
+   fstream fichier("CSV/employer.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
 
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/employer.csv");
+      rename("./CSV/temp.csv", "./CSV/employer.csv");
+
+      for (size_t i = 0; i < employers.size(); i++)
+      {
+         addEmployerCSV(employers[i], employers);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
 }
 
-void MajCSVEntreprise(std::vector<Employer> &employers)
+void MajCSVEntreprise(std::vector<Entreprise> &entreprises)
 {
+   fstream fichier("CSV/entreprise.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
 
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/entreprise.csv");
+      rename("./CSV/temp.csv", "./CSV/entreprise.csv");
+
+      for (size_t i = 0; i < entreprises.size(); i++)
+      {
+         addEntrepriseCSV(entreprises[i], entreprises);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
 }
 
-void MajCSVChomeur(std::vector<Employer> &employers)
+void MajCSVChomeur(std::vector<Chomeur> &chomeurs)
 {
+   fstream fichier("CSV/chomeur.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
 
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/chomeur.csv");
+      rename("./CSV/temp.csv", "./CSV/chomeur.csv");
+
+      for (size_t i = 0; i < chomeurs.size(); i++)
+      {
+         addChomeurCSV(chomeurs[i], chomeurs);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
 }
 
-void MajCSVPoste(std::vector<Employer> &employers)
+void MajCSVPoste(std::vector<Poste> &postes)
 {
+   fstream fichier("CSV/poste.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
 
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/poste.csv");
+      rename("./CSV/temp.csv", "./CSV/poste.csv");
+
+      for (size_t i = 0; i < postes.size(); i++)
+      {
+         addPosteCSV(postes[i], postes);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
 }
-

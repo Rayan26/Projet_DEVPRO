@@ -42,9 +42,9 @@ void delPosteCSV(int ID);
  * EN COURS D'implémentation
  */
 void MajCSVEmployer(std::vector<Employer> &employers);
-void MajCSVEntreprise(std::vector<Employer> &employers);
-void MajCSVChomeur(std::vector<Employer> &employers);
-void MajCSVPoste(std::vector<Employer> &employers);
+void MajCSVEntreprise(std::vector<Entreprise> &entreprises);
+void MajCSVChomeur(std::vector<Chomeur> &chomeurs);
+void MajCSVPoste(std::vector<Poste> &postes);
 
 #endif
 
