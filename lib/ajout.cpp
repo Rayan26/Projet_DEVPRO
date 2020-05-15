@@ -116,6 +116,92 @@ void delEmployer(vector<Employer> &employers, vector<Entreprise> &entreprises, i
 	}
 }
 
-void delEntreprise(vector<Entreprise> &entreprises, int id);
-void delChomeur(vector<Chomeur> &chomeurs, int id);
-void delPoste(vector<Poste> &postes, int id);
+void delEntreprise(vector<Entreprise> &entreprises, int id)
+{
+	if (id > 0)
+	{
+		int x = 0;
+		for (size_t i = 0; i < entreprises.size(); i++)
+		{
+			if (entreprises[i].getId() == id)
+			{
+				entreprises.erase(entreprises.begin() + i);
+				x = 1;
+			}
+		}
+		if (x == 0)
+		{
+			cout << "Cet ID ne correspond à aucune entreprise";
+			exit(0);
+		}
+	}
+	MajCSVEntreprise(entreprises);
+}
+
+void delChomeur(vector<Chomeur> &chomeurs, int id)
+{
+	if (id > 0)
+	{
+		int x = 0;
+		for (size_t i = 0; i < chomeurs.size(); i++)
+		{
+			if (chomeurs[i].getIdPersonne() == id)
+			{
+				chomeurs.erase(chomeurs.begin() + i);
+				x = 1;
+			}
+		}
+		if (x == 0)
+		{
+			cout << "Cet ID ne correspond à aucun chomeur";
+			exit(0);
+		}
+
+		for (size_t i = 0; i < chomeurs.size(); i++)
+		{
+			for (size_t j = 0; j < (chomeurs[i].get_Anciens_collegues()).size(); j++)
+			{
+				if (chomeurs[i].get_Anciens_collegues()[j] == id)
+				{
+					chomeurs[i].erase_ancien_collegue(id);
+				}
+			}
+		}
+		MajCSVChomeur(chomeurs);
+	}
+}
+
+void delPoste(vector<Poste> &postes, vector<Entreprise> &entreprises, int id)
+{
+	if (id > 0)
+	{
+		int x = 0;
+
+		Entreprise *entre = get_entreprise((get_poste(id, postes))->getIdEntreprise(), entreprises);
+		entre->deleteJob(id);
+
+		for (size_t i = 0; i < postes.size(); i++)
+		{
+			if (postes[i].getId() == id)
+			{
+				postes.erase(postes.begin() + i);
+				x = 1;
+			}
+		}
+
+		if (x == 0)
+		{
+			cout << "Cet ID ne correspond à aucun poste";
+			exit(0);
+		}
+		/*for (size_t i = 0; i < entre.getJobs().size(); i++)
+		{
+			if (entre.getJobs()[i] == id)
+			{
+				entre.deleteJob()
+			}
+		}
+		*/
+		MajCSVPoste(postes);
+	}
+}

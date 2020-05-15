@@ -28,20 +28,20 @@ public:
 
     /*
      * Modificateurs caracteristiques Personnes 
-     */    
+     */
     void setId(int newid);
     void setNom(std::string newnom);
     void setPrenom(std::string newprenom);
     void setMail(std::string newmail);
     void setCode(std::string newcode);
-    
-    void addCompetence(std::string const newcompetence);
+
+    void addCompetence(std::string newcompetence);
     void addCollegue(int const newcollegue);
     void addAncienCollegue(int const Anciencollegue);
-    
+
     // Affiche les caractéristique de la personnes
     void printInfo() const;
-    
+
     /*
      * Modificateurs des vecteurs dans le cas de la suppression d'un autre profil dans la base de donnée
      */

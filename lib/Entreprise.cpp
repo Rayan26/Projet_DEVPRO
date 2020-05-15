@@ -89,7 +89,7 @@ void affichage_vecteur_entreprise(vector<Entreprise> entre)
 {
 	for (int i = 0; i < (int)entre.size(); i++)
 	{
-	     entre[i].printInfo();
+		entre[i].printInfo();
 	}
 }
 
@@ -101,24 +101,29 @@ void affichage_vecteur_entreprise(vector<Entreprise> entre)
 // 	this->_Jobs[_Jobs.size()] = new_poste;
 // }
 
-// void Entreprise::deleteJob(Poste poste)
-// {
-// }
+void Entreprise::deleteJob(int id)
+{
+	for (size_t i = 0; i < _idJobs.size(); i++)
+	{
+		if (_idJobs[i] == id)
+		{
+			_idJobs.erase(_idJobs.begin() + i);
+		}
+	}
+}
 
 void Entreprise::addEmploye(int Id_employe)
 {
-	this->_idEmployer.push_back(Id_employe) ;
+	this->_idEmployer.push_back(Id_employe);
 }
 
 void Entreprise::deleteEmploye(int Id_employe)
 {
 	for (size_t i = 0; i < _idEmployer.size(); i++)
 	{
-		if (_idEmployer[i]==Id_employe)
+		if (_idEmployer[i] == Id_employe)
 		{
-			_idEmployer.erase(_idEmployer.begin()+i);
+			_idEmployer.erase(_idEmployer.begin() + i);
 		}
-		
 	}
-	
 }

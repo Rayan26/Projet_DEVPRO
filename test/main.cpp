@@ -188,12 +188,24 @@ int main()
      // Chomeurs.push_back(Michel);
      // MajCSVChomeur(Chomeurs);
 
-     Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
+     // Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
      //ajout_employer_entreprise(Michel, 1, Entreprises);
      //Employers.push_back(Michel);
      //MajCSVEmployer(Employers);
-     vector<string> skills = Michel.getSkill();
-     cout << skills[0];
-     delEmployer(Employers, Entreprises, 2);
+     // Michel.addCompetence("humour");
+
+     Employer *empl1 = get_employers(2, Employers);
+     empl1->addCompetence("humour");
+     vector<string> skills = empl1->getSkill();
+     cout << "skills[0] = " << skills[0] << "\n";
+     empl1->printInfo();
+
+     //delEmployer(Employers, Entreprises, 2);
+     //  delEntreprise(Entreprises, 5);
+     //delChomeur(Chomeurs, 5);
+     //delPoste(Postes, Entreprises, 3);
+
+     //////////////////// TESTER DELPOSTE ///////////////////////////
+
      return 0;
 }

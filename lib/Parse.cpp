@@ -341,7 +341,17 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
       fichier << "\n"
               << empl.getIdPersonne() << ',' << empl.getNom() << ',' << empl.getPrenom() << ',' << empl.getMail() << ',' << empl.getCode() << ',';
 
-      vector<string> skills = empl.getSkill();
+      vector<string> skills;
+
+      empl.printInfo();
+      cout << "taille skills : " << empl.getSkill().size() << "\n";
+      skills = empl.getSkill();
+      if (skills.size() == 0)
+      {
+         cout << "skills vide \n";
+         cout << "ID EMPLOYE : " << empl.getIdPersonne() << "\n";
+      }
+
       if (skills.size() != 0)
       {
 

@@ -6,7 +6,7 @@ Personne::Personne(int id, string nom, string prenom, string mail, string code, 
 {
 }
 
-Personne::Personne(const Personne &personne) : _id(personne.getIdPersonne()), _nom(personne.getNom()), _prenom(personne.getPrenom()), _mail(personne.getMail()), _code(personne.getCode())
+Personne::Personne(const Personne &personne) : _id(personne.getIdPersonne()), _nom(personne.getNom()), _prenom(personne.getPrenom()), _mail(personne.getMail()), _code(personne.getCode()), _skill(personne.getSkill()), _IdCollegue(personne.get_collegues()), _IdAncienCollegue(personne.get_Anciens_collegues())
 {
 }
 
@@ -69,9 +69,9 @@ void Personne::setCode(string newcode)
     this->_code = newcode;
 }
 
-void Personne::addCompetence(string const newcompetence)
+void Personne::addCompetence(string newcompetence)
 {
-    this->_skill.push_back(newcompetence);
+    _skill.push_back(newcompetence);
 }
 
 void Personne::addCollegue(int const newcollegue)
