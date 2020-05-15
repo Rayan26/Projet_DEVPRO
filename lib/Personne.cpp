@@ -41,8 +41,7 @@ string Personne::getCode() const
 
 vector<string> Personne::getSkill() const
 {
-
-    return this->_skill;
+    return _skill;
 }
 
 void Personne::setId(int newid)

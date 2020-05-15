@@ -65,7 +65,7 @@ void addPoste(const Poste &post, std::vector<Poste> &postes)
 	postes.push_back(post);
 }
 
-void delEmployer(vector<Employer> &employers,vector<Entreprise> &entreprises, int id)
+void delEmployer(vector<Employer> &employers, vector<Entreprise> &entreprises, int id)
 {
 	if (id > 0)
 	{
@@ -80,7 +80,7 @@ void delEmployer(vector<Employer> &employers,vector<Entreprise> &entreprises, in
 		}
 		if (x == 0)
 		{
-			cout << "Cet ID ne correspond à aucun employé" ;
+			cout << "Cet ID ne correspond à aucun employé";
 			exit(0);
 		}
 
@@ -101,20 +101,18 @@ void delEmployer(vector<Employer> &employers,vector<Entreprise> &entreprises, in
 					employers[i].erase_ancien_collegue(id);
 				}
 			}
-
 		}
 		for (size_t i = 0; i < entreprises.size(); i++)
 		{
-			for (size_t j = 0; j < (get_employers_de_entreprise(entreprises[i].getId(),employers)).size(); j++)
+			for (size_t j = 0; j < (get_employers_de_entreprise(entreprises[i].getId(), employers)).size(); j++)
 			{
-				if ((get_employers_de_entreprise(entreprises[i].getId(),employers))[j].getIdPersonne() == id)
+				if ((get_employers_de_entreprise(entreprises[i].getId(), employers))[j].getIdPersonne() == id)
 				{
 					entreprises[i].deleteEmploye(id);
 				}
 			}
-			
 		}
-		
+		MajCSVEmployer(employers);
 	}
 }
 

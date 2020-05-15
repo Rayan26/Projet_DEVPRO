@@ -59,14 +59,28 @@ vector<Chomeur> Create_Chomeur()
             case 5:
                while (getline(zz, comp, ';'))
                {
-                  new_Chomeur.addCompetence(comp);
+                  try
+                  {
+                     new_Chomeur.addCompetence(comp);
+                  }
+                  catch (std::invalid_argument)
+                  {
+                     // MEssage erreur
+                  }
                }
                ++j;
                break;
             case 6:
                while (getline(zz, comp, ';'))
                {
-                  new_Chomeur.addAncienCollegue(stoi(info));
+                  try
+                  {
+                     new_Chomeur.addAncienCollegue(stoi(comp));
+                  }
+                  catch (std::invalid_argument)
+                  {
+                     // MEssage erreur
+                  }
                }
                ++j;
                break;
@@ -328,7 +342,7 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
               << empl.getIdPersonne() << ',' << empl.getNom() << ',' << empl.getPrenom() << ',' << empl.getMail() << ',' << empl.getCode() << ',';
 
       vector<string> skills = empl.getSkill();
-      if (skills.size()!=0)
+      if (skills.size() != 0)
       {
 
          fichier << skills[0];
@@ -337,6 +351,9 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
             fichier << ';' << skills[i];
          }
       }
+
+      fichier << ",";
+
       int entre = empl.getIdEntreprise();
       vector<Employer> employers_entreprise = get_employers_de_entreprise(entre, employers);
 
@@ -385,7 +402,7 @@ void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
               << chom.getIdPersonne() << ',' << chom.getNom() << ',' << chom.getPrenom() << ',' << chom.getMail() << ',' << chom.getCode() << ',';
 
       vector<string> skills = chom.getSkill();
-      if (skills.size()!=0)
+      if (skills.size() != 0)
       {
 
          fichier << skills[0];

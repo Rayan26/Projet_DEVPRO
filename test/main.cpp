@@ -189,9 +189,11 @@ int main()
      // MajCSVChomeur(Chomeurs);
 
      Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
-     ajout_employer_entreprise(Michel, 1, Entreprises);
-     Employers.push_back(Michel);
-     MajCSVEmployer(Employers);
-
+     //ajout_employer_entreprise(Michel, 1, Entreprises);
+     //Employers.push_back(Michel);
+     //MajCSVEmployer(Employers);
+     vector<string> skills = Michel.getSkill();
+     cout << skills[0];
+     delEmployer(Employers, Entreprises, 2);
      return 0;
 }
