@@ -332,6 +332,26 @@ vector<Poste> Create_Poste()
    return Postes;
 }
 
+void association_poste_entreprise(vector<Poste> &postes, vector<Entreprise> &entreprises)
+{
+   for (size_t i = 0; i < postes.size(); i++)
+   {
+      Entreprise *entre;
+      entre = get_entreprise(postes[i].getIdEntreprise(), entreprises);
+      entre->addJob(postes[i].getId());
+   }
+}
+
+void association_employer_entreprise(vector<Employer> &employers, vector<Entreprise> &entreprises)
+{
+   for (size_t i = 0; i < employers.size(); i++)
+   {
+      Entreprise *entre;
+      entre = get_entreprise(employers[i].getIdEntreprise(), entreprises);
+      entre->addEmploye(employers[i].getIdPersonne());
+   }
+}
+
 void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
 {
 

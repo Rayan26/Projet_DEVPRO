@@ -63,6 +63,9 @@ int main()
           << endl;
      vector<Poste> Postes = Create_Poste();
 
+     association_poste_entreprise(Postes, Entreprises);
+     association_employer_entreprise(Employers, Entreprises);
+
      cout << "fin de déclaration" << endl;
 
      //TEST GET_ENTREPRISE
@@ -194,16 +197,21 @@ int main()
      //MajCSVEmployer(Employers);
      // Michel.addCompetence("humour");
 
-     Employer *empl1 = get_employers(2, Employers);
-     empl1->addCompetence("humour");
-     vector<string> skills = empl1->getSkill();
-     cout << "skills[0] = " << skills[0] << "\n";
-     empl1->printInfo();
+     //Employer *empl1 = get_employers(2, Employers);
+     // empl1->addCompetence("humour");
+     // vector<string> skills = empl1->getSkill();
+     // cout << "skills[0] = " << skills[0] << "\n";
 
-     //delEmployer(Employers, Entreprises, 2);
-     //  delEntreprise(Entreprises, 5);
+     //delEntreprise(Entreprises, Employers, 2);
      //delChomeur(Chomeurs, 5);
-     //delPoste(Postes, Entreprises, 3);
+     cout << "info entreprise 3 avant del : \n";
+     Entreprise *entre2 = get_entreprise(2, Entreprises);
+     vector<int> jobs = entre2->getJobs();
+     cout << jobs[0];
+     entre2->printInfo();
+     delEmployer(Employers, Entreprises, 1);
+     delPoste(Postes, Entreprises, 2);
+     entre2->printInfo();
 
      //////////////////// TESTER DELPOSTE ///////////////////////////
 

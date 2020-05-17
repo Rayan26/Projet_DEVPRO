@@ -104,9 +104,9 @@ void delEmployer(vector<Employer> &employers, vector<Entreprise> &entreprises, i
 		}
 		for (size_t i = 0; i < entreprises.size(); i++)
 		{
-			for (size_t j = 0; j < (get_employers_de_entreprise(entreprises[i].getId(), employers)).size(); j++)
+			for (size_t j = 0; j < (entreprises[i].get_employers_entreprise()).size(); j++)
 			{
-				if ((get_employers_de_entreprise(entreprises[i].getId(), employers))[j].getIdPersonne() == id)
+				if ((entreprises[i].get_employers_entreprise())[j] == id)
 				{
 					entreprises[i].deleteEmploye(id);
 				}
@@ -116,26 +116,36 @@ void delEmployer(vector<Employer> &employers, vector<Entreprise> &entreprises, i
 	}
 }
 
-void delEntreprise(vector<Entreprise> &entreprises, int id)
+void delEntreprise(vector<Entreprise> &entreprises, vector<Employer> &employers, int id)
 {
 	if (id > 0)
 	{
-		int x = 0;
-		for (size_t i = 0; i < entreprises.size(); i++)
+		vector<Employer> empl = get_employers_de_entreprise(id, employers);
+
+		if (empl.size() == 0)
 		{
-			if (entreprises[i].getId() == id)
+
+			int x = 0;
+			for (size_t i = 0; i < entreprises.size(); i++)
 			{
-				entreprises.erase(entreprises.begin() + i);
-				x = 1;
+				if (entreprises[i].getId() == id)
+				{
+					entreprises.erase(entreprises.begin() + i);
+					x = 1;
+				}
 			}
+			if (x == 0)
+			{
+				cout << "Cet ID ne correspond à aucune entreprise";
+				exit(0);
+			}
+			MajCSVEntreprise(entreprises);
 		}
-		if (x == 0)
+		else
 		{
-			cout << "Cet ID ne correspond à aucune entreprise";
-			exit(0);
+			cout << "L'entreprise possède encore des employers, impossible de la supprimer \n";
 		}
 	}
-	MajCSVEntreprise(entreprises);
 }
 
 void delChomeur(vector<Chomeur> &chomeurs, int id)
@@ -194,14 +204,9 @@ void delPoste(vector<Poste> &postes, vector<Entreprise> &entreprises, int id)
 			cout << "Cet ID ne correspond à aucun poste";
 			exit(0);
 		}
-		/*for (size_t i = 0; i < entre.getJobs().size(); i++)
-		{
-			if (entre.getJobs()[i] == id)
-			{
-				entre.deleteJob()
-			}
-		}
-		*/
+
+		entre->deleteJob(id);
+
 		MajCSVPoste(postes);
 	}
 }

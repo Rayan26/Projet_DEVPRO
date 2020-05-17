@@ -22,6 +22,6 @@ void addPoste(const Poste &post, std::vector<Poste> &postes);
  *  puis en rééditant le fichier CSV
  */
 void delEmployer(vector<Employer> &employers, vector<Entreprise> &entreprises, int id);
-void delEntreprise(vector<Entreprise> &entreprises, int id);
+void delEntreprise(vector<Entreprise> &entreprises, vector<Employer> &employers, int id);
 void delChomeur(vector<Chomeur> &chomeurs, int id);
 void delPoste(vector<Poste> &postes, vector<Entreprise> &entreprises, int id);
