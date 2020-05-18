@@ -204,16 +204,14 @@ int main()
 
      //delEntreprise(Entreprises, Employers, 2);
      //delChomeur(Chomeurs, 5);
-     cout << "info entreprise 3 avant del : \n";
      Entreprise *entre2 = get_entreprise(2, Entreprises);
-     vector<int> jobs = entre2->getJobs();
-     cout << jobs[0];
      entre2->printInfo();
      delEmployer(Employers, Entreprises, 1);
-     delPoste(Postes, Entreprises, 2);
      entre2->printInfo();
 
      //////////////////// TESTER DELPOSTE ///////////////////////////
+     // vector<int> jobs = entre2->getJobs();
+     //delPoste(Postes, Entreprises, 2);
 
      return 0;
 }
