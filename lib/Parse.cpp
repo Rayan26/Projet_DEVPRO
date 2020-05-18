@@ -63,9 +63,8 @@ vector<Chomeur> Create_Chomeur()
                   {
                      new_Chomeur.addCompetence(comp);
                   }
-                  catch (std::invalid_argument)
+                  catch (logic_error &)
                   {
-                     // MEssage erreur
                   }
                }
                ++j;
@@ -77,9 +76,8 @@ vector<Chomeur> Create_Chomeur()
                   {
                      new_Chomeur.addAncienCollegue(stoi(comp));
                   }
-                  catch (std::invalid_argument)
+                  catch (logic_error &)
                   {
-                     // MEssage erreur
                   }
                }
                ++j;
@@ -91,7 +89,7 @@ vector<Chomeur> Create_Chomeur()
 
          if (i != 0)
          {
-            //   new_Chomeur.printInfo();
+
             Chomeurs.push_back(new_Chomeur);
          }
          ++i;
@@ -162,14 +160,26 @@ vector<Employer> Create_Employer()
             case 6:
                while (getline(zz, comp, ';'))
                {
-                  new_Employer.addCollegue(stoi(comp));
+                  try
+                  {
+                     new_Employer.addCollegue(stoi(comp));
+                  }
+                  catch (logic_error &)
+                  {
+                  }
                }
                ++j;
                break;
             case 7:
                while (getline(zz, comp, ';'))
                {
-                  new_Employer.addAncienCollegue(stoi(comp));
+                  try
+                  {
+                     new_Employer.addAncienCollegue(stoi(comp));
+                  }
+                  catch (logic_error &)
+                  {
+                  }
                }
                ++j;
                break;
@@ -184,8 +194,6 @@ vector<Employer> Create_Employer()
 
          if (i != 0)
          {
-            //   new_Employer.printInfo();
-            //   new_Employer.printEmployeur();
             Employers.push_back(new_Employer);
          }
 
@@ -249,7 +257,6 @@ vector<Entreprise> Create_Entreprise()
 
          if (i != 0)
          {
-            //   new_Entreprise.printInfo();
             Entreprises.push_back(new_Entreprise);
          }
 
@@ -317,7 +324,6 @@ vector<Poste> Create_Poste()
 
          if (i != 0)
          {
-            //   new_Poste.printInfo();
             Postes.push_back(new_Poste);
          }
 
