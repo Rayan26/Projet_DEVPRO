@@ -10,7 +10,7 @@ Entreprise::Entreprise(int ID, string nom, string code, string mail) : _id(ID), 
 {
 }
 
-Entreprise::Entreprise(const Entreprise &entreprise) : _id(entreprise.getId()), _nom(entreprise.getNom()), _mail(entreprise.getMail()), _code(entreprise.getCode())
+Entreprise::Entreprise(const Entreprise &entreprise) : _id(entreprise.getId()), _nom(entreprise.getNom()), _mail(entreprise.getMail()), _code(entreprise.getCode()), _idEmployer(entreprise.get_employers_entreprise()), _idJobs(entreprise.getJobs())
 {
 }
 
@@ -38,9 +38,15 @@ string Entreprise::getCode() const
 	return this->_code;
 }
 
-vector<int> Entreprise::getJobs()
+vector<int> Entreprise::getJobs() const
 {
-	return this->_idJobs;
+	vector<int> jobs;
+
+	for (size_t i = 0; i < _idJobs.size(); i++)
+	{
+		jobs.push_back(_idJobs[i]);
+	}
+	return jobs;
 }
 
 void Entreprise::setId(int newid)
@@ -89,28 +95,48 @@ void affichage_vecteur_entreprise(vector<Entreprise> entre)
 {
 	for (int i = 0; i < (int)entre.size(); i++)
 	{
-	     entre[i].printInfo();
+		entre[i].printInfo();
 	}
 }
 
-////Je n'ai pas réussi a finir ces quatres fonctions
+void Entreprise::addJob(int id)
+{
+	_idJobs.push_back(id);
+}
 
-// void Entreprise::addJob(int Id, std::string const newjob)
-// {
-// 	Poste new_poste(Id, newjob, this->_nom, this->_mail, this->_code);
-// 	this->_Jobs[_Jobs.size()] = new_poste;
-// }
-
-// void Entreprise::deleteJob(Poste poste)
-// {
-// }
+void Entreprise::deleteJob(int id)
+{
+	for (size_t i = 0; i < _idJobs.size(); i++)
+	{
+		if (_idJobs[i] == id)
+		{
+			_idJobs.erase(_idJobs.begin() + i);
+		}
+	}
+}
 
 void Entreprise::addEmploye(int Id_employe)
 {
-	this->_idEmployer.push_back(Id_employe) ;
+	this->_idEmployer.push_back(Id_employe);
 }
 
-// void Entreprise::deleteEmploye(int Id_employe)
-// {
+void Entreprise::deleteEmploye(int Id_employe)
+{
+	for (size_t i = 0; i < _idEmployer.size(); i++)
+	{
+		if (_idEmployer[i] == Id_employe)
+		{
+			_idEmployer.erase(_idEmployer.begin() + i);
+		}
+	}
+}
 
-// }
+vector<int> Entreprise::get_employers_entreprise() const
+{
+	vector<int> empl;
+	for (size_t i = 0; i < _idEmployer.size(); i++)
+	{
+		empl.push_back(_idEmployer[i]);
+	}
+	return empl;
+}

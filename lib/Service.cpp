@@ -6,7 +6,7 @@ using namespace std;
 
 Entreprise *get_entreprise(int id, vector<Entreprise> &entreprises)
 {
-	if (id > (int)entreprises.size() || id < 0)
+	if (id < 0)
 		return NULL;
 	for (size_t i = 0; i < entreprises.size(); i++)
 	{
@@ -19,7 +19,7 @@ Entreprise *get_entreprise(int id, vector<Entreprise> &entreprises)
 
 Employer *get_employers(int id, vector<Employer> &employers)
 {
-	if (id > (int)employers.size() || id < 0)
+	if (id < 0)
 		return NULL;
 	for (size_t i = 0; i < employers.size(); i++)
 	{
@@ -108,9 +108,9 @@ vector<Poste> recherche_par_comp_CP(string competence_recherche, string CP, vect
 	return liste_poste_correspondants;
 }
 
-void ajout_employer_entreprise(Employer & empl, int id_entreprise, vector<Entreprise> &entreprises)
-{	
-	empl.setIdEntreprise(id_entreprise) ;
+void ajout_employer_entreprise(Employer &empl, int id_entreprise, vector<Entreprise> &entreprises)
+{
+	empl.setIdEntreprise(id_entreprise);
 	Entreprise *entre = get_entreprise(id_entreprise, entreprises);
 	assert(entre);
 	entre->addEmploye(empl.getIdPersonne());

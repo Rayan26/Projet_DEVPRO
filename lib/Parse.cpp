@@ -59,14 +59,26 @@ vector<Chomeur> Create_Chomeur()
             case 5:
                while (getline(zz, comp, ';'))
                {
-                  new_Chomeur.addCompetence(comp);
+                  try
+                  {
+                     new_Chomeur.addCompetence(comp);
+                  }
+                  catch (logic_error &)
+                  {
+                  }
                }
                ++j;
                break;
             case 6:
                while (getline(zz, comp, ';'))
                {
-                  new_Chomeur.addAncienCollegue(stoi(info));
+                  try
+                  {
+                     new_Chomeur.addAncienCollegue(stoi(comp));
+                  }
+                  catch (logic_error &)
+                  {
+                  }
                }
                ++j;
                break;
@@ -77,7 +89,7 @@ vector<Chomeur> Create_Chomeur()
 
          if (i != 0)
          {
-            //   new_Chomeur.printInfo();
+
             Chomeurs.push_back(new_Chomeur);
          }
          ++i;
@@ -148,14 +160,26 @@ vector<Employer> Create_Employer()
             case 6:
                while (getline(zz, comp, ';'))
                {
-                  new_Employer.addCollegue(stoi(comp));
+                  try
+                  {
+                     new_Employer.addCollegue(stoi(comp));
+                  }
+                  catch (logic_error &)
+                  {
+                  }
                }
                ++j;
                break;
             case 7:
                while (getline(zz, comp, ';'))
                {
-                  new_Employer.addAncienCollegue(stoi(comp));
+                  try
+                  {
+                     new_Employer.addAncienCollegue(stoi(comp));
+                  }
+                  catch (logic_error &)
+                  {
+                  }
                }
                ++j;
                break;
@@ -170,8 +194,6 @@ vector<Employer> Create_Employer()
 
          if (i != 0)
          {
-            //   new_Employer.printInfo();
-            //   new_Employer.printEmployeur();
             Employers.push_back(new_Employer);
          }
 
@@ -235,7 +257,6 @@ vector<Entreprise> Create_Entreprise()
 
          if (i != 0)
          {
-            //   new_Entreprise.printInfo();
             Entreprises.push_back(new_Entreprise);
          }
 
@@ -303,7 +324,6 @@ vector<Poste> Create_Poste()
 
          if (i != 0)
          {
-            //   new_Poste.printInfo();
             Postes.push_back(new_Poste);
          }
 
@@ -318,25 +338,28 @@ vector<Poste> Create_Poste()
    return Postes;
 }
 
+void association_poste_entreprise(vector<Poste> &postes, vector<Entreprise> &entreprises)
+{
+   for (size_t i = 0; i < postes.size(); i++)
+   {
+      Entreprise *entre;
+      entre = get_entreprise(postes[i].getIdEntreprise(), entreprises);
+      entre->addJob(postes[i].getId());
+   }
+}
+
+void association_employer_entreprise(vector<Employer> &employers, vector<Entreprise> &entreprises)
+{
+   for (size_t i = 0; i < employers.size(); i++)
+   {
+      Entreprise *entre;
+      entre = get_entreprise(employers[i].getIdEntreprise(), entreprises);
+      entre->addEmploye(employers[i].getIdPersonne());
+   }
+}
+
 void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
 {
-   for (int i = 0; i < (int)employers.size(); i++)
-   {
-      if (empl.getIdPersonne() == employers[i].getIdPersonne())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
-
-   // for (int i = 0; i < (int)employers.size(); i++)
-   // {
-   //    if (empl.getNom() == employers[i].getNom() && empl.getPrenom() == employers[i].getPrenom())
-   //    {
-   //       cout << "Employer existe déja dans la base de donnée" << endl;
-   //       return;
-   //    }
-   // }
 
    ofstream fichier("CSV/employer.csv", ios::app);
    if (fichier)
@@ -344,14 +367,21 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
       fichier << "\n"
               << empl.getIdPersonne() << ',' << empl.getNom() << ',' << empl.getPrenom() << ',' << empl.getMail() << ',' << empl.getCode() << ',';
 
-      vector<string> skills = empl.getSkill();
-      fichier << skills[0];
-      for (size_t i = 1; i < skills.size(); i++)
+      vector<string> skills;
+
+      skills = empl.getSkill();
+      
+      if (skills.size() != 0)
       {
-         fichier << ';' << skills[i];
+
+         fichier << skills[0];
+         for (size_t i = 1; i < skills.size(); i++)
+         {
+            fichier << ';' << skills[i];
+         }
       }
 
-      fichier << ',';
+      fichier << ",";
 
       int entre = empl.getIdEntreprise();
       vector<Employer> employers_entreprise = get_employers_de_entreprise(entre, employers);
@@ -370,7 +400,6 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
             }
          }
       }
-      
 
       fichier << ',';
       if ((empl.get_Anciens_collegues().size() > 0))
@@ -390,21 +419,10 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
 
       fichier << ',' << entre;
    }
-
-   employers.push_back(empl);
 }
 
 void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
 {
-
-   for (int i = 0; i < (int)chomeurs.size(); i++)
-   {
-      if (chom.getIdPersonne() == chomeurs[i].getIdPersonne())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
 
    ofstream fichier("CSV/chomeur.csv", ios::app);
    if (fichier)
@@ -413,10 +431,14 @@ void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
               << chom.getIdPersonne() << ',' << chom.getNom() << ',' << chom.getPrenom() << ',' << chom.getMail() << ',' << chom.getCode() << ',';
 
       vector<string> skills = chom.getSkill();
-      fichier << skills[0];
-      for (size_t i = 1; i < skills.size(); i++)
+      if (skills.size() != 0)
       {
-         fichier << ';' << skills[i];
+
+         fichier << skills[0];
+         for (size_t i = 1; i < skills.size(); i++)
+         {
+            fichier << ';' << skills[i];
+         }
       }
 
       fichier << ',';
@@ -437,20 +459,10 @@ void addChomeurCSV(const Chomeur &chom, vector<Chomeur> &chomeurs)
          }
       }
    }
-
-   chomeurs.push_back(chom);
 }
 
 void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise> &entreprises)
 {
-   for (int i = 0; i < (int)entreprises.size(); i++)
-   {
-      if (entre.getId() == entreprises[i].getId())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
 
    ofstream fichier("CSV/entreprise.csv", ios::app);
    if (fichier)
@@ -458,21 +470,10 @@ void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise> &entrepri
       fichier << "\n"
               << entre.getId() << ',' << entre.getNom() << ',' << entre.getCode() << ',' << entre.getMail();
    }
-
-   entreprises.push_back(entre);
 }
 
 void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
 {
-
-   for (int i = 0; i < (int)postes.size(); i++)
-   {
-      if (post.getId() == postes[i].getId())
-      {
-         cout << "ID existe déja dans la base de donnée" << endl;
-         return;
-      }
-   }
 
    ofstream fichier("CSV/poste.csv", ios::app);
    if (fichier)
@@ -490,6 +491,363 @@ void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
       fichier << ',';
       fichier << post.getIdEntreprise();
    }
+}
 
-   postes.push_back(post);
+void delEmployerCSV(int ID)
+{
+   fstream fichier("CSV/employer.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         i++;
+         if (j == ID)
+         {
+            cout << "Employé trouvé \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas d'employé avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/employer.csv");
+         rename("./CSV/temp.csv", "./CSV/employer.csv");
+         cout << "Les infos de l'employé ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void delEntrepriseCSV(int ID)
+{
+   fstream fichier("CSV/entreprise.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         cout << "j = " << j << "\n";
+         i++;
+         if (j == ID)
+         {
+            cout << "Entreprise trouvée \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas d'entreprise avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/entreprise.csv");
+         rename("./CSV/temp.csv", "./CSV/entreprise.csv");
+         cout << "Les infos de l'entreprise ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void delChomeurCSV(int ID)
+{
+   fstream fichier("CSV/chomeur.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         cout << "j = " << j << "\n";
+         i++;
+         if (j == ID)
+         {
+            cout << "Chomeur trouvé \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas de chomeur avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/chomeur.csv");
+         rename("./CSV/temp.csv", "./CSV/chomeur.csv");
+         cout << "Les infos du chomeur ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void delPosteCSV(int ID)
+{
+   fstream fichier("CSV/poste.csv");
+   if (fichier)
+   {
+      string ligne;
+      int x = 0;
+      int i = 1;
+      int j;
+      getline(fichier, ligne);
+      do
+      {
+         fichier >> j;
+         cout << "j = " << j << "\n";
+         i++;
+         if (j == ID)
+         {
+            cout << "Poste trouvé \n";
+            break;
+         }
+      } while (getline(fichier, ligne) && i > 0);
+
+      //suppression ligne
+      fichier.seekg(0, ios::beg);
+      ofstream temp("./CSV/temp.csv"); // temp file for input of every student except the one user wants to delete
+
+      int z = 0;
+      while (getline(fichier, ligne))
+      {
+         z++;
+         if (z != i)
+         {
+            temp << ligne << endl;
+         }
+         else
+         {
+            x = 1;
+         }
+      }
+
+      if (x == 0)
+      { // x était défini à 0 au début, donc si ça n'a pas changé, il n'y a eu aucune modif
+         cout << "Il n'y a pas de poste avec cette ID" << endl;
+      }
+      else
+      {                   // x n'est pas égal à 0, donc ça a bien changé
+         fichier.clear(); // clear eof and fail bits
+         fichier.seekg(0, ios::beg);
+         fichier.close();
+         temp.close();
+         remove("./CSV/poste.csv");
+         rename("./CSV/temp.csv", "./CSV/poste.csv");
+         cout << "Les infos du poste ont été supprimées" << endl;
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void MajCSVEmployer(std::vector<Employer> &employers)
+{
+   fstream fichier("CSV/employer.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
+
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/employer.csv");
+      rename("./CSV/temp.csv", "./CSV/employer.csv");
+
+      for (size_t i = 0; i < employers.size(); i++)
+      {
+         addEmployerCSV(employers[i], employers);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void MajCSVEntreprise(std::vector<Entreprise> &entreprises)
+{
+   fstream fichier("CSV/entreprise.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
+
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/entreprise.csv");
+      rename("./CSV/temp.csv", "./CSV/entreprise.csv");
+
+      for (size_t i = 0; i < entreprises.size(); i++)
+      {
+         addEntrepriseCSV(entreprises[i], entreprises);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void MajCSVChomeur(std::vector<Chomeur> &chomeurs)
+{
+   fstream fichier("CSV/chomeur.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
+
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/chomeur.csv");
+      rename("./CSV/temp.csv", "./CSV/chomeur.csv");
+
+      for (size_t i = 0; i < chomeurs.size(); i++)
+      {
+         addChomeurCSV(chomeurs[i], chomeurs);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
+}
+
+void MajCSVPoste(std::vector<Poste> &postes)
+{
+   fstream fichier("CSV/poste.csv");
+   if (fichier)
+   {
+      ofstream temp("./CSV/temp.csv");
+      string premiere_ligne;
+      getline(fichier, premiere_ligne);
+
+      temp << premiere_ligne;
+
+      temp.seekp(0, ios::beg);
+      fichier.close();
+      temp.close();
+
+      remove("./CSV/poste.csv");
+      rename("./CSV/temp.csv", "./CSV/poste.csv");
+
+      for (size_t i = 0; i < postes.size(); i++)
+      {
+         addPosteCSV(postes[i], postes);
+      }
+   }
+   else
+   {
+      cout << "Erreur impossible d'ouvrir le fichier \n";
+   }
 }
