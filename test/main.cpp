@@ -204,14 +204,22 @@ int main()
 
      //delEntreprise(Entreprises, Employers, 2);
      //delChomeur(Chomeurs, 5);
-     Entreprise *entre2 = get_entreprise(2, Entreprises);
-     entre2->printInfo();
-     delEmployer(Employers, Entreprises, 1);
-     entre2->printInfo();
+     // Entreprise *entre2 = get_entreprise(2, Entreprises);
+     // entre2->printInfo();
+     // delEmployer(Employers, Entreprises, 1);
+     // entre2->printInfo();
 
      //////////////////// TESTER DELPOSTE ///////////////////////////
      // vector<int> jobs = entre2->getJobs();
      //delPoste(Postes, Entreprises, 2);
 
+
+
+     // //TEST RECHERCHE ID DISPO
+     // cout<<rechercheIdDispo_Chomeur(Chomeurs)<<endl;
+     // cout<<rechercheIdDispo_Employer(Employers)<<endl;
+     // cout<<rechercheIdDispo_Entreprise(Entreprises)<<endl;
+     // cout<<rechercheIdDispo_Poste(Postes)<<endl;
+     
      return 0;
 }

@@ -27,20 +27,9 @@ void addEntrepriseCSV(const Entreprise &entre, std::vector<Entreprise> &entrepri
 void addChomeurCSV(const Chomeur &chom, std::vector<Chomeur> &chomeurs);
 void addPosteCSV(const Poste &post, std::vector<Poste> &postes);
 
-/*
- * Suppression d'une ligne dans le fichier CSV
- * 
- * COMMENTAIRE : fonctionelle mais inutiles une fois que MajCSVObjet sera correctement implémenté 
- */
-void delEmployerCSV(int ID);
-void delEntrepriseCSV(int ID);
-void delChomeurCSV(int ID);
-void delPosteCSV(int ID);
 
 /*
  * Mise à jour du fichier csv à partir de la base de donnée dynamique
- * 
- * EN COURS D'implémentation
  */
 void MajCSVEmployer(std::vector<Employer> &employers);
 void MajCSVEntreprise(std::vector<Entreprise> &entreprises);
