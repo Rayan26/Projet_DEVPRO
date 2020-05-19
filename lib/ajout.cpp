@@ -211,33 +211,30 @@ void delPoste(vector<Poste> &postes, vector<Entreprise> &entreprises, int id)
 	}
 }
 
-void transitionEmployer_Vers_Chomeur(int idEmployer, vector<Employer> &employers, vector<Chomeur> &chomeurs, vector<Entreprise>& entreprises)
-{
-	Employer *empl = get_employers(idEmployer, employers);
-	
-	delEmployer(employers,entreprises,idEmployer);
-	
+// void transitionEmployer_Vers_Chomeur(int idEmployer, vector<Employer> &employers, vector<Chomeur> &chomeurs, vector<Entreprise> &entreprises)
+// {
+// 	Employer *empl = get_employers(idEmployer, employers);
 
-	int id_dispo = rechercheIdDispo_Chomeur(chomeurs);
-	Chomeur *chom = new Chomeur(id_dispo,empl->getNom(),empl->getPrenom(),empl->getMail(),empl->getCode(),empl->getSkill());
-	
-	// for (size_t i = 0; i < empl.get_Anciens_collegues().size(); i++)
-	// {
-	// 	chom.addAncienCollegue(empl.get_Anciens_collegues()[i]);
-	// }
-	// for (size_t i = 0; i < empl.get_collegues().size(); i++)
-	// {
-	// 	chom.addAncienCollegue(empl.get_collegues()[i]);
-	// }
-	
+// 	delEmployer(employers, entreprises, idEmployer);
 
-	addChomeur(chom,chomeurs);
+// 	int id_dispo = rechercheIdDispo_Chomeur(chomeurs);
+// 	Chomeur *chom = new Chomeur(id_dispo, empl->getNom(), empl->getPrenom(), empl->getMail(), empl->getCode(), empl->getSkill());
 
-}
+// 	// for (size_t i = 0; i < empl.get_Anciens_collegues().size(); i++)
+// 	// {
+// 	// 	chom.addAncienCollegue(empl.get_Anciens_collegues()[i]);
+// 	// }
+// 	// for (size_t i = 0; i < empl.get_collegues().size(); i++)
+// 	// {
+// 	// 	chom.addAncienCollegue(empl.get_collegues()[i]);
+// 	// }
+
+// 	// addChomeur(chom, chomeurs);
+// }
 
 void transitionChomeur_Vers_Employer(int idChomeur, int idEntreprises, vector<Employer> &employers, vector<Chomeur> &chomeurs, vector<Entreprise> &entreprises);
 
-int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs)
+int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employers)
 {
 	int id = 1;
 	for (size_t i = 0; i < chomeurs.size(); i++)
@@ -247,11 +244,18 @@ int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs)
 			id = chomeurs[i].getIdPersonne();
 		}
 	}
+	for (size_t i = 0; i < employers.size(); i++)
+	{
+		if (employers[i].getIdPersonne() >= id)
+		{
+			id = employers[i].getIdPersonne();
+		}
+	}
 
 	return id + 1;
 }
 
-int rechercheIdDispo_Employer(vector<Employer> &employers)
+int rechercheIdDispo_Employer(vector<Employer> &employers, vector<Chomeur> &chomeurs)
 {
 	int id = 1;
 	for (size_t i = 0; i < employers.size(); i++)
@@ -261,7 +265,13 @@ int rechercheIdDispo_Employer(vector<Employer> &employers)
 			id = employers[i].getIdPersonne();
 		}
 	}
-
+	for (size_t i = 0; i < chomeurs.size(); i++)
+	{
+		if (chomeurs[i].getIdPersonne() >= id)
+		{
+			id = chomeurs[i].getIdPersonne();
+		}
+	}
 	return id + 1;
 }
 

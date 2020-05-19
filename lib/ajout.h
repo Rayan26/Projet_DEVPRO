@@ -37,7 +37,7 @@ void transitionChomeur_Vers_Employer(int idChomeur, int idEntreprises, vector<Em
 /*
  * Fonctions permettant de rechercher un id disponible
  */
-int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs); 
-int rechercheIdDispo_Employer(vector<Employer> &employers);
+int rechercheIdDispo_Employer(vector<Employer> &employers, vector<Chomeur> &chomeurs); 
+int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employers);
 int rechercheIdDispo_Entreprise(vector<Entreprise> &entreprises);
 int rechercheIdDispo_Poste(vector<Poste> &postes);
