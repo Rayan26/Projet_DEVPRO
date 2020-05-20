@@ -42,31 +42,18 @@ int main()
 
     julien.setIdEntreprise(3) ;
 
-    affichage_menu_principal();
+    
 */
-     cout << "Génération des personnes sans-emplois ..." << endl
-          << endl;
-     vector<Chomeur> Chomeurs = Create_Chomeur();
-     cout << " " << endl;
+     
 
-     cout << "Génération des employés ..." << endl
-          << endl;
-     vector<Employer> Employers = Create_Employer();
-     cout << " " << endl;
 
-     cout << "Génération des entreprises ..." << endl
-          << endl;
-     vector<Entreprise> Entreprises = Create_Entreprise();
-     cout << " " << endl;
 
-     cout << "Génération des postes à pourvoir ..." << endl
-          << endl;
-     vector<Poste> Postes = Create_Poste();
+     //Test du menu
+     affichage_menu_principal();
 
-     association_poste_entreprise(Postes, Entreprises);
-     association_employer_entreprise(Employers, Entreprises);
 
-     cout << "fin de déclaration" << endl;
+
+
 
      //TEST GET_ENTREPRISE
      // Entreprise *entre = get_entreprise(5, Entreprises);
@@ -222,6 +209,6 @@ int main()
      //transitionEmployer_Vers_Chomeur(4, Employers, Chomeurs, Entreprises);
      //transitionChomeur_Vers_Employer(4, 2, Employers, Chomeurs, Entreprises);
      // affichage_vecteur_employer(recherche_employer_par_comp("comedie", Employers));
-     affichage_vecteur_employer(recherche_employer_par_comp_CP("comedie", "77700", Employers));
+     //affichage_vecteur_employer(recherche_employer_par_comp_CP("comedie", "77700", Employers));
      return 0;
 }

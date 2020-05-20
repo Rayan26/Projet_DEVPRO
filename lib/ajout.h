@@ -40,3 +40,4 @@ int rechercheIdDispo_Employer(vector<Employer> &employers, vector<Chomeur> &chom
 int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employers);
 int rechercheIdDispo_Entreprise(vector<Entreprise> &entreprises);
 int rechercheIdDispo_Poste(vector<Poste> &postes);
+

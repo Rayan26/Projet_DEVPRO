@@ -2,8 +2,57 @@
 #include <string>
 using namespace std;
 
+
 #include "menu.h"
 
+#include "Personne.h"
+#include "Entreprise.h"
+#include "Poste.h"
+#include "Chomeur.h"
+#include "Employer.h"
+#include "menu.h"
+#include "Parse.h"
+#include "Service.h"
+#include "ajout.h"
+
+vector<Chomeur> Chomeurs;
+vector<Employer> Employers;
+vector<Entreprise> Entreprises;
+vector<Poste> Postes;
+
+int idUtilisateur;
+
+void affichage_menu_principal()
+{	
+	cout << "Génération des personnes sans-emplois ..." << endl
+          << endl;
+     Chomeurs = Create_Chomeur();
+     cout << " " << endl;
+
+     cout << "Génération des employés ..." << endl
+          << endl;
+     Employers = Create_Employer();
+     cout << " " << endl;
+
+     cout << "Génération des entreprises ..." << endl
+          << endl;
+     Entreprises = Create_Entreprise();
+     cout << " " << endl;
+
+     cout << "Génération des postes à pourvoir ..." << endl
+          << endl;
+     Postes = Create_Poste();
+
+     association_poste_entreprise(Postes, Entreprises);
+     association_employer_entreprise(Employers, Entreprises);
+
+    cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl << "* Menu principal *" << endl << endl
+    << "Vous êtes :" << endl << "1. Une entreprise" << endl << "2. Un employé" << endl << "3. A la recherche d'un emploi" << endl << endl << 
+	"Votre choix ('q' pour quitter) : ";
+	
+	onInputPrincipal();
+
+}
 
 int onInputPrincipal()
 {
@@ -134,7 +183,7 @@ int onInputIntEntreprise()
 
 	else if (input == '1')
 	{
-		creer_poste();
+		creer_profil_entreprise();
 	}
     
 	else if (input == '2') 
@@ -216,16 +265,6 @@ int onInputIntEmployer()
 	return 1 ;
 }
 
-void affichage_menu_principal()
-{
-    cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl << "* Menu principal *" << endl << endl
-    << "Vous êtes :" << endl << "1. Une entreprise" << endl << "2. Un employé" << endl << "3. A la recherche d'un emploi" << endl << endl << 
-	"Votre choix ('q' pour quitter) : ";
-	
-	onInputPrincipal();
-
-}
-
 
 void affichage_menu_entreprise()
 {
@@ -251,7 +290,7 @@ void affichage_menu_employer()
 
 
 void creer_profil_entreprise()
-{
+{	
 	affichage_menu_intermediaire_entreprise();
 }
 
@@ -267,19 +306,91 @@ void creer_profil_employer()
 
 
 void identification_entreprise()
-{
-    affichage_menu_intermediaire_entreprise();
+{	
+	cout << " • Veuillez saisir l'identifiant de votre entreprise : " << endl << endl << " ==> Identifiant : ";
+
+	string input ;
+	
+	cin >> input ;
+
+	int id = stoi(input);
+
+	for (size_t i = 0; i < Entreprises.size(); i++)
+   {
+	   if(Entreprises[i].getId() == id){
+
+		   string nom = Entreprises[i].getNom();
+
+		   cout << "*** • Vous etes désormais connecter • ***" << endl << endl ;
+		   cout << " • Bienvenue sur votre compte " << nom << " • " << endl ;
+		   
+		   idUtilisateur = id;
+		   affichage_menu_intermediaire_entreprise();
+	   }
+   }
+
+	cout << " • Id inéxistant dans les entreprises • "<< endl ;
+	affichage_menu_entreprise();
+
 }
 
 void identification_chomeur()
 {
+cout << " • Veuillez saisir votre identifiant : " << endl << endl << " ==> Identifiant : " ;
 
-	affichage_menu_intermediaire_chomeur();
+	string input ;
+	
+	cin >> input ;
+
+	int id = stoi(input);
+
+	for (size_t i = 0; i < Chomeurs.size(); i++)
+   {
+	   if(Chomeurs[i].getIdPersonne() == id){
+
+		   string nom = Chomeurs[i].getNom();
+		   string prenom = Chomeurs[i].getPrenom();
+
+		   cout << "*** • Vous etes désormais connecter • ***" << endl << endl ;
+		   cout << " • Bienvenue Monsieur/Madame " << nom << " " << prenom << " • "  << endl ;
+		   idUtilisateur = id;
+
+		   affichage_menu_intermediaire_chomeur();
+	   }
+   }
+
+	cout << " • Id inéxistant chez les sans emplois • "<< endl ;
+
+	affichage_menu_chomeur();
 }
 
 void identification_employer()
 {
-	affichage_menu_intermediaire_employer();
+	cout << " • Veuillez saisir votre identifiant • " << endl << endl << " ==> Identifiant : ";
+
+	string input ;
+	
+	cin >> input ;
+
+	int id = stoi(input);
+
+	for (size_t i = 0; i < Employers.size(); i++)
+   {
+	   if(Employers[i].getIdPersonne() == id){
+
+		   string nom = Employers[i].getNom();
+		   string prenom = Employers[i].getPrenom();
+
+		   cout << "*** • Vous etes désormais connecter • ***" << endl << endl ;
+		   cout << " • Bienvenue Monsieur/Madame " << nom << " " << prenom << " • "  << endl ;
+		   
+		   idUtilisateur = id;
+		   affichage_menu_intermediaire_employer();
+	   }
+   }
+
+	cout << " • Id inéxistant chez les employés • "<< endl ;
+	affichage_menu_employer();
 }
 
 void affichage_menu_intermediaire_entreprise()
