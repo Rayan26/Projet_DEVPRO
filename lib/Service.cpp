@@ -32,7 +32,7 @@ Employer *get_employers(int id, vector<Employer> &employers)
 }
 Chomeur *get_chomeur(int id, vector<Chomeur> &chomeurs)
 {
-	if (id > (int)chomeurs.size() || id < 0)
+	if (id < 0)
 		return NULL;
 	for (size_t i = 0; i < chomeurs.size(); i++)
 	{
@@ -46,7 +46,7 @@ Chomeur *get_chomeur(int id, vector<Chomeur> &chomeurs)
 
 Poste *get_poste(int id, vector<Poste> &postes)
 {
-	if (id > (int)postes.size() || id < 0)
+	if (id < 0)
 		return NULL;
 	for (size_t i = 0; i < postes.size(); i++)
 	{
@@ -106,6 +106,43 @@ vector<Poste> recherche_par_comp_CP(string competence_recherche, string CP, vect
 		}
 	}
 	return liste_poste_correspondants;
+}
+
+vector<Employer> recherche_employer_par_comp(string competence_recherche, vector<Employer> &employers)
+{
+	vector<Employer> liste_employer_correspondant;
+
+	for (size_t i = 0; i < employers.size(); i++)
+	{
+		for (size_t j = 0; j < employers[i].getSkill().size(); j++)
+		{
+			if (competence_recherche.compare(employers[i].getSkill()[j]) == 0)
+			{
+				liste_employer_correspondant.push_back(employers[i]);
+			}
+		}
+	}
+	return liste_employer_correspondant;
+}
+
+vector<Employer> recherche_employer_par_comp_CP(string competence_recherche, string CP, vector<Employer> &employers)
+{
+	vector<Employer> liste_employer_correspondant;
+
+	for (size_t i = 0; i < employers.size(); i++)
+	{
+		for (size_t j = 0; j < employers[i].getSkill().size(); j++)
+		{
+			if (competence_recherche.compare(employers[i].getSkill()[j]) == 0)
+			{
+				if (employers[i].getCode() == CP)
+				{
+					liste_employer_correspondant.push_back(employers[i]);
+				}
+			}
+		}
+	}
+	return liste_employer_correspondant;
 }
 
 void ajout_employer_entreprise(Employer &empl, int id_entreprise, vector<Entreprise> &entreprises)

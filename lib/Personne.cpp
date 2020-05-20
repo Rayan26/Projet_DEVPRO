@@ -76,12 +76,41 @@ void Personne::addCompetence(string newcompetence)
 
 void Personne::addCollegue(int const newcollegue)
 {
-    this->_IdCollegue.push_back(newcollegue);
+    int compteur;
+    bool verif = false;
+    for (size_t i = 0; i < _IdAncienCollegue.size(); i++)
+    {
+        if (_IdAncienCollegue[i] == newcollegue)
+        {
+            compteur = i;
+            verif = true;
+        }
+    }
+    if (verif == true)
+    {
+        _IdCollegue.push_back(newcollegue);
+        _IdAncienCollegue.erase(_IdAncienCollegue.begin() + compteur);
+    }
+    else
+    {
+        this->_IdCollegue.push_back(newcollegue);
+    }
 }
 
 void Personne::addAncienCollegue(int const Anciencollegue)
 {
-    this->_IdAncienCollegue.push_back(Anciencollegue);
+    bool verif = false;
+    for (size_t i = 0; i < _IdCollegue.size(); i++)
+    {
+        if (_IdCollegue[i] == Anciencollegue)
+        {
+            verif = true;
+        }
+    }
+    if (verif == false)
+    {
+        _IdAncienCollegue.push_back(Anciencollegue);
+    }
 }
 
 void Personne::printInfo() const

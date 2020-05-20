@@ -128,13 +128,13 @@ int main()
      //addEmployerCSV(Michel,Employers);
 
      //TEST ADDCHOMEURCSV & ADDANCIENCOLLEGUE
-     // Chomeur Michel(6,"Michel","Dumas","michel@gmail.com","13011",competence);
+     //Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
      // Michel.addAncienCollegue(2);
      // addChomeur(Michel,Chomeurs);
 
      // vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
      // affichage_vecteur_employer(employers_entreprise);
-     // addEmployer(Michel,Employers);
+     //addEmployer(Michel, Employers, Chomeurs);
 
      //TEST ADDENTREPRISECSV
      // Entreprise MichelINC(8,"MichelINC","13009","michelinc@gmail.com");
@@ -204,14 +204,24 @@ int main()
 
      //delEntreprise(Entreprises, Employers, 2);
      //delChomeur(Chomeurs, 5);
-     Entreprise *entre2 = get_entreprise(2, Entreprises);
-     entre2->printInfo();
-     delEmployer(Employers, Entreprises, 1);
-     entre2->printInfo();
+     // Entreprise *entre2 = get_entreprise(2, Entreprises);
+     // entre2->printInfo();
+     // delEmployer(Employers, Chomeurs, Entreprises, 1);
+     // entre2->printInfo();
 
      //////////////////// TESTER DELPOSTE ///////////////////////////
      // vector<int> jobs = entre2->getJobs();
      //delPoste(Postes, Entreprises, 2);
 
+     // //TEST RECHERCHE ID DISPO
+     // cout<<rechercheIdDispo_Chomeur(Chomeurs)<<endl;
+     // cout<<rechercheIdDispo_Employer(Employers)<<endl;
+     // cout<<rechercheIdDispo_Entreprise(Entreprises)<<endl;
+     // cout<<rechercheIdDispo_Poste(Postes)<<endl;
+
+     //transitionEmployer_Vers_Chomeur(4, Employers, Chomeurs, Entreprises);
+     //transitionChomeur_Vers_Employer(4, 2, Employers, Chomeurs, Entreprises);
+     // affichage_vecteur_employer(recherche_employer_par_comp("comedie", Employers));
+     affichage_vecteur_employer(recherche_employer_par_comp_CP("comedie", "77700", Employers));
      return 0;
 }
