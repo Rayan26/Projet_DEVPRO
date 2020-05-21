@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 
@@ -291,6 +292,83 @@ void affichage_menu_employer()
 
 void creer_profil_entreprise()
 {	
+	Entreprise newEnterprise;
+	char input[50];
+	char yn;
+
+	int maxid = 0;
+
+	cout << " • Création d'un nouveau profil entreprise • " << endl << endl;
+	
+		//NOM ET ID
+NE: 	cout << " Nom de l'entreprise : " << endl;
+	    cin >> input ;
+		
+		string newNom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+
+		for (size_t i = 0; i < Entreprises.size(); i++) //verifie que si le nom existe.
+       {	
+		   	
+	   		if(Entreprises[i].getNom() == newNom)
+			   {
+				cout << " * Ce nom d'entreprise est dejas prit ! *"<< endl ;
+		   		goto NE;
+				   }
+	   }
+
+		for (size_t i = 0; i < Entreprises.size(); i++) //trouve un id inéxistant.
+       {
+	   		if(Entreprises[i].getId() > maxid)
+			   	{
+		   		maxid = Entreprises[i].getId();
+	   			}
+		}
+		
+		maxid = maxid + 1; // on prend l'id maximum pour etre sur qu'il n'éxiste pas.
+		newEnterprise.setId(maxid);
+		newEnterprise.setNom(newNom);
+
+		//MAIL
+ME:		cout << " Mail de l'entreprise : " << endl;
+	    cin >> input ;
+		string newMail = input; 
+
+		for (size_t i = 0; i < Entreprises.size(); i++) //trouve un id inéxistant.
+       {	
+		    
+	   		if(Entreprises[i].getMail() == newMail)
+			   {
+		   		cout << " * Ce mail est dejas prit ! *"<< endl ;
+		   		goto ME;
+	   			}
+		}
+		
+		newEnterprise.setMail(newMail);
+
+		cout << " Code postal de l'entreprise : " << endl;
+	    cin >> input ;
+		string newCode = input; 
+		//ajouter verification d'un int de 5 chiffres
+		newEnterprise.setCode(newCode);
+
+		cout << " Récapitulatif de votre inscription : " << endl << endl;
+		newEnterprise.printInfo();
+		cout << endl << " Confirmez votre inscription ? (y/n) : " << endl;
+		cin >> yn ;
+		if (yn == 'y')
+		{
+		  cout << " Ajout du compte à la base de données ...... " << endl << endl;
+		  addEntreprise(newEnterprise,Entreprises);
+
+		}else if(yn == 'n'){
+			affichage_menu_entreprise();
+		}else{
+			cout << " Veuillez entrez y pour oui et n pour non. " << endl << endl;
+		}
+
+		
+	idUtilisateur = newEnterprise.getId();
+
 	affichage_menu_intermediaire_entreprise();
 }
 
