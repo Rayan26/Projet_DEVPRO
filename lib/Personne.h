@@ -10,6 +10,7 @@
 class Personne
 {
 public:
+    Personne();
     Personne(int id, std::string nom, std::string prenom, std::string mail, std::string code, std::vector<std::string> const &skill);
     Personne(Personne const &personne);
     ~Personne();

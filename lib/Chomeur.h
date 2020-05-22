@@ -10,6 +10,7 @@
 class Chomeur : public Personne
 {
 public:
+    Chomeur();
     Chomeur(int id, std::string nom, std::string prenom, std::string mail, std::string code, std::vector<std::string> const &skill);
     ~Chomeur();
 

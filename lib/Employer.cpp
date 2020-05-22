@@ -3,6 +3,10 @@
 
 using namespace std;
 
+Employer::Employer() : Personne()
+{
+}
+
 Employer::Employer(int id, string nom, string prenom, string mail, string code, vector<string> const &skill) : Personne(id, nom, prenom, mail, code, skill)
 {
 }

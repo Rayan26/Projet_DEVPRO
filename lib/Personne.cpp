@@ -2,6 +2,10 @@
 
 using namespace std;
 
+Personne::Personne()
+{
+}
+
 Personne::Personne(int id, string nom, string prenom, string mail, string code, vector<string> const &skill) : _id(id), _nom(nom), _prenom(prenom), _mail(mail), _code(code), _skill(skill)
 {
 }

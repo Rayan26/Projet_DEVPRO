@@ -333,7 +333,7 @@ ME:		cout << " Mail de l'entreprise : " << endl;
 	    cin >> input ;
 		string newMail = input; 
 
-		for (size_t i = 0; i < Entreprises.size(); i++) //trouve un id inéxistant.
+		for (size_t i = 0; i < Entreprises.size(); i++) 
        {	
 		    
 	   		if(Entreprises[i].getMail() == newMail)
@@ -353,6 +353,8 @@ ME:		cout << " Mail de l'entreprise : " << endl;
 
 		cout << " Récapitulatif de votre inscription : " << endl << endl;
 		newEnterprise.printInfo();
+
+		cout << " Vous pourrez modifiez ces informations et ajoutez des postes à pourvoir après l'inscription" << endl << endl;
 		cout << endl << " Confirmez votre inscription ? (y/n) : " << endl;
 		cin >> yn ;
 		if (yn == 'y')
@@ -374,8 +376,121 @@ ME:		cout << " Mail de l'entreprise : " << endl;
 
 void creer_profil_chomeur()
 {
-    affichage_menu_intermediaire_chomeur();
+    Chomeur newChomeur;
+	char input[50];
+	char yn;
+
+	int maxid = 0;
+
+	cout << " • Création d'un nouveau profil sans-emploi • " << endl << endl;
+	
+		//NOM, PRENOM ET ID
+CN: 	cout << " Votre prénom : " << endl;
+	    cin >> input ;
+		
+		string newPrenom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+
+		cout << " Votre nom : " << endl;
+	    cin >> input ;
+		
+		string newNom = input;
+
+		for (size_t i = 0; i < Chomeurs.size(); i++) //verifie que si le nom existe.
+       {	
+		   	
+	   		if(Chomeurs[i].getNom() == newNom && Chomeurs[i].getPrenom() == newPrenom)
+			   {
+				cout << " * Ce nom et prenom sont déjas prit ! Vous etes inscrit en tant que chomeur *"<< endl ;
+		   		goto CN;
+				   }
+	   }
+
+	   for (size_t i = 0; i < Employers.size(); i++) //verifie que si le nom existe.
+       {	
+		   	
+	   		if(Employers[i].getNom() == newNom && Employers[i].getPrenom() == newPrenom)
+			   {
+				
+				string entre = Entreprises[Employers[i].getIdEntreprise()].getNom();
+				cout << " * Ce nom et prenom sont déjas prit ! Vous etes inscrit en tant qu'employer de "<< entre <<" * "<< endl ;
+		   		goto CN;
+				   }
+	   }
+
+		for (size_t i = 0; i < Chomeurs.size(); i++) //trouve un id inéxistant.
+       {
+	   		if(Chomeurs[i].getIdPersonne() > maxid)
+			   	{
+		   		maxid = Chomeurs[i].getIdPersonne();
+	   			}
+		}
+		
+		maxid = maxid + 1; // on prend l'id maximum pour etre sur qu'il n'éxiste pas.
+		newChomeur.setId(maxid);
+		newChomeur.setNom(newNom);
+		newChomeur.setPrenom(newPrenom);
+
+		//MAIL
+CE:		cout << " Votre mail : " << endl;
+	    cin >> input ;
+		string newMail = input; 
+
+		for (size_t i = 0; i < Chomeurs.size(); i++) 
+       {	
+		    
+	   		if(Chomeurs[i].getMail() == newMail)
+			   {
+		   		cout << " * Ce mail est dejas prit ! *"<< endl ;
+		   		goto CE;
+	   			}
+		}
+		
+		newChomeur.setMail(newMail);
+
+		cout << " Votre code postal : " << endl;
+	    cin >> input ;
+		string newCode = input; 
+		//ajouter verification d'un int de 5 chiffres
+		newChomeur.setCode(newCode);
+
+NEW:		cout << " Entrez au moins une compétence : " << endl;
+	    cin >> input ;
+		string newCompetence = input;
+		newChomeur.addCompetence(newCompetence);
+		cout << endl << " Ajoutez une compétence ? (y/n) : " << endl;
+		cin >> yn ;
+		if (yn == 'y')
+		{
+		   goto NEW;
+		}else if(yn == 'n'){
+			goto NEXT;
+		}else{
+			cout << " Veuillez entrez y pour oui et n pour non. " << endl << endl;
+		}
+
+NEXT:	
+		cout << " Récapitulatif de votre inscription : " << endl << endl;
+		newChomeur.printInfo();
+		cout << " Vous pourrez modifiez ces informations et ajoutez des anciens collègue après l'inscription" << endl << endl;
+		cout << endl << " Confirmez votre inscription ? (y/n) : " << endl;
+		cin >> yn ;
+		if (yn == 'y')
+		{
+		  cout << " Ajout du compte à la base de données ...... " << endl << endl;
+		  addChomeur(newChomeur,Chomeurs,Employers);
+
+		}else if(yn == 'n'){
+			affichage_menu_chomeur();
+		}else{
+			cout << " Veuillez entrez y pour oui et n pour non. " << endl << endl;
+		}
+
+		
+	idUtilisateur = newChomeur.getIdPersonne();
+
+	affichage_menu_intermediaire_chomeur();
 }
+
 
 void creer_profil_employer()
 {
@@ -472,7 +587,8 @@ void identification_employer()
 }
 
 void affichage_menu_intermediaire_entreprise()
-{
+{	
+
     cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl <<  "* Menu entreprise *" <<  endl << endl << "Vous voulez :" << endl ;
     cout << "1. Créer le profil d'un poste à pourvoir" << endl <<
      "2. Supprimer le profil d'un poste maintenant pourvu " << endl << 

@@ -11,6 +11,7 @@
 class Employer : public Personne
 {
 public:
+    Employer();
     Employer(int id, std::string nom, std::string prenom, std::string mail, std::string code, std::vector<std::string> const &skill);
     int getIdEntreprise() const;
     void setIdEntreprise(int newid);
