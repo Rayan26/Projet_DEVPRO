@@ -370,7 +370,7 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
       vector<string> skills;
 
       skills = empl.getSkill();
-      
+
       if (skills.size() != 0)
       {
 
@@ -383,20 +383,19 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
 
       fichier << ",";
 
-      int entre = empl.getIdEntreprise();
-      vector<Employer> employers_entreprise = get_employers_de_entreprise(entre, employers);
+      vector<int> collegue = empl.get_collegues();
 
-      if ((employers_entreprise.size() > 0))
+      if ((collegue.size() > 0))
       {
-         if (employers_entreprise[0].getIdPersonne() != empl.getIdPersonne())
+         if (collegue[0] != empl.getIdPersonne())
          {
-            fichier << employers_entreprise[0].getIdPersonne();
+            fichier << collegue[0];
          }
-         for (size_t i = 1; i < employers_entreprise.size(); i++)
+         for (size_t i = 1; i < collegue.size(); i++)
          {
-            if (employers_entreprise[i].getIdPersonne() != empl.getIdPersonne())
+            if (collegue[i] != empl.getIdPersonne())
             {
-               fichier << ';' << employers_entreprise[i].getIdPersonne();
+               fichier << ';' << collegue[i];
             }
          }
       }
@@ -416,8 +415,8 @@ void addEmployerCSV(const Employer &empl, vector<Employer> &employers)
             }
          }
       }
-
-      fichier << ',' << entre;
+      
+      fichier << ',' << empl.getIdEntreprise();
    }
 }
 

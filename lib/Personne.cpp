@@ -104,6 +104,7 @@ void Personne::addCollegue(int const newcollegue)
 void Personne::addAncienCollegue(int const Anciencollegue)
 {
     bool verif = false;
+
     for (size_t i = 0; i < _IdCollegue.size(); i++)
     {
         if (_IdCollegue[i] == Anciencollegue)
@@ -111,7 +112,14 @@ void Personne::addAncienCollegue(int const Anciencollegue)
             verif = true;
         }
     }
-    if (verif == false)
+    for (size_t i = 0; i < _IdAncienCollegue.size(); i++)
+    {
+        if (_IdAncienCollegue[i] == Anciencollegue)
+        {
+            verif = true;
+        }
+    }
+    if (verif == false )
     {
         _IdAncienCollegue.push_back(Anciencollegue);
     }

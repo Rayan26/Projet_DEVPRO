@@ -2,6 +2,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Personne.h"
+#include "Entreprise.h"
+#include "Poste.h"
+#include "Chomeur.h"
+#include "Employer.h"
+#include "menu.h"
+#include "Parse.h"
+#include "Service.h"
+#include "ajout.h"
 
 
 /* 
@@ -46,8 +55,8 @@ int onInputEmployer();
  * 
  * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
  */
-void affichage_menu_intermediaire_entreprise();
-int onInputIntEntreprise();
+void affichage_menu_intermediaire_entreprise(int identr);
+int onInputIntEntreprise(int identr);
 
 /*
  * Menu Intermédiaire chercheur d'emploi
@@ -58,8 +67,8 @@ int onInputIntEntreprise();
  *  
  * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
  */
-void affichage_menu_intermediaire_chomeur();
-int onInputIntChomeur();
+void affichage_menu_intermediaire_chomeur(int idchom);
+int onInputIntChomeur(int idchom);
 
 /*
  * Menu Intermédiaire employé
@@ -70,8 +79,8 @@ int onInputIntChomeur();
  * 
  * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
  */
-void affichage_menu_intermediaire_employer();
-int onInputIntEmployer();
+void affichage_menu_intermediaire_employer(int idempl);
+int onInputIntEmployer(int idempl);
 
 /*
  * Fonctions appellant le constructeur de l'objet,
@@ -91,7 +100,6 @@ void creer_profil_employer();
  * si erreur retourne au menu_objet
  * sinon on appelle affichage_menu_intermediaire_objet()
  * 
- * A IMPLEMENTER
  */
 void identification_entreprise();
 void identification_chomeur();
@@ -104,8 +112,8 @@ void identification_employer();
  * 
  * A IMPLEMENTER
  */
-void modification_profil_chomeur();
-void modification_profil_employer();
+void modification_profil_chomeur(int idchom);
+void modification_profil_employer(int idempl);
 
 
 /*
@@ -118,8 +126,8 @@ void modification_profil_employer();
  *
  * A IMPLEMENTER
  */
-void transition_chercheur_emploi();
-void transition_employer();
+void transition_chercheur_emploi(int idchom);
+void transition_employer(int idempl);
 
 
 /*
@@ -128,16 +136,14 @@ void transition_employer();
  * 
  * A IMPLEMENTER
  */
-void supprimer_profil_chomeur();
-void supprimer_profil_employer();
+void supprimer_profil_chomeur(int idchom);
+void supprimer_profil_employer(int idempl);
 
 
-/*
- * Je suis pas convaincu de la necessité de ces trois fonctions ici
- */
-void creer_poste();
 
-void supprimer_poste();
+void creer_poste(int identr);
 
-void rechercher_demandeur_emploi();
+void supprimer_poste(int identr);
+
+void rechercher_demandeur_emploi(int identr);
 

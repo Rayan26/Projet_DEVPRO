@@ -3,18 +3,7 @@
 #include <vector>
 using namespace std;
 
-
 #include "menu.h"
-
-#include "Personne.h"
-#include "Entreprise.h"
-#include "Poste.h"
-#include "Chomeur.h"
-#include "Employer.h"
-#include "menu.h"
-#include "Parse.h"
-#include "Service.h"
-#include "ajout.h"
 
 vector<Chomeur> Chomeurs;
 vector<Employer> Employers;
@@ -24,42 +13,48 @@ vector<Poste> Postes;
 int idUtilisateur;
 
 void affichage_menu_principal()
-{	
+{
 	cout << "Génération des personnes sans-emplois ..." << endl
-          << endl;
-     Chomeurs = Create_Chomeur();
-     cout << " " << endl;
+		 << endl;
+	Chomeurs = Create_Chomeur();
+	cout << " " << endl;
 
-     cout << "Génération des employés ..." << endl
-          << endl;
-     Employers = Create_Employer();
-     cout << " " << endl;
+	cout << "Génération des employés ..." << endl
+		 << endl;
+	Employers = Create_Employer();
+	cout << " " << endl;
 
-     cout << "Génération des entreprises ..." << endl
-          << endl;
-     Entreprises = Create_Entreprise();
-     cout << " " << endl;
+	cout << "Génération des entreprises ..." << endl
+		 << endl;
+	Entreprises = Create_Entreprise();
+	cout << " " << endl;
 
-     cout << "Génération des postes à pourvoir ..." << endl
-          << endl;
-     Postes = Create_Poste();
+	cout << "Génération des postes à pourvoir ..." << endl
+		 << endl;
+	Postes = Create_Poste();
 
-     association_poste_entreprise(Postes, Entreprises);
-     association_employer_entreprise(Employers, Entreprises);
+	association_poste_entreprise(Postes, Entreprises);
+	association_employer_entreprise(Employers, Entreprises);
 
-    cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl << "* Menu principal *" << endl << endl
-    << "Vous êtes :" << endl << "1. Une entreprise" << endl << "2. Un employé" << endl << "3. A la recherche d'un emploi" << endl << endl << 
-	"Votre choix ('q' pour quitter) : ";
-	
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu principal *" << endl
+		 << endl
+		 << "Vous êtes :" << endl
+		 << "1. Une entreprise" << endl
+		 << "2. Un employé" << endl
+		 << "3. A la recherche d'un emploi" << endl
+		 << endl
+		 << "Votre choix ('q' pour quitter) : ";
+
 	onInputPrincipal();
-
 }
 
 int onInputPrincipal()
 {
-	char input ;
-	
-	cin >> input ;
+	char input;
+
+	cin >> input;
 	if (input == 'q')
 	{
 		exit(0);
@@ -69,8 +64,8 @@ int onInputPrincipal()
 	{
 		affichage_menu_entreprise();
 	}
-    
-	else if (input == '2') 
+
+	else if (input == '2')
 	{
 		affichage_menu_employer();
 	}
@@ -79,20 +74,20 @@ int onInputPrincipal()
 	{
 		affichage_menu_chomeur();
 	}
-    return 1;
+	return 1;
 }
 
 int onInputEntreprise()
 {
-	char input ;
-	
-	cin >> input ;
+	char input;
+
+	cin >> input;
 	if (input == 'q')
 	{
 		exit(0);
 	}
 
-	if(input == 'p')
+	if (input == 'p')
 	{
 		affichage_menu_principal();
 	}
@@ -101,26 +96,26 @@ int onInputEntreprise()
 	{
 		creer_profil_entreprise();
 	}
-    
-	else if (input == '2') 
+
+	else if (input == '2')
 	{
 		identification_entreprise();
 	}
 
-	return 1 ;
+	return 1;
 }
 
 int onInputEmployer()
 {
-	char input ;
-	
-	cin >> input ;
+	char input;
+
+	cin >> input;
 	if (input == 'q')
 	{
 		exit(0);
 	}
 
-	if(input == 'p')
+	if (input == 'p')
 	{
 		affichage_menu_principal();
 	}
@@ -129,27 +124,26 @@ int onInputEmployer()
 	{
 		creer_profil_employer();
 	}
-    
-	else if (input == '2') 
+
+	else if (input == '2')
 	{
 		identification_employer();
 	}
 
-	return 1 ;
+	return 1;
 }
-
 
 int onInputChomeur()
 {
-	char input ;
-	
-	cin >> input ;
+	char input;
+
+	cin >> input;
 	if (input == 'q')
 	{
 		exit(0);
 	}
 
-	if(input == 'p')
+	if (input == 'p')
 	{
 		affichage_menu_principal();
 	}
@@ -158,510 +152,874 @@ int onInputChomeur()
 	{
 		creer_profil_chomeur();
 	}
-    
-	else if (input == '2') 
+
+	else if (input == '2')
 	{
 		identification_chomeur();
 	}
 
-	return 1 ;
+	return 1;
 }
 
-int onInputIntEntreprise()
+int onInputIntEntreprise(int identr)
 {
-	char input ;
-	
-	cin >> input ;
+	char input;
+
+	cin >> input;
 	if (input == 'q')
 	{
 		exit(0);
 	}
 
-	if(input == 'p')
+	if (input == 'p')
 	{
 		affichage_menu_entreprise();
 	}
 
 	else if (input == '1')
 	{
-		creer_profil_entreprise();
-	}
-    
-	else if (input == '2') 
-	{
-		supprimer_poste();
+		creer_poste(identr);
 	}
 
-	else if(input == '3')
+	else if (input == '2')
 	{
-		rechercher_demandeur_emploi();
+		supprimer_poste(identr);
 	}
 
-	return 1 ;
+	else if (input == '3')
+	{
+		rechercher_demandeur_emploi(identr);
+	}
+
+	return 1;
 }
 
-int onInputIntChomeur()
+int onInputIntChomeur(int idchom)
 {
-	char input ;
-	
-	cin >> input ;
+	char input;
+
+	cin >> input;
 	if (input == 'q')
 	{
 		exit(0);
 	}
 
-	if(input == 'p')
+	if (input == 'p')
 	{
 		affichage_menu_chomeur();
 	}
 
 	else if (input == '1')
 	{
-		modification_profil_chomeur();
-	}
-    
-	else if (input == '2') 
-	{
-		transition_chercheur_emploi();
+		modification_profil_chomeur(idchom);
 	}
 
-	else if(input == '3')
+	else if (input == '2')
 	{
-		supprimer_profil_chomeur();
+		transition_chercheur_emploi(idchom);
 	}
 
-	return 1 ;
+	else if (input == '3')
+	{
+		supprimer_profil_chomeur(idchom);
+	}
+
+	return 1;
 }
 
-int onInputIntEmployer()
+int onInputIntEmployer(int idempl)
 {
-	char input ;
-	
-	cin >> input ;
+	char input;
+
+	cin >> input;
 	if (input == 'q')
 	{
 		exit(0);
 	}
 
-	if(input == 'p')
+	if (input == 'p')
 	{
 		affichage_menu_employer();
 	}
 
 	else if (input == '1')
 	{
-		modification_profil_employer();
-	}
-    
-	else if (input == '2') 
-	{
-		transition_employer();
-	}
-	
-	else if(input == '3')
-	{
-		supprimer_profil_employer();
+		modification_profil_employer(idempl);
 	}
 
-	return 1 ;
+	else if (input == '2')
+	{
+		transition_employer(idempl);
+	}
+
+	else if (input == '3')
+	{
+		supprimer_profil_employer(idempl);
+	}
+
+	return 1;
 }
-
 
 void affichage_menu_entreprise()
 {
-    cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl <<  "* Menu entreprise *" <<  endl << endl << "Vous voulez :" << endl ;
-    cout << "1. Créer le profil de votre entreprise" << endl << "2. Identifier votre entreprise à l'aide de votre ID" << endl << endl << "Votre choix ('q' pour quitter, 'p' pour revenir au menu précédent) :";
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu entreprise *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Créer le profil de votre entreprise" << endl
+		 << "2. Identifier votre entreprise à l'aide de votre ID" << endl
+		 << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour revenir au menu précédent) :";
 
 	onInputEntreprise();
 }
 
 void affichage_menu_chomeur()
 {
-    cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl <<  "* Menu recherche d'emploi *" <<  endl << endl << "Vous voulez :" << endl ;
-    cout << "1. Créer votre profil" << endl << "2. Identifiez-vous" << endl << endl << "Votre choix ('q' pour quitter, 'p' pour revenir au menu précédent) :";
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu recherche d'emploi *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Créer votre profil" << endl
+		 << "2. Identifiez-vous" << endl
+		 << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour revenir au menu précédent) :";
 	onInputChomeur();
 }
 
 void affichage_menu_employer()
 {
-	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl <<  "* Menu employé *" <<  endl << endl << "Vous voulez :" << endl ;
-    cout << "1. Créer votre profil" << endl << "2. Identifiez-vous" << endl << endl << "Votre choix ('q' pour quitter, 'p' pour revenir au menu précédent) :";
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu employé *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Créer votre profil" << endl
+		 << "2. Identifiez-vous" << endl
+		 << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour revenir au menu précédent) :";
 	onInputEmployer();
 }
 
-
 void creer_profil_entreprise()
-{	
+{
 	Entreprise newEnterprise;
 	char input[50];
 	char yn;
 
 	int maxid = 0;
 
-	cout << " • Création d'un nouveau profil entreprise • " << endl << endl;
-	
-		//NOM ET ID
-NE: 	cout << " Nom de l'entreprise : " << endl;
-	    cin >> input ;
-		
-		string newNom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+	cout << " • Création d'un nouveau profil entreprise • " << endl
+		 << endl;
 
-		for (size_t i = 0; i < Entreprises.size(); i++) //verifie que si le nom existe.
-       {	
-		   	
-	   		if(Entreprises[i].getNom() == newNom)
-			   {
-				cout << " * Ce nom d'entreprise est dejas prit ! *"<< endl ;
-		   		goto NE;
-				   }
-	   }
+	//NOM ET ID
+NE:
+	cout << " Nom de l'entreprise : " << endl;
+	cin >> input;
 
-		for (size_t i = 0; i < Entreprises.size(); i++) //trouve un id inéxistant.
-       {
-	   		if(Entreprises[i].getId() > maxid)
-			   	{
-		   		maxid = Entreprises[i].getId();
-	   			}
-		}
-		
-		maxid = maxid + 1; // on prend l'id maximum pour etre sur qu'il n'éxiste pas.
-		newEnterprise.setId(maxid);
-		newEnterprise.setNom(newNom);
+	string newNom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
 
-		//MAIL
-ME:		cout << " Mail de l'entreprise : " << endl;
-	    cin >> input ;
-		string newMail = input; 
+	for (size_t i = 0; i < Entreprises.size(); i++) //verifie que si le nom existe.
+	{
 
-		for (size_t i = 0; i < Entreprises.size(); i++) 
-       {	
-		    
-	   		if(Entreprises[i].getMail() == newMail)
-			   {
-		   		cout << " * Ce mail est dejas prit ! *"<< endl ;
-		   		goto ME;
-	   			}
-		}
-		
-		newEnterprise.setMail(newMail);
-
-		cout << " Code postal de l'entreprise : " << endl;
-	    cin >> input ;
-		string newCode = input; 
-		//ajouter verification d'un int de 5 chiffres
-		newEnterprise.setCode(newCode);
-
-		cout << " Récapitulatif de votre inscription : " << endl << endl;
-		newEnterprise.printInfo();
-
-		cout << " Vous pourrez modifiez ces informations et ajoutez des postes à pourvoir après l'inscription" << endl << endl;
-		cout << endl << " Confirmez votre inscription ? (y/n) : " << endl;
-		cin >> yn ;
-		if (yn == 'y')
+		if (Entreprises[i].getNom() == newNom)
 		{
-		  cout << " Ajout du compte à la base de données ...... " << endl << endl;
-		  addEntreprise(newEnterprise,Entreprises);
-
-		}else if(yn == 'n'){
-			affichage_menu_entreprise();
-		}else{
-			cout << " Veuillez entrez y pour oui et n pour non. " << endl << endl;
+			cout << " * Ce nom d'entreprise est déjà pris ! *" << endl;
+			goto NE;
 		}
+	}
 
-		
+	for (size_t i = 0; i < Entreprises.size(); i++) //trouve un id inéxistant.
+	{
+		if (Entreprises[i].getId() > maxid)
+		{
+			maxid = Entreprises[i].getId();
+		}
+	}
+
+	maxid = maxid + 1; // on prend l'id maximum pour etre sur qu'il n'éxiste pas.
+	newEnterprise.setId(maxid);
+	newEnterprise.setNom(newNom);
+
+	//MAIL
+ME:
+	cout << " Mail de l'entreprise : " << endl;
+	cin >> input;
+	string newMail = input;
+
+	for (size_t i = 0; i < Entreprises.size(); i++)
+	{
+
+		if (Entreprises[i].getMail() == newMail)
+		{
+			cout << " * Ce mail est déjà pris ! *" << endl;
+			goto ME;
+		}
+	}
+
+	newEnterprise.setMail(newMail);
+
+	cout << " Code postal de l'entreprise : " << endl;
+	cin >> input;
+	string newCode = input;
+	//ajouter verification d'un int de 5 chiffres
+	newEnterprise.setCode(newCode);
+
+	cout << " Récapitulatif de votre inscription : " << endl
+		 << endl;
+	newEnterprise.printInfo();
+
+	cout << " Vous pourrez modifiez ces informations et ajoutez des postes à pourvoir après l'inscription" << endl
+		 << endl;
+	cout << endl
+		 << " Confirmez votre inscription ? (y/n) : " << endl;
+	cin >> yn;
+	if (yn == 'y')
+	{
+		cout << " Ajout du compte à la base de données ...... " << endl
+			 << endl;
+		addEntreprise(newEnterprise, Entreprises);
+	}
+	else if (yn == 'n')
+	{
+		affichage_menu_entreprise();
+	}
+	else
+	{
+		cout << " Veuillez entrez y pour oui et n pour non. " << endl
+			 << endl;
+	}
+
 	idUtilisateur = newEnterprise.getId();
 
-	affichage_menu_intermediaire_entreprise();
+	affichage_menu_intermediaire_entreprise(idUtilisateur);
 }
 
 void creer_profil_chomeur()
 {
-    Chomeur newChomeur;
+	Chomeur newChomeur;
 	char input[50];
 	char yn;
 
-	int maxid = 0;
+	cout << " • Création d'un nouveau profil sans-emploi • " << endl
+		 << endl;
 
-	cout << " • Création d'un nouveau profil sans-emploi • " << endl << endl;
-	
-		//NOM, PRENOM ET ID
-CN: 	cout << " Votre prénom : " << endl;
-	    cin >> input ;
-		
-		string newPrenom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+	//NOM, PRENOM ET ID
+CN:
+	cout << " Votre prénom : " << endl;
+	cin >> input;
 
-		cout << " Votre nom : " << endl;
-	    cin >> input ;
-		
-		string newNom = input;
+	string newPrenom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
 
-		for (size_t i = 0; i < Chomeurs.size(); i++) //verifie que si le nom existe.
-       {	
-		   	
-	   		if(Chomeurs[i].getNom() == newNom && Chomeurs[i].getPrenom() == newPrenom)
-			   {
-				cout << " * Ce nom et prenom sont déjas prit ! Vous etes inscrit en tant que chomeur *"<< endl ;
-		   		goto CN;
-				   }
-	   }
+	cout << " Votre nom : " << endl;
+	cin >> input;
 
-	   for (size_t i = 0; i < Employers.size(); i++) //verifie que si le nom existe.
-       {	
-		   	
-	   		if(Employers[i].getNom() == newNom && Employers[i].getPrenom() == newPrenom)
-			   {
-				
-				string entre = Entreprises[Employers[i].getIdEntreprise()].getNom();
-				cout << " * Ce nom et prenom sont déjas prit ! Vous etes inscrit en tant qu'employer de "<< entre <<" * "<< endl ;
-		   		goto CN;
-				   }
-	   }
+	string newNom = input;
 
-		for (size_t i = 0; i < Chomeurs.size(); i++) //trouve un id inéxistant.
-       {
-	   		if(Chomeurs[i].getIdPersonne() > maxid)
-			   	{
-		   		maxid = Chomeurs[i].getIdPersonne();
-	   			}
-		}
-		
-		maxid = maxid + 1; // on prend l'id maximum pour etre sur qu'il n'éxiste pas.
-		newChomeur.setId(maxid);
-		newChomeur.setNom(newNom);
-		newChomeur.setPrenom(newPrenom);
+	for (size_t i = 0; i < Chomeurs.size(); i++) //verifie que si le nom existe.
+	{
 
-		//MAIL
-CE:		cout << " Votre mail : " << endl;
-	    cin >> input ;
-		string newMail = input; 
-
-		for (size_t i = 0; i < Chomeurs.size(); i++) 
-       {	
-		    
-	   		if(Chomeurs[i].getMail() == newMail)
-			   {
-		   		cout << " * Ce mail est dejas prit ! *"<< endl ;
-		   		goto CE;
-	   			}
-		}
-		
-		newChomeur.setMail(newMail);
-
-		cout << " Votre code postal : " << endl;
-	    cin >> input ;
-		string newCode = input; 
-		//ajouter verification d'un int de 5 chiffres
-		newChomeur.setCode(newCode);
-
-NEW:		cout << " Entrez au moins une compétence : " << endl;
-	    cin >> input ;
-		string newCompetence = input;
-		newChomeur.addCompetence(newCompetence);
-		cout << endl << " Ajoutez une compétence ? (y/n) : " << endl;
-		cin >> yn ;
-		if (yn == 'y')
+		if (Chomeurs[i].getNom() == newNom && Chomeurs[i].getPrenom() == newPrenom)
 		{
-		   goto NEW;
-		}else if(yn == 'n'){
-			goto NEXT;
-		}else{
-			cout << " Veuillez entrez y pour oui et n pour non. " << endl << endl;
+			cout << " * Ce nom et prénom sont déjà pris ! Vous etes inscrit en tant que chomeur *" << endl;
+			goto CN;
 		}
+	}
 
-NEXT:	
-		cout << " Récapitulatif de votre inscription : " << endl << endl;
-		newChomeur.printInfo();
-		cout << " Vous pourrez modifiez ces informations et ajoutez des anciens collègue après l'inscription" << endl << endl;
-		cout << endl << " Confirmez votre inscription ? (y/n) : " << endl;
-		cin >> yn ;
-		if (yn == 'y')
+	for (size_t i = 0; i < Employers.size(); i++) //verifie que si le nom existe.
+	{
+
+		if (Employers[i].getNom() == newNom && Employers[i].getPrenom() == newPrenom)
 		{
-		  cout << " Ajout du compte à la base de données ...... " << endl << endl;
-		  addChomeur(newChomeur,Chomeurs,Employers);
 
-		}else if(yn == 'n'){
-			affichage_menu_chomeur();
-		}else{
-			cout << " Veuillez entrez y pour oui et n pour non. " << endl << endl;
+			string entre = Entreprises[Employers[i].getIdEntreprise()].getNom();
+			cout << " * Ce nom et prenom sont déjà pris ! Vous etes inscrit en tant qu'employer de " << entre << " * " << endl;
+			goto CN;
 		}
+	}
 
-		
-	idUtilisateur = newChomeur.getIdPersonne();
+	idUtilisateur = rechercheIdDispo_Chomeur(Chomeurs, Employers);
+	newChomeur.setId(idUtilisateur);
+	newChomeur.setNom(newNom);
+	newChomeur.setPrenom(newPrenom);
 
-	affichage_menu_intermediaire_chomeur();
+	//MAIL
+CE:
+	cout << " Votre mail : " << endl;
+	cin >> input;
+	string newMail = input;
+
+	for (size_t i = 0; i < Chomeurs.size(); i++)
+	{
+
+		if (Chomeurs[i].getMail() == newMail)
+		{
+			cout << " * Ce mail est déjà pris ! *" << endl;
+			goto CE;
+		}
+	}
+
+	newChomeur.setMail(newMail);
+
+	cout << " Votre code postal : " << endl;
+	cin >> input;
+	string newCode = input;
+	//ajouter verification d'un int de 5 chiffres
+	newChomeur.setCode(newCode);
+
+NEW:
+	cout << " Entrez au moins une compétence : " << endl;
+	cin >> input;
+	string newCompetence = input;
+	newChomeur.addCompetence(newCompetence);
+	cout << endl
+		 << " Ajoutez une compétence ? (y/n) : " << endl;
+	cin >> yn;
+	if (yn == 'y')
+	{
+		goto NEW;
+	}
+	else if (yn == 'n')
+	{
+		goto NEXT;
+	}
+	else
+	{
+		cout << " Veuillez entrez y pour oui et n pour non. " << endl
+			 << endl;
+	}
+
+NEXT:
+	cout << " Récapitulatif de votre inscription : " << endl
+		 << endl;
+	newChomeur.printInfo();
+	cout << " Vous pourrez modifiez ces informations et ajoutez des anciens collègues après l'inscription" << endl
+		 << endl;
+	cout << endl
+		 << " Confirmez votre inscription ? (y/n) : " << endl;
+	cin >> yn;
+	if (yn == 'y')
+	{
+		cout << " Ajout du compte à la base de données ...... " << endl
+			 << endl;
+		addChomeur(newChomeur, Chomeurs, Employers);
+	}
+	else if (yn == 'n')
+	{
+		affichage_menu_chomeur();
+	}
+	else
+	{
+		cout << " Veuillez entrez y pour oui et n pour non. " << endl
+			 << endl;
+	}
+
+	newChomeur.getIdPersonne();
+
+	affichage_menu_intermediaire_chomeur(idUtilisateur);
 }
-
 
 void creer_profil_employer()
 {
-    affichage_menu_intermediaire_employer();
+
+	idUtilisateur = 1;
+	affichage_menu_intermediaire_employer(idUtilisateur);
 }
 
-
 void identification_entreprise()
-{	
-	cout << " • Veuillez saisir l'identifiant de votre entreprise : " << endl << endl << " ==> Identifiant : ";
+{
+	cout << " • Veuillez saisir l'identifiant de votre entreprise : " << endl
+		 << endl
+		 << " ==> Identifiant : ";
 
-	string input ;
-	
-	cin >> input ;
+	string input;
+
+	cin >> input;
 
 	int id = stoi(input);
 
 	for (size_t i = 0; i < Entreprises.size(); i++)
-   {
-	   if(Entreprises[i].getId() == id){
+	{
+		if (Entreprises[i].getId() == id)
+		{
 
-		   string nom = Entreprises[i].getNom();
+			string nom = Entreprises[i].getNom();
 
-		   cout << "*** • Vous etes désormais connecter • ***" << endl << endl ;
-		   cout << " • Bienvenue sur votre compte " << nom << " • " << endl ;
-		   
-		   idUtilisateur = id;
-		   affichage_menu_intermediaire_entreprise();
-	   }
-   }
+			cout << "*** • Vous etes désormais connecté • ***" << endl
+				 << endl;
+			cout << " • Bienvenue sur votre compte " << nom << " • " << endl;
 
-	cout << " • Id inéxistant dans les entreprises • "<< endl ;
+			idUtilisateur = id;
+			affichage_menu_intermediaire_entreprise(idUtilisateur);
+		}
+	}
+
+	cout << " • Id inexistant dans les entreprises • " << endl;
 	affichage_menu_entreprise();
-
 }
 
 void identification_chomeur()
 {
-cout << " • Veuillez saisir votre identifiant : " << endl << endl << " ==> Identifiant : " ;
+	cout << " • Veuillez saisir votre identifiant : " << endl
+		 << endl
+		 << " ==> Identifiant : ";
 
-	string input ;
-	
-	cin >> input ;
+	string input;
+
+	cin >> input;
 
 	int id = stoi(input);
 
 	for (size_t i = 0; i < Chomeurs.size(); i++)
-   {
-	   if(Chomeurs[i].getIdPersonne() == id){
+	{
+		if (Chomeurs[i].getIdPersonne() == id)
+		{
 
-		   string nom = Chomeurs[i].getNom();
-		   string prenom = Chomeurs[i].getPrenom();
+			string nom = Chomeurs[i].getNom();
+			string prenom = Chomeurs[i].getPrenom();
 
-		   cout << "*** • Vous etes désormais connecter • ***" << endl << endl ;
-		   cout << " • Bienvenue Monsieur/Madame " << nom << " " << prenom << " • "  << endl ;
-		   idUtilisateur = id;
+			cout << "*** • Vous etes désormais connecté • ***" << endl
+				 << endl;
+			cout << " • Bienvenue Monsieur/Madame " << nom << " " << prenom << " • " << endl;
+			idUtilisateur = id;
 
-		   affichage_menu_intermediaire_chomeur();
-	   }
-   }
+			affichage_menu_intermediaire_chomeur(idUtilisateur);
+		}
+	}
 
-	cout << " • Id inéxistant chez les sans emplois • "<< endl ;
+	cout << " • Id inexistant chez les sans emplois • " << endl;
 
 	affichage_menu_chomeur();
 }
 
 void identification_employer()
 {
-	cout << " • Veuillez saisir votre identifiant • " << endl << endl << " ==> Identifiant : ";
+	cout << " • Veuillez saisir votre identifiant • " << endl
+		 << endl
+		 << " ==> Identifiant : ";
 
-	string input ;
-	
-	cin >> input ;
+	string input;
+
+	cin >> input;
 
 	int id = stoi(input);
 
 	for (size_t i = 0; i < Employers.size(); i++)
-   {
-	   if(Employers[i].getIdPersonne() == id){
+	{
+		if (Employers[i].getIdPersonne() == id)
+		{
 
-		   string nom = Employers[i].getNom();
-		   string prenom = Employers[i].getPrenom();
+			string nom = Employers[i].getNom();
+			string prenom = Employers[i].getPrenom();
 
-		   cout << "*** • Vous etes désormais connecter • ***" << endl << endl ;
-		   cout << " • Bienvenue Monsieur/Madame " << nom << " " << prenom << " • "  << endl ;
-		   
-		   idUtilisateur = id;
-		   affichage_menu_intermediaire_employer();
-	   }
-   }
+			cout << "\n\n\n*** • Vous etes désormais connecté • ***" << endl
+				 << endl;
+			cout << " • Bienvenue Monsieur/Madame " << nom << " " << prenom << " • " << endl;
 
-	cout << " • Id inéxistant chez les employés • "<< endl ;
+			idUtilisateur = id;
+			affichage_menu_intermediaire_employer(idUtilisateur);
+		}
+	}
+
+	cout << " • Id inexistant chez les employés • " << endl;
 	affichage_menu_employer();
 }
 
-void affichage_menu_intermediaire_entreprise()
-{	
-
-    cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl <<  "* Menu entreprise *" <<  endl << endl << "Vous voulez :" << endl ;
-    cout << "1. Créer le profil d'un poste à pourvoir" << endl <<
-     "2. Supprimer le profil d'un poste maintenant pourvu " << endl << 
-     "3. Faire une recherche parmi les chercheurs d'emploi " << endl ;
-    cout << endl << "Votre choix ('q' pour quitter, 'p' pour menu précédent)" ;
-	onInputIntEntreprise();
-}
-
-void affichage_menu_intermediaire_chomeur()
+void affichage_menu_intermediaire_entreprise(int identr)
 {
-	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl <<  "* Menu chercheur d'emploi *" <<  endl << endl << "Vous voulez :" << endl  ;
-    cout << "1. Modifier son profil" << endl <<
-     "2. Faire une transition vers employé" << endl << 
-     "3. Supprimer son profil" << endl <<
-     "4. Faire une recherche de poste à pourvoir";
-    cout << endl << "Votre choix ('q' pour quitter, 'p' pour menu précédent)" ;
-	onInputIntChomeur();
+
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu entreprise *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Créer le profil d'un poste à pourvoir" << endl
+		 << "2. Supprimer le profil d'un poste maintenant pourvu " << endl
+		 << "3. Faire une recherche parmi les chercheurs d'emploi " << endl;
+	cout << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
+	onInputIntEntreprise(identr);
 }
 
-void affichage_menu_intermediaire_employer()
+void affichage_menu_intermediaire_chomeur(int idchom)
 {
-	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl << endl <<  "* Menu employé *" <<  endl << endl << "Vous voulez :" << endl  ;
-    cout << "1. Modifier son profil" << endl <<
-     "2. Faire une transition vers chercheur d'emploi" << endl << 
-     "3. Supprimer son profil" << endl <<
-     "4. Faire une recherche de poste à pourvoir";
-    cout << endl << "Votre choix ('q' pour quitter, 'p' pour menu précédent)" ;
-	onInputIntEmployer();
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu chercheur d'emploi *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Modifier son profil" << endl
+		 << "2. Faire une transition vers employé" << endl
+		 << "3. Supprimer son profil" << endl
+		 << "4. Faire une recherche de poste à pourvoir";
+	cout << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
+	onInputIntChomeur(idchom);
 }
 
-void modification_profil_chomeur()
+void affichage_menu_intermediaire_employer(int idempl)
 {
-	affichage_menu_intermediaire_chomeur();
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu employé *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Modifier son profil" << endl
+		 << "2. Faire une transition vers chercheur d'emploi" << endl
+		 << "3. Supprimer son profil" << endl
+		 << "4. Faire une recherche de poste à pourvoir";
+	cout << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
+	onInputIntEmployer(idempl);
 }
 
-void modification_profil_employer()
+void modification_profil_chomeur(int idchom)
 {
-	affichage_menu_intermediaire_employer();
+	Chomeur *chom = get_chomeur(idchom, Chomeurs);
+
+DEB:
+	cout << "\n\nSelectionner le service demandé\n\n";
+	cout << " 1 - Ajouter des compétences \n 2 - Ajouter un(e) ancien(ne) collègue de travail \n 3 - Modifier le code postal \n 4 - Revenir au menu Principal \n ";
+	string info;
+	cout << "\nVotre Choix :";
+	cin >> info;
+	if (info == "1")
+	{
+		cout << "Quelle compétence voulez vous ajouter : (Entrez r pour revenir en arriere) \n";
+		string comp;
+		cin >> comp;
+		if (comp == "r")
+			goto DEB;
+		else
+		{
+			chom->addCompetence(comp);
+			goto DEB;
+		}
+	}
+	else if (info == "2")
+	{
+		cout << "Entrer l'id d l'ancien collègue à ajouter : (Entrez r pour revenir en arriere) \n";
+		string comp;
+		cin >> comp;
+		if (comp == "r")
+			goto DEB;
+		else
+		{
+			int id;
+
+			try
+			{
+				id = stoi(comp);
+			}
+			catch (logic_error &)
+			{
+				cout << "erreur vous n'avez pas rentré un id valide";
+				goto DEB;
+			}
+			for (size_t i = 0; i < Chomeurs.size(); i++)
+			{
+				if (Chomeurs[i].getIdPersonne() == id)
+				{
+					chom->addAncienCollegue(id);
+				}
+			}
+			for (size_t i = 0; i < Employers.size(); i++)
+			{
+				if (Employers[i].getIdPersonne() == id)
+				{
+					chom->addAncienCollegue(id);
+				}
+			}
+
+			goto DEB;
+		}
+	}
+	else if (info == "3")
+	{
+		cout << "Entrez le nouveau code postal : (Entrez r pour revenir en arriere) \n";
+		string code;
+		cin >> code;
+
+		int id;
+		try
+		{
+			id = stoi(code);
+		}
+		catch (logic_error &)
+		{
+			cout << "erreur vous n'avez pas rentré un code postal valide\n";
+			goto DEB;
+		}
+		id++;
+		chom->setCode(code);
+		goto DEB;
+	}
+	else if (info == "4")
+	{
+		MajCSVChomeur(Chomeurs);
+		affichage_menu_intermediaire_chomeur(idchom);
+	}
+	else
+	{
+		goto DEB;
+	}
 }
 
-
-void transition_chercheur_emploi()
+void modification_profil_employer(int idempl)
 {
-	affichage_menu_intermediaire_employer();
+	Employer *empl = get_employers(idempl, Employers);
+
+
+DEB1:
+	empl->printInfo();
+	cout << "\n\nSelectionner le service demandé\n\n";
+	cout << " 1 - Ajouter des compétences \n 2 - Ajouter un(e) collègue de travail actuel \n 3 - Ajouter un(e) ancien(ne) collègue de travail \n 4 - Modifier le code postal \n 5 - Changer d'entreprise \n 6 - Revenir au menu Principal \n ";
+	string info;
+	cout << "\nVotre Choix :";
+	cin >> info;
+	if (info == "1")
+	{
+		cout << "Quelle compétence voulez vous ajouter : (Entrez r pour revenir en arriere) \n";
+		string comp;
+		cin >> comp;
+		if (comp == "r")
+			goto DEB1;
+		else
+		{
+			empl->addCompetence(comp);
+			goto DEB1;
+		}
+	}
+	else if (info == "2")
+	{
+		cout << "Entrer l'id du collègue à ajouter : (Entrez r pour revenir en arriere) \n";
+		string comp;
+		cin >> comp;
+		if (comp == "r")
+			goto DEB1;
+		else
+		{
+			int id;
+
+			try
+			{
+				id = stoi(comp);
+			}
+			catch (logic_error &)
+			{
+				cout << "erreur vous n'avez pas rentré un id valide";
+				goto DEB1;
+			}
+			for (size_t i = 0; i < Chomeurs.size(); i++)
+			{
+				if (Chomeurs[i].getIdPersonne() == id)
+				{
+					empl->addCollegue(id);
+				}
+			}
+			for (size_t i = 0; i < Employers.size(); i++)
+			{
+				if (Employers[i].getIdPersonne() == id)
+				{
+					empl->addCollegue(id);
+				}
+			}
+			goto DEB1;
+		}
+	}
+	else if (info == "3")
+	{
+		cout << "Entrer l'id de l'ancien collègue à ajouter : (Entrez r pour revenir en arriere) \n";
+		string comp;
+		cin >> comp;
+		if (comp == "r")
+			goto DEB1;
+		else
+		{
+			int id;
+
+			try
+			{
+				id = stoi(comp);
+			}
+			catch (logic_error &)
+			{
+				cout << "erreur vous n'avez pas rentré un id valide";
+				goto DEB1;
+			}
+			for (size_t i = 0; i < Chomeurs.size(); i++)
+			{
+				if (Chomeurs[i].getIdPersonne() == id)
+				{
+					empl->addAncienCollegue(id);
+				}
+			}
+			for (size_t i = 0; i < Employers.size(); i++)
+			{
+				if (Employers[i].getIdPersonne() == id)
+				{
+					empl->addAncienCollegue(id);
+				}
+			}
+
+			goto DEB1;
+		}
+	}
+	else if (info == "4")
+	{
+		cout << "Entrez le nouveau code postal : (Entrez r pour revenir en arriere) \n";
+		string code;
+		cin >> code;
+
+		int id;
+		try
+		{
+			id = stoi(code);
+		}
+		catch (logic_error &)
+		{
+			cout << "erreur vous n'avez pas rentré un code postal valide\n";
+			goto DEB1;
+		}
+		id++;
+		empl->setCode(code);
+		goto DEB1;
+	}
+	else if (info == "5")
+	{
+		cout << "Entrez l'id de votre nouvelle entreprise' : (Entrez r pour revenir en arriere) \n";
+		string code;
+		cin >> code;
+
+		int id;
+		try
+		{
+			id = stoi(code);
+		}
+		catch (logic_error &)
+		{
+			cout << "erreur vous n'avez pas rentré un id d'entreprise valide\n";
+			goto DEB1;
+		}
+
+		int ancienid = empl->getIdEntreprise();
+		Entreprise *ancien_entre = get_entreprise(ancienid, Entreprises);
+		ancien_entre->deleteEmploye(idempl);
+		ajout_employer_entreprise(*empl, id, Entreprises);
+
+		vector<Employer> ancien_coll = get_employers_de_entreprise(ancien_entre->getId(), Employers);
+
+		for (size_t i = 0; i < ancien_coll.size(); i++)
+		{
+			for (size_t j = 0; j < empl->get_collegues().size(); j++)
+			{
+				if (empl->get_collegues()[j] == ancien_coll[i].getIdPersonne())
+				{
+					empl->erase_collegue(ancien_coll[i].getIdPersonne());
+				}
+			}
+			empl->addAncienCollegue(ancien_coll[i].getIdPersonne());
+		}
+		goto DEB1;
+	}
+	else if (info == "6")
+	{
+		MajCSVEmployer(Employers);
+		affichage_menu_intermediaire_employer(idempl);
+	}
+	else
+	{
+		goto DEB1;
+	}
 }
 
-void transition_employer()
+void transition_chercheur_emploi(int idchom)
 {
-	affichage_menu_intermediaire_chomeur();
+	bool isexist = false;
+	string info;
+DEB2:
+	cout << "Quelle enterprise voulez vous integrer ? ( Entrer r pour revenir au menu précédent )\n";
+	cin >> info;
+	if (info == "r")
+	{
+		affichage_menu_intermediaire_chomeur(idchom);
+	}
+	int id;
+	try
+	{
+		id = stoi(info);
+	}
+	catch (logic_error &)
+	{
+		cout << "erreur vous n'avez pas rentré un id d'entreprise valide\n";
+		goto DEB2;
+	}
+	for (size_t i = 0; i < Entreprises.size(); i++)
+	{
+		if (id == Entreprises[i].getId())
+		{
+			isexist = true;
+		}
+	}
+	if (isexist)
+	{
+		transitionChomeur_Vers_Employer(idchom, id, Employers, Chomeurs, Entreprises);
+	}
+	else
+	{
+		cout << "L'entreprise que vous voulez integrer n'existe pas dans la base de données\n";
+		goto DEB2;
+	}
+
+	affichage_menu_intermediaire_employer(idchom);
 }
 
-void supprimer_profil_chomeur()
+void transition_employer(int idempl)
+{
+
+	string info;
+DEB3:
+	cout << "Etes vous sur ? ( Entrer y pour continuer, n pour revenir au menu précédent )\n";
+	cin >> info;
+	if (info == "n")
+	{
+		affichage_menu_intermediaire_chomeur(idempl);
+	}
+	else if (info == "y")
+	{
+		transitionEmployer_Vers_Chomeur(idempl, Employers, Chomeurs, Entreprises);
+	}
+	else
+	{
+		goto DEB3;
+	}
+
+	affichage_menu_intermediaire_chomeur(idempl);
+}
+
+void supprimer_profil_chomeur(int idchom)
 {
 	affichage_menu_principal();
 }
 
-void supprimer_profil_employer()
+void supprimer_profil_employer(int identr)
 {
 	affichage_menu_principal();
 }
 
-void creer_poste()
+void creer_poste(int identr)
 {
-	affichage_menu_intermediaire_entreprise();
+	affichage_menu_intermediaire_entreprise(identr);
 }
 
-void supprimer_poste()
+void supprimer_poste(int identr)
 {
-	affichage_menu_intermediaire_entreprise();
+	affichage_menu_intermediaire_entreprise(identr);
 }
 
-void rechercher_demandeur_emploi()
+void rechercher_demandeur_emploi(int identr)
 {
-	affichage_menu_intermediaire_entreprise();
+	affichage_menu_intermediaire_entreprise(identr);
 }
-

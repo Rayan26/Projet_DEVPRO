@@ -20,7 +20,7 @@ int main()
 {
 
      //TEST FONCTION AFFICHAGE INFORMATION
-     vector<string> competence(1, "C++");
+     // vector<string> competence(1, "C++");
      /*
     Personne rayan(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
     rayan.printInfo();
@@ -46,14 +46,11 @@ int main()
 */
      
 
-
+     
 
      //Test du menu
      affichage_menu_principal();
-
-
-
-
+     
 
      //TEST GET_ENTREPRISE
      // Entreprise *entre = get_entreprise(5, Entreprises);
@@ -210,5 +207,10 @@ int main()
      //transitionChomeur_Vers_Employer(4, 2, Employers, Chomeurs, Entreprises);
      // affichage_vecteur_employer(recherche_employer_par_comp("comedie", Employers));
      //affichage_vecteur_employer(recherche_employer_par_comp_CP("comedie", "77700", Employers));
+
+
+
+     // affichage_menu_principal();
+
      return 0;
 }
