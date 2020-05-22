@@ -54,9 +54,10 @@ int onInputEmployer();
  * Permet de faire une recherche parmis les demandeurs d'emplois
  * 
  * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
+ * REPONSE Pas besoin, on a son id et la liste complète des entreprises en globale donc on pourra toujours y acceder
  */
-void affichage_menu_intermediaire_entreprise(int identr);
-int onInputIntEntreprise(int identr);
+void affichage_menu_intermediaire_entreprise();
+int onInputIntEntreprise();
 
 /*
  * Menu Intermédiaire chercheur d'emploi
@@ -67,8 +68,8 @@ int onInputIntEntreprise(int identr);
  *  
  * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
  */
-void affichage_menu_intermediaire_chomeur(int idchom);
-int onInputIntChomeur(int idchom);
+void affichage_menu_intermediaire_chomeur();
+int onInputIntChomeur();
 
 /*
  * Menu Intermédiaire employé
@@ -79,8 +80,8 @@ int onInputIntChomeur(int idchom);
  * 
  * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
  */
-void affichage_menu_intermediaire_employer(int idempl);
-int onInputIntEmployer(int idempl);
+void affichage_menu_intermediaire_employer();
+int onInputIntEmployer();
 
 /*
  * Fonctions appellant le constructeur de l'objet,
@@ -112,8 +113,8 @@ void identification_employer();
  * 
  * A IMPLEMENTER
  */
-void modification_profil_chomeur(int idchom);
-void modification_profil_employer(int idempl);
+void modification_profil_chomeur();
+void modification_profil_employer();
 
 
 /*
@@ -126,8 +127,8 @@ void modification_profil_employer(int idempl);
  *
  * A IMPLEMENTER
  */
-void transition_chercheur_emploi(int idchom);
-void transition_employer(int idempl);
+void transition_chercheur_emploi();
+void transition_employer();
 
 
 /*
@@ -136,14 +137,14 @@ void transition_employer(int idempl);
  * 
  * A IMPLEMENTER
  */
-void supprimer_profil_chomeur(int idchom);
-void supprimer_profil_employer(int idempl);
+void supprimer_profil_chomeur();
+void supprimer_profil_employer();
 
 
 
-void creer_poste(int identr);
+void creer_poste();
 
-void supprimer_poste(int identr);
+void supprimer_poste();
 
-void rechercher_demandeur_emploi(int identr);
+void rechercher_demandeur_emploi();
 

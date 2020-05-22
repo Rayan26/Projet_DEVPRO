@@ -308,7 +308,7 @@ void transitionChomeur_Vers_Employer(int idChomeur, int idEntreprises, vector<Em
 	addEmployer(*empl, employers, chomeurs);
 }
 
-int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employers)
+int rechercheIdDispo_Personne(vector<Employer> &employers , vector<Chomeur> &chomeurs)
 {
 	int id = 1;
 	for (size_t i = 0; i < chomeurs.size(); i++)
@@ -329,25 +329,6 @@ int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employ
 	return id + 1;
 }
 
-int rechercheIdDispo_Employer(vector<Employer> &employers, vector<Chomeur> &chomeurs)
-{
-	int id = 1;
-	for (size_t i = 0; i < employers.size(); i++)
-	{
-		if (employers[i].getIdPersonne() >= id)
-		{
-			id = employers[i].getIdPersonne();
-		}
-	}
-	for (size_t i = 0; i < chomeurs.size(); i++)
-	{
-		if (chomeurs[i].getIdPersonne() >= id)
-		{
-			id = chomeurs[i].getIdPersonne();
-		}
-	}
-	return id + 1;
-}
 
 int rechercheIdDispo_Entreprise(vector<Entreprise> &entreprises)
 {
@@ -375,4 +356,33 @@ int rechercheIdDispo_Poste(vector<Poste> &postes)
 	}
 
 	return id + 1;
+}
+
+bool verif_Mail(string mailAVerif ,vector<Employer>& employers, vector<Chomeur>& chomeurs, vector<Entreprise>& entreprises)
+{
+		for (size_t i = 0; i < chomeurs.size(); i++)
+	{
+		if (chomeurs[i].getMail() == mailAVerif)
+		{
+			return false;
+		}
+	}
+
+	for (size_t i = 0; i < employers.size(); i++)
+	{
+		if (employers[i].getMail() == mailAVerif)
+		{
+			return false;
+		}
+	}
+
+	for (size_t i = 0; i < entreprises.size(); i++)
+	{
+		if (entreprises[i].getMail() == mailAVerif)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
