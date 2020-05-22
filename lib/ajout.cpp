@@ -386,3 +386,43 @@ bool verif_Mail(string mailAVerif ,vector<Employer>& employers, vector<Chomeur>&
 
 	return true;
 }
+
+bool verif_NomPersonne(string nomAVerif, string prenomAVerif,vector<Employer>& employers, vector<Chomeur>& chomeurs)
+{
+	for (size_t i = 0; i < chomeurs.size(); i++) //verifie que le nom existe.
+	{
+
+		if (chomeurs[i].getNom() == nomAVerif && chomeurs[i].getPrenom() == prenomAVerif)
+		{
+			return false;
+		}
+	}
+
+	for (size_t i = 0; i < employers.size(); i++) //verifie que si le nom existe.
+	{
+
+		if (employers[i].getNom() == nomAVerif && employers[i].getPrenom() == prenomAVerif)
+		{
+
+			return false;
+		}
+	}
+
+	return true;
+
+}
+
+bool verif_NomEntreprise(string nomAVerif, vector<Entreprise>& entreprises)
+{
+	for (size_t i = 0; i < entreprises.size(); i++)
+	{
+		if (entreprises[i].getNom() == nomAVerif)
+		{
+			return false;
+		}
+	}
+
+	return true;
+
+}
+

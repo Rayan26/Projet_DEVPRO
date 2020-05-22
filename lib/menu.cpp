@@ -260,6 +260,10 @@ int onInputIntEmployer()
 	return 1;
 }
 
+/*=========================LES MENUS============================*/
+
+
+
 void affichage_menu_entreprise()
 {
 	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
@@ -303,6 +307,56 @@ void affichage_menu_employer()
 	onInputEmployer();
 }
 
+void affichage_menu_intermediaire_entreprise()
+{
+
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu entreprise *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Créer le profil d'un poste à pourvoir" << endl
+		 << "2. Supprimer le profil d'un poste maintenant pourvu " << endl
+		 << "3. Faire une recherche parmi les chercheurs d'emploi " << endl;
+	cout << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
+	onInputIntEntreprise();
+}
+
+void affichage_menu_intermediaire_chomeur()
+{
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu chercheur d'emploi *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Modifier son profil" << endl
+		 << "2. Faire une transition vers employé" << endl
+		 << "3. Supprimer son profil" << endl
+		 << "4. Faire une recherche de poste à pourvoir";
+	cout << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
+	onInputIntChomeur();
+}
+
+void affichage_menu_intermediaire_employer()
+{
+	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
+		 << endl
+		 << "* Menu employé *" << endl
+		 << endl
+		 << "Vous voulez :" << endl;
+	cout << "1. Modifier son profil" << endl
+		 << "2. Faire une transition vers chercheur d'emploi" << endl
+		 << "3. Supprimer son profil" << endl
+		 << "4. Faire une recherche de poste à pourvoir";
+	cout << endl
+		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
+	onInputIntEmployer();
+}
+
+/*=========================LES CREATIONS DE PROFIL============================*/
+
 void creer_profil_entreprise()
 {
 	Entreprise newEnterprise;
@@ -314,29 +368,26 @@ void creer_profil_entreprise()
 	cout << " • Création d'un nouveau profil entreprise • " << endl
 		 << endl;
 
-	//NOM ET ID
+                            /*=======NOM=====*/
 NE:
 	cout << " Nom de l'entreprise : " << endl;
 	cin >> input;
 
 	string newNom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
 
-	for (size_t i = 0; i < Entreprises.size(); i++) //verifie que si le nom existe.
-	{
-
-		if (Entreprises[i].getNom() == newNom)
+	if (verif_NomEntreprise(newNom,Entreprises) == false)
 		{
-			cout << " * Ce nom d'entreprise est déjà pris ! *" << endl;
+			cout << " * Ce nom est déjà pris ! *" << endl;
 			goto NE;
+		}else{
+			newEnterprise.setNom(newNom);
 		}
-	}
-
-	newEnterprise.setNom(newNom);
 
 	newEnterprise.setId(rechercheIdDispo_Entreprise(Entreprises));
 	idUtilisateur = newEnterprise.getId();
 
-	//MAIL
+                           /*=======MAIL=======*/
+
 	string newMail = input;
 ME:
 	cout << " Mail de l'entreprise : " << endl;
@@ -350,17 +401,17 @@ ME:
 		}else{
 			newEnterprise.setMail(newMail);
 		}
-	
 
+                    /*==========Code Postal===========*/
 	
-
-	
-
 	cout << " Code postal de l'entreprise : " << endl;
 	cin >> input;
 	string newCode = input;
 	//ajouter verification d'un int de 5 chiffres
 	newEnterprise.setCode(newCode);
+
+
+	                 /*==========Validation===========*/
 
 	cout << " Récapitulatif de votre inscription : " << endl
 		 << endl;
@@ -392,6 +443,7 @@ ME:
 	affichage_menu_intermediaire_entreprise();
 }
 
+
 void creer_profil_chomeur()
 {
 	Chomeur newChomeur;
@@ -401,7 +453,8 @@ void creer_profil_chomeur()
 	cout << " • Création d'un nouveau profil sans-emploi • " << endl
 		 << endl;
 
-	//NOM, PRENOM ET ID
+	             /*==========NOM ET PRENOM===========*/
+			
 CN:
 	cout << " Votre prénom : " << endl;
 	cin >> input;
@@ -410,38 +463,23 @@ CN:
 
 	cout << " Votre nom : " << endl;
 	cin >> input;
-
 	string newNom = input;
 
-	for (size_t i = 0; i < Chomeurs.size(); i++) //verifie que le nom existe.
-	{
-
-		if (Chomeurs[i].getNom() == newNom && Chomeurs[i].getPrenom() == newPrenom)
+	if (verif_NomPersonne(newNom,newPrenom,Employers,Chomeurs) == false)
 		{
-			cout << " * Ce nom et prénom sont déjà pris ! Vous etes inscrit en tant que chomeur *" << endl;
+			cout << " * Ce nom et prénom sont déjà pris ! *" << endl;
 			goto CN;
+		}else{
+			newChomeur.setNom(newNom);
+			newChomeur.setPrenom(newPrenom);
 		}
-	}
-
-	for (size_t i = 0; i < Employers.size(); i++) //verifie que si le nom existe.
-	{
-
-		if (Employers[i].getNom() == newNom && Employers[i].getPrenom() == newPrenom)
-		{
-
-			string entre = Entreprises[Employers[i].getIdEntreprise()].getNom();
-			cout << " * Ce nom et prenom sont déjà pris ! Vous etes inscrit en tant qu'employer de " << entre << " * " << endl;
-			goto CN;
-		}
-	}
 
 	
 	newChomeur.setId(rechercheIdDispo_Personne(Employers,Chomeurs));
-	newChomeur.setNom(newNom);
-	newChomeur.setPrenom(newPrenom);
 	idUtilisateur = newChomeur.getIdPersonne();
 
-	//MAIL
+	                 /*==========Maill===========*/
+
 	 
 CE:
 	cout << " Votre mail : " << endl;
@@ -456,11 +494,15 @@ CE:
 			newChomeur.setMail(newMail);
 		}
 
+		          /*==========Code Postal===========*/
+
 	cout << " Votre code postal : " << endl;
 	cin >> input;
 	string newCode = input;
 	//ajouter verification d'un int de 5 chiffres
 	newChomeur.setCode(newCode);
+
+	              /*==========Competences===========*/
 
 NEW:
 	cout << " Entrez au moins une compétence : " << endl;
@@ -483,6 +525,8 @@ NEW:
 		cout << " Veuillez entrez y pour oui et n pour non. " << endl
 			 << endl;
 	}
+
+	               /*==========Validation===========*/
 
 NEXT:
 	cout << " Récapitulatif de votre inscription : " << endl
@@ -514,11 +558,22 @@ NEXT:
 	affichage_menu_intermediaire_chomeur();
 }
 
+
+
 void creer_profil_employer()
 {
 
 	affichage_menu_intermediaire_employer();
 }
+
+
+void creer_poste()
+{
+	affichage_menu_intermediaire_entreprise();
+}
+
+
+/*=========================IDENTIFICATION============================*/
 
 void identification_entreprise()
 {
@@ -619,53 +674,8 @@ void identification_employer()
 	affichage_menu_employer();
 }
 
-void affichage_menu_intermediaire_entreprise()
-{
+/*=========================MODIFICATIONS DES PROFILS============================*/
 
-	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
-		 << endl
-		 << "* Menu entreprise *" << endl
-		 << endl
-		 << "Vous voulez :" << endl;
-	cout << "1. Créer le profil d'un poste à pourvoir" << endl
-		 << "2. Supprimer le profil d'un poste maintenant pourvu " << endl
-		 << "3. Faire une recherche parmi les chercheurs d'emploi " << endl;
-	cout << endl
-		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
-	onInputIntEntreprise();
-}
-
-void affichage_menu_intermediaire_chomeur()
-{
-	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
-		 << endl
-		 << "* Menu chercheur d'emploi *" << endl
-		 << endl
-		 << "Vous voulez :" << endl;
-	cout << "1. Modifier son profil" << endl
-		 << "2. Faire une transition vers employé" << endl
-		 << "3. Supprimer son profil" << endl
-		 << "4. Faire une recherche de poste à pourvoir";
-	cout << endl
-		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
-	onInputIntChomeur();
-}
-
-void affichage_menu_intermediaire_employer()
-{
-	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
-		 << endl
-		 << "* Menu employé *" << endl
-		 << endl
-		 << "Vous voulez :" << endl;
-	cout << "1. Modifier son profil" << endl
-		 << "2. Faire une transition vers chercheur d'emploi" << endl
-		 << "3. Supprimer son profil" << endl
-		 << "4. Faire une recherche de poste à pourvoir";
-	cout << endl
-		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
-	onInputIntEmployer();
-}
 
 void modification_profil_chomeur()
 {
@@ -994,6 +1004,8 @@ DEB3:
 	affichage_menu_intermediaire_chomeur();
 }
 
+/*=========================SUPPRESSION DE PROFILS============================*/
+
 void supprimer_profil_chomeur()
 {
 	affichage_menu_principal();
@@ -1004,15 +1016,12 @@ void supprimer_profil_employer()
 	affichage_menu_principal();
 }
 
-void creer_poste()
-{
-	affichage_menu_intermediaire_entreprise();
-}
-
 void supprimer_poste()
 {
 	affichage_menu_intermediaire_entreprise();
 }
+
+/*================================SERVICES=====================================*/
 
 void rechercher_demandeur_emploi()
 {
