@@ -119,7 +119,7 @@ void Personne::addAncienCollegue(int const Anciencollegue)
             verif = true;
         }
     }
-    if (verif == false )
+    if (verif == false)
     {
         _IdAncienCollegue.push_back(Anciencollegue);
     }
@@ -138,10 +138,10 @@ void Personne::printInfo() const
         cout << "Compétence " << i << " : " << _skill[i - 1] << endl;
     }
 
-    for (size_t i(1); i <= _IdCollegue.size(); ++i)
-    {
-        cout << "ID du collègue n°" << i << " : " << _IdCollegue[i - 1] << endl;
-    }
+    // for (size_t i(1); i <= _IdCollegue.size(); ++i)
+    // {
+    //     cout << "ID du collègue n°" << i << " : " << _IdCollegue[i - 1] << endl;
+    // }
 }
 
 std::vector<int> Personne::get_collegues() const

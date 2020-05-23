@@ -12,7 +12,6 @@
 #include "Service.h"
 #include "ajout.h"
 
-
 /* 
  * Affiche le menu Initial 
  * On peut ensuite rejoindre
@@ -107,7 +106,6 @@ void identification_entreprise();
 void identification_chomeur();
 void identification_employer();
 
-
 /*
  * Permet de modifier les informations concernant la personne comme son CP ou son mail
  * Appeler ensuite majObjetCSV()
@@ -119,7 +117,6 @@ void modification_profil_employer();
 void transition_chercheur_emploi();
 void transition_employer();
 
-
 /*
  * Appelle delOBJET de ajout.h
  * Puis retourne au menu principal 
@@ -128,11 +125,7 @@ void transition_employer();
  */
 void supprimer_profil_chomeur();
 void supprimer_profil_employer();
+void supprimer_profil_entreprise();
 void supprimer_poste();
 
-
-
-
-
 void rechercher_demandeur_emploi();
-

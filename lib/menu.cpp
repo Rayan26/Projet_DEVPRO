@@ -306,7 +306,8 @@ void affichage_menu_intermediaire_entreprise()
 	Entreprise *entre = get_entreprise(idUtilisateur, Entreprises);
 	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
 		 << endl
-		 << "•••• Vous êtes actuellement sur le compte de l'entreprise " << entre->getNom() << " ••••\n" << endl
+		 << "•••• Vous êtes actuellement sur le compte de l'entreprise " << entre->getNom() << " ••••\n"
+		 << endl
 		 << "* Menu entreprise *" << endl
 		 << endl
 		 << "Vous voulez :" << endl;
@@ -334,7 +335,7 @@ void affichage_menu_intermediaire_chomeur()
 		 << "3. Supprimer son profil" << endl
 		 << "4. Faire une recherche de poste à pourvoir";
 	cout << endl
-		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent)";
+		 << "\nVotre choix ('q' pour quitter, 'p' pour menu précédent) : ";
 	onInputIntChomeur();
 }
 
@@ -345,7 +346,8 @@ void affichage_menu_intermediaire_employer()
 	cout << "*** Bienvenu sur LuminIn, le site des pros ***" << endl
 		 << endl
 		 << "•••• Bonjour " << empl->getPrenom() << " nous sommes ravis de vous revoir "
-		 << "••••\n\n" << endl;
+		 << "••••\n\n"
+		 << endl;
 	cout << "* Menu employé *" << endl
 		 << endl
 		 << "Vous voulez :" << endl;
@@ -461,16 +463,16 @@ void identification_employer()
 void creer_profil_entreprise()
 {
 	Entreprise newEnterprise;
-	char input[50];
+	string input;
 	char yn;
+	system("clear");
 
 NE:
-	system("clear");
 	cout << " • Création d'un nouveau profil entreprise • " << endl
 		 << endl;
 
 	/*=======NOM=====*/
-	cout << " Nom de l'entreprise : " << endl;
+	cout << " Nom de l'entreprise : (pour les noms composés, utiliser des tirets, exemple: 'L'Atelier-Du-Bois') " << endl;
 	cin >> input;
 
 	string newNom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
@@ -491,8 +493,8 @@ NE:
 	/*=======MAIL=======*/
 
 	string newMail = input;
-ME:
 	system("clear");
+ME:
 	cout << " Mail de l'entreprise : " << endl;
 	cin >> input;
 	newMail = input;
@@ -509,11 +511,26 @@ ME:
 
 	/*==========Code Postal===========*/
 	system("clear");
+CODE:
 	cout << " Code postal de l'entreprise : " << endl;
 	cin >> input;
-	string newCode = input;
-	//ajouter verification d'un int de 5 chiffres
-	newEnterprise.setCode(newCode);
+	int id;
+	try
+	{
+		id = stoi(input);
+	}
+	catch (logic_error &)
+	{
+		cout << "erreur vous n'avez pas rentré un code postal valide\n";
+		goto CODE;
+	}
+	if (input.size() != 5)
+	{
+		cout << "erreur vous n'avez pas rentré un code postal valide (format) \n";
+		goto CODE;
+	}
+	id++;
+	newEnterprise.setCode(input);
 
 	/*==========Validation===========*/
 	system("clear");
@@ -549,7 +566,7 @@ ME:
 void creer_profil_chomeur()
 {
 	Chomeur newChomeur;
-	char input[50];
+	string input;
 	char yn;
 
 	system("clear");
@@ -560,12 +577,12 @@ void creer_profil_chomeur()
 	/*==========NOM ET PRENOM===========*/
 
 CN:
-	cout << " Votre prénom : " << endl;
+	cout << " Votre prénom (pour les noms composés, utiliser des tirets, exemple: 'Marie-Pierre') : " << endl;
 	cin >> input;
 
 	string newPrenom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
 
-	cout << " Votre nom : " << endl;
+	cout << " Votre nom (pour les noms composés, utiliser des tirets, exemple: 'Martin-Dupont') : : " << endl;
 	cin >> input;
 	string newNom = input;
 
@@ -601,18 +618,33 @@ CE:
 	}
 
 	/*==========Code Postal===========*/
-
-	cout << " Votre code postal : " << endl;
+	system("clear");
+CODE1:
+	cout << " Code postal : " << endl;
 	cin >> input;
-	string newCode = input;
-	//ajouter verification d'un int de 5 chiffres
-	newChomeur.setCode(newCode);
+	int id;
+	try
+	{
+		id = stoi(input);
+	}
+	catch (logic_error &)
+	{
+		cout << "erreur vous n'avez pas rentré un code postal valide\n";
+		goto CODE1;
+	}
+	if (input.size() != 5)
+	{
+		cout << "erreur vous n'avez pas rentré un code postal valide (format) \n";
+		goto CODE1;
+	}
+	id++;
+	newChomeur.setCode(input);
 
 	/*==========Competences===========*/
-
-NEW:
 	system("clear");
-	cout << " Entrez une compétence : " << endl;
+NEW:
+
+	cout << " Entrez une compétence : (pour les compétences comportant plusieurs mots, utiliser des tirets, exemple: 'tennis-de-table') : " << endl;
 	cin >> input;
 	string newCompetence = input;
 	newChomeur.addCompetence(newCompetence);
@@ -669,12 +701,240 @@ NEXT:
 
 void creer_profil_employer()
 {
+	Employer newEmployer;
+	string input;
+	char yn;
+
+	system("clear");
+
+	cout << " • Création d'un nouveau profil employé • " << endl
+		 << endl;
+
+	/*==========NOM ET PRENOM===========*/
+
+CN10:
+	cout << " Votre prénom (pour les noms composés, utiliser des tirets, exemple: 'Marie-Pierre') : " << endl;
+	cin >> input;
+
+	string newPrenom = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+
+	cout << " Votre nom (pour les noms composés, utiliser des tirets, exemple: 'Martin-Dupont') :: " << endl;
+	cin >> input;
+	string newNom = input;
+
+	if (verif_NomPersonne(newNom, newPrenom, Employers, Chomeurs) == false)
+	{
+		cout << " * Ce nom et prénom sont déjà pris ! *" << endl;
+		goto CN10;
+	}
+	else
+	{
+		newEmployer.setNom(newNom);
+		newEmployer.setPrenom(newPrenom);
+	}
+
+	newEmployer.setId(rechercheIdDispo_Personne(Employers, Chomeurs));
+	idUtilisateur = newEmployer.getIdPersonne();
+
+	/*==========Maill===========*/
+CE10:
+	system("clear");
+	cout << " Votre mail : " << endl;
+	cin >> input;
+	string newMail = input;
+
+	if (verif_Mail(newMail, Employers, Chomeurs, Entreprises) == false)
+	{
+		cout << " * Ce mail est déjà pris ! *" << endl;
+		goto CE10;
+	}
+	else
+	{
+		newEmployer.setMail(newMail);
+	}
+
+	/*==========Code Postal===========*/
+	system("clear");
+CODE10:
+	cout << " Code postal : " << endl;
+	cin >> input;
+	int id;
+	try
+	{
+		id = stoi(input);
+	}
+	catch (logic_error &)
+	{
+		cout << "erreur vous n'avez pas rentré un code postal valide\n";
+		goto CODE10;
+	}
+	if (input.size() != 5)
+	{
+		cout << "erreur vous n'avez pas rentré un code postal valide (format) \n";
+		goto CODE10;
+	}
+	id++;
+	newEmployer.setCode(input);
+
+	/*==========Competences===========*/
+	system("clear");
+NEW10:
+
+	cout << " Entrez une compétence (pour les compétences composées de plusieurs mots, utiliser des tirets, exemple: 'tennis-de-table') : " << endl;
+	cin >> input;
+	string newCompetence = input;
+	newEmployer.addCompetence(newCompetence);
+	cout << endl
+		 << " Ajoutez une compétence ? (y/n) : " << endl;
+	cin >> yn;
+	if (yn == 'y')
+	{
+		goto NEW10;
+	}
+	else if (yn == 'n')
+	{
+		goto NOM_ENTREPRISE10;
+	}
+	else
+	{
+		cout << " Veuillez entrez y pour oui et n pour non. " << endl
+			 << endl;
+		goto NEW10;
+	}
+
+	/*==========Entreprise===========*/
+	system("clear");
+NOM_ENTREPRISE10:
+	cout << "\n\nEntrez le nom de votre entreprise' : \n";
+	string nom;
+	cin >> nom;
+
+	bool verif = false;
+	size_t i;
+	int id2;
+	for (i = 0; i < Entreprises.size(); i++)
+	{
+		if (Entreprises[i].getNom() == nom)
+		{
+			id2 = Entreprises[i].getId();
+			Entreprises[i].addEmploye(newEmployer.getIdPersonne());
+			newEmployer.setIdEntreprise(id2);
+			verif = true;
+		}
+	}
+	if (verif == false)
+	{
+		cout << " • Nom inexistant dans les entreprises • " << endl;
+		goto NOM_ENTREPRISE10;
+	}
+
+	/*==========Validation===========*/
+	system("clear");
+
+	cout << " Récapitulatif de votre inscription : " << endl
+		 << endl;
+	newEmployer.printInfo();
+	cout << " Vous pourrez modifiez ces informations et ajoutez des anciens collègues après l'inscription" << endl
+		 << endl;
+	cout << endl
+		 << " Confirmez votre inscription ? (y/n) : " << endl;
+	cin >> yn;
+	if (yn == 'y')
+	{
+		cout << " Ajout du compte à la base de données ...... " << endl
+			 << endl;
+		addEmployer(newEmployer, Employers, Chomeurs);
+	}
+	else if (yn == 'n')
+	{
+		affichage_menu_employer();
+	}
+	else
+	{
+		cout << " Veuillez entrez y pour oui et n pour non. " << endl
+			 << endl;
+	}
 
 	affichage_menu_intermediaire_employer();
 }
 
 void creer_poste()
 {
+	Poste newPoste;
+	string input;
+	char yn;
+
+	system("clear");
+
+	cout << " • Création d'un nouveau poste • " << endl
+		 << endl;
+
+	/*==========TITRE===========*/
+
+	cout << " Titre du poste (pour les noms composés, utiliser des tirets, exemple: 'Développeur-Web') : " << endl;
+	cin >> input;
+
+	string newTitre = input; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+
+	newPoste.setTitre(newTitre);
+
+	/*===========ID=============*/
+	newPoste.setId(rechercheIdDispo_Poste(Postes));
+
+	/*==========Competences===========*/
+	system("clear");
+NEW:
+
+	cout << " Entrez une compétence requise : (pour les compétences comportant plusieurs mots, utiliser des tirets, exemple: 'tennis-de-table') : " << endl;
+	cin >> input;
+	string newCompetence = input;
+	newPoste.addCompetence(newCompetence);
+	cout << endl
+		 << " Ajoutez une compétence ? (y/n) : " << endl;
+	cin >> yn;
+	if (yn == 'y')
+	{
+		goto NEW;
+	}
+	else if (yn == 'n')
+	{
+		goto NEXT;
+	}
+	else
+	{
+		cout << " Veuillez entrez y pour oui et n pour non. " << endl
+			 << endl;
+		goto NEW;
+	}
+
+	/*==========Validation===========*/
+
+NEXT:
+	system("clear");
+	newPoste.setIdEntreprise(idUtilisateur);
+	cout << " Récapitulatif du nouveau poste : " << endl
+		 << endl;
+	newPoste.printInfo();
+	cout << endl
+		 << " Confirmez la création du nouveau poste ? (y/n) : " << endl;
+	cin >> yn;
+	if (yn == 'y')
+	{
+		cout << " Ajout du poste à la base de données ...... " << endl
+			 << endl;
+		Entreprise *entre = get_entreprise(idUtilisateur, Entreprises);
+		entre->addJob(newPoste.getId());
+		addPoste(newPoste, Postes);
+	}
+	else if (yn == 'n')
+	{
+		affichage_menu_entreprise();
+	}
+	else
+	{
+		cout << " Veuillez entrez y pour oui et n pour non. " << endl
+			 << endl;
+	}
 	affichage_menu_intermediaire_entreprise();
 }
 
@@ -719,9 +979,9 @@ DEB:
 		cin >> comp;
 		string newNom = comp;
 
-		if (verif_NomPersonne(newNom, newPrenom, Employers, Chomeurs) == false)
+		if (verif_NomPersonne(newNom, newPrenom, Employers, Chomeurs) == true)
 		{
-			cout << " * Cette personne n'éxiste pas ou plus chez nous ! *" << endl;
+			cout << " * Cette personne n'existe pas ou plus chez nous ! *" << endl;
 			goto COLL;
 		}
 		else
@@ -757,6 +1017,8 @@ DEB:
 	}
 	else if (info == "3") /*============CHANGE CODE============*/
 	{
+		system("clear");
+	CODE3:
 		cout << "Entrez le nouveau code postal : (Entrez r pour revenir en arriere) \n";
 		string code;
 		cin >> code;
@@ -769,7 +1031,12 @@ DEB:
 		catch (logic_error &)
 		{
 			cout << "erreur vous n'avez pas rentré un code postal valide\n";
-			goto DEB;
+			goto CODE3;
+		}
+		if (code.size() != 5)
+		{
+			cout << "erreur vous n'avez pas rentré un code postal valide (format)\n";
+			goto CODE3;
 		}
 		id++;
 		chom->setCode(code);
@@ -794,7 +1061,6 @@ DEB1:
 	system("clear");
 	empl->printInfo();
 	cout << "\n\nSelectionner le service demandé\n\n";
-	//et la transition ??? (Option devenir un sans emploi a mettre ici)
 	cout << " 1 - Ajouter des compétences \n 2 - Ajouter un(e) collègue de travail actuel \n 3 - Ajouter un(e) ancien(ne) collègue de travail \n 4 - Modifier le code postal \n 5 - Changer d'entreprise \n 6 - Revenir au menu Principal \n ";
 	string info;
 	cout << "\nVotre Choix : ";
@@ -815,13 +1081,13 @@ DEB1:
 	else if (info == "2") /*============CHANGE COLLEGUES============*/
 	{
 		string comp;
-		cout << "Entrer le nom et prenom de votre collègue : (Entrez 2 fois q pour revenir en arriere) \n";
+		cout << "Entrer le nom et prenom de votre collègue : (Entrez 'r' pour revenir en arriere) \n";
 		cout << " Son prénom : " << endl;
 		cin >> comp;
-		/*if(comp == 'q'){
-			goto DEB1;         A COOORRRRIGEER
-
-		}  */
+		if (comp == "r")
+		{
+			goto DEB1;
+		}
 
 		string newPrenom = comp; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
 
@@ -829,7 +1095,7 @@ DEB1:
 		cin >> comp;
 		string newNom = comp;
 
-		if (verif_NomPersonne(newNom, newPrenom, Employers, Chomeurs) == false)
+		if (verif_NomPersonne(newNom, newPrenom, Employers, Chomeurs) == true)
 		{
 			cout << " * Cette personne n'existe pas ou plus chez nous ! *" << endl;
 			goto DEB1;
@@ -851,8 +1117,6 @@ DEB1:
 				{
 					int id = Employers[i].getIdPersonne();
 					empl->addAncienCollegue(id);
-
-					Employers[i].addAncienCollegue(empl->getIdPersonne());
 				}
 			}
 
@@ -872,7 +1136,7 @@ DEB1:
 		cin >> comp;
 		string newNom = comp;
 
-		if (verif_NomPersonne(newNom, newPrenom, Employers, Chomeurs) == false)
+		if (verif_NomPersonne(newNom, newPrenom, Employers, Chomeurs) == true)
 		{
 			cout << " * Cette personne n'existe pas ou plus chez nous ! *" << endl;
 			goto DEB1;
@@ -886,11 +1150,6 @@ DEB1:
 				{
 					int id = Chomeurs[i].getIdPersonne(); //on prend son id pour lajouter a la liste du nouveau profil
 					empl->addAncienCollegue(id);
-
-					/*il faut aussi ajoutez ce nouveau chomeur à la liste 
-					des anciens collègues de son soit disant nouveau 
-					anciens collègue (à transformer en demande d'amis)*/
-					Chomeurs[i].addAncienCollegue(empl->getIdPersonne());
 				}
 			}
 
@@ -900,8 +1159,6 @@ DEB1:
 				{
 					int id = Employers[i].getIdPersonne(); //on prend son id pour lajouter a la liste du nouveau profil
 					empl->addAncienCollegue(id);
-
-					Employers[i].addAncienCollegue(empl->getIdPersonne());
 				}
 			}
 
@@ -931,21 +1188,27 @@ DEB1:
 	}
 	else if (info == "5") /*============CHANGE ENTREPRISE============*/
 	{
-		cout << "\n\nEntrez l'id de votre nouvelle entreprise' : (Entrez r pour revenir en arriere) \n";
-		string code;
-		cin >> code;
-
+	NOM_ENTREPRISE:
+		cout << "\n\nEntrez le nom de votre nouvelle entreprise' : (Entrez r pour revenir en arriere) \n";
+		string nom;
+		cin >> nom;
+		bool verif = false;
+		size_t i;
 		int id;
-		try
+		for (i = 0; i < Entreprises.size(); i++)
 		{
-			id = stoi(code);
-		}
-		catch (logic_error &) //AAAA COORIGER : AJOUT AVEC NOM DE LENTREPRISE ET DONC TEST SUR LE NOM ENTRER AVEC VALID_NOMENTREPRISE
-		{
-			cout << "Erreur vous n'avez pas rentré un id d'entreprise valide\n";
-			goto DEB1;
-		}
+			if (Entreprises[i].getNom() == nom)
+			{
 
+				id = Entreprises[i].getId();
+				verif = true;
+			}
+		}
+		if (verif == false)
+		{
+			cout << " • Nom inexistant dans les entreprises • " << endl;
+			goto NOM_ENTREPRISE;
+		}
 		int ancienid = empl->getIdEntreprise();
 		Entreprise *ancien_entre = get_entreprise(ancienid, Entreprises);
 		ancien_entre->deleteEmploye(idUtilisateur);
@@ -980,41 +1243,36 @@ DEB1:
 
 void transition_chercheur_emploi()
 {
-	bool isexist = false;
-	string info;
-DEB2:
 	system("clear");
-	cout << "Quelle enterprise voulez vous integrer ? ( Entrer r pour revenir au menu précédent ) \n";
-	cin >> info;
-	if (info == "r")
+NOM_ENTREPRISE2:
+	cout << "\n\nEntrez le nom de votre nouvelle entreprise' : (Entrez r pour revenir en arriere) \n";
+	string nom;
+	cin >> nom;
+	if (nom == "r")
 	{
 		affichage_menu_intermediaire_chomeur();
 	}
+	bool verif = false;
+	size_t i;
 	int id;
-	try
+	for (i = 0; i < Entreprises.size(); i++)
 	{
-		id = stoi(info);
-	}
-	catch (logic_error &)
-	{
-		cout << "Erreur vous n'avez pas rentré un id d'entreprise valide\n";
-		goto DEB2;
-	}
-	for (size_t i = 0; i < Entreprises.size(); i++)
-	{
-		if (id == Entreprises[i].getId())
+		if (Entreprises[i].getNom() == nom)
 		{
-			isexist = true;
+
+			id = Entreprises[i].getId();
+			verif = true;
 		}
 	}
-	if (isexist)
+	if (verif == false)
 	{
-		transitionChomeur_Vers_Employer(idUtilisateur, id, Employers, Chomeurs, Entreprises);
+		cout << " • Nom inexistant dans les entreprises • " << endl;
+		goto NOM_ENTREPRISE2;
 	}
+
 	else
 	{
-		cout << "L'entreprise que vous voulez integrer n'existe pas dans notre base de données\n";
-		goto DEB2;
+		transitionChomeur_Vers_Employer(idUtilisateur, id, Employers, Chomeurs, Entreprises);
 	}
 
 	affichage_menu_intermediaire_employer();
@@ -1049,12 +1307,81 @@ DEB3:
 
 void supprimer_profil_chomeur()
 {
-	affichage_menu_principal();
+DEBSUPPR:
+	cout << "Vous allez supprimer votre profil de chercheur d'emploi, êtes vous sûr? (y pour continuer, n pour revenir en arrière) \n";
+	string input;
+	cin >> input;
+
+	if (input == "y")
+	{
+		delChomeur(Chomeurs, Employers, idUtilisateur);
+	DEBSUPPR2:
+		cout << "Profil supprimé, voulez-vous retourner au menu principal? (y pour oui, n pour quitter)\n";
+		string input2;
+		cin >> input2;
+		if (input2 == "y")
+		{
+			affichage_menu_principal();
+		}
+
+		else if (input2 == "n")
+		{
+			exit(0);
+		}
+		else
+		{
+			goto DEBSUPPR2;
+		}
+	}
+
+	else if (input == "n")
+		affichage_menu_intermediaire_chomeur();
+	else
+	{
+		goto DEBSUPPR;
+	}
 }
 
 void supprimer_profil_employer()
 {
-	affichage_menu_principal();
+DEBSUPPREMPL:
+	cout << "Vous allez supprimer votre profil d'employé, êtes vous sûr? (y pour continuer, n pour revenir en arrière) \n";
+	string input;
+	cin >> input;
+
+	if (input == "y")
+	{
+		delEmployer(Employers, Chomeurs, Entreprises, idUtilisateur);
+	DEBSUPPREMPL2:
+		cout << "Profil supprimé, voulez-vous retourner au menu principal? (y pour oui, n pour quitter)\n";
+		string input2;
+		cin >> input2;
+		if (input2 == "y")
+		{
+			affichage_menu_principal();
+		}
+
+		else if (input2 == "n")
+		{
+			exit(0);
+		}
+		else
+		{
+			goto DEBSUPPREMPL2;
+		}
+	}
+
+	else if (input == "n")
+		affichage_menu_intermediaire_employer();
+	else
+	{
+		goto DEBSUPPREMPL;
+	}
+}
+
+void supprimer_profil_entreprise()
+{
+	affichage_menu_intermediaire_entreprise();
 }
 
 void supprimer_poste()
