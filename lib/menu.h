@@ -94,6 +94,7 @@ int onInputIntEmployer();
 void creer_profil_entreprise();
 void creer_profil_chomeur();
 void creer_profil_employer();
+void creer_poste();
 
 /*
  * Fonctions permetant de charger le profil de l'objet
@@ -115,18 +116,6 @@ void identification_employer();
  */
 void modification_profil_chomeur();
 void modification_profil_employer();
-
-
-/*
- * Permet de faire la transition vers le coté obscur de la force
- * Creer  le nouvel objet avec les informations de l'ancien
- * Puis appelle le menu_intermediaire_of_the_other_side()
- * 
- * Dans le cas du passage de chomeur à employé on doit demander l'id de la nouvelle entreprise
- * puis appeler ajout_employer_entreprise() qui rajoute le nouvel employé à la liste de ses employés
- *
- * A IMPLEMENTER
- */
 void transition_chercheur_emploi();
 void transition_employer();
 
@@ -139,12 +128,11 @@ void transition_employer();
  */
 void supprimer_profil_chomeur();
 void supprimer_profil_employer();
-
-
-
-void creer_poste();
-
 void supprimer_poste();
+
+
+
+
 
 void rechercher_demandeur_emploi();
 

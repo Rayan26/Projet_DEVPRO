@@ -679,15 +679,15 @@ void identification_employer()
 
 void modification_profil_chomeur()
 {
-	Chomeur *chom = get_chomeur(idUtilisateur, Chomeurs);
-
+	Chomeur *chom = get_chomeur(idUtilisateur, Chomeurs); 
+//ajouter modification mail avec verif que nouvo mail existe pas
 DEB:
 	cout << "\n\nSelectionner le service demandé\n\n";
 	cout << " 1 - Ajouter des compétences \n 2 - Ajouter un(e) ancien(ne) collègue de travail \n 3 - Modifier le code postal \n 4 - Revenir au menu Principal \n ";
 	string info;
 	cout << "\nVotre Choix :";
 	cin >> info;
-	if (info == "1")
+	if (info == "1")        /*============CHANGE COMPETENCES============*/
 	{
 		cout << "Quelle compétence voulez vous ajouter : (Entrez r pour revenir en arriere) \n";
 		string comp;
@@ -700,45 +700,57 @@ DEB:
 			goto DEB;
 		}
 	}
-	else if (info == "2")
+	else if (info == "2")  /*============CHANGE ANCIENS COLLEGUES============*/
 	{
-		cout << "Entrer l'id d l'ancien collègue à ajouter : (Entrez r pour revenir en arriere) \n";
-		string comp;
-		cin >> comp;
-		if (comp == "r")
-			goto DEB;
-		else
-		{
-			int id;
 
-			try
-			{
-				id = stoi(comp);
-			}
-			catch (logic_error &)
-			{
-				cout << "erreur vous n'avez pas rentré un id valide";
-				goto DEB;
-			}
+COLL:	string comp;
+		cout << "Entrer le nom et prenom de votre ancien collègue : (Entrez 2 fois q pour revenir en arriere) \n";
+		cout << " Son prénom : " << endl;
+		cin >> comp;
+
+		string newPrenom = comp; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+
+		cout << " Son nom : " << endl;
+		cin >> comp;
+		string newNom = comp;
+		
+		if (verif_NomPersonne(newNom,newPrenom,Employers,Chomeurs) == false)
+		{
+			cout << " * Cette personne n'éxiste pas ou plus chez nous ! *" << endl;
+			goto COLL;
+
+		}else{
+
 			for (size_t i = 0; i < Chomeurs.size(); i++)
 			{
-				if (Chomeurs[i].getIdPersonne() == id)
-				{
+				if (Chomeurs[i].getNom() == newNom && Chomeurs[i].getPrenom() == newPrenom)
+				{	
+					int id = Chomeurs[i].getIdPersonne(); //on prend son id pour lajouter a la liste du nouveau profil
 					chom->addAncienCollegue(id);
+
+					/*il faut aussi ajoutez ce nouveau chomeur à la liste 
+					des anciens collègues de son soit disant nouveau 
+					anciens collègue (à transformer en demande d'amis)*/
+					Chomeurs[i].addAncienCollegue(chom->getIdPersonne());
 				}
 			}
+
 			for (size_t i = 0; i < Employers.size(); i++)
 			{
-				if (Employers[i].getIdPersonne() == id)
-				{
+				if (Employers[i].getNom() == newNom && Employers[i].getPrenom() == newPrenom)
+				{	
+					int id = Employers[i].getIdPersonne(); //on prend son id pour lajouter a la liste du nouveau profil
 					chom->addAncienCollegue(id);
+					
+					Employers[i].addAncienCollegue(chom->getIdPersonne());
 				}
 			}
 
 			goto DEB;
 		}
+
 	}
-	else if (info == "3")
+	else if (info == "3")   /*============CHANGE CODE============*/
 	{
 		cout << "Entrez le nouveau code postal : (Entrez r pour revenir en arriere) \n";
 		string code;
@@ -782,7 +794,7 @@ DEB1:
 	string info;
 	cout << "\nVotre Choix :";
 	cin >> info;
-	if (info == "1")
+	if (info == "1")    /*============CHANGE COMPETENCES============*/
 	{
 		cout << "Quelle compétence voulez vous ajouter : (Entrez r pour revenir en arriere) \n";
 		string comp;
@@ -795,82 +807,103 @@ DEB1:
 			goto DEB1;
 		}
 	}
-	else if (info == "2")
+	else if (info == "2")   /*============CHANGE COLLEGUES============*/
 	{
-		cout << "Entrer l'id du collègue à ajouter : (Entrez r pour revenir en arriere) \n";
 		string comp;
+		cout << "Entrer le nom et prenom de votre collègue : (Entrez 2 fois q pour revenir en arriere) \n";
+		cout << " Son prénom : " << endl;
 		cin >> comp;
-		if (comp == "r")
-			goto DEB1;
-		else
-		{
-			int id;
+		/*if(comp == 'q'){
+			goto DEB1;         A COOORRRRIGEER
 
-			try
-			{
-				id = stoi(comp);
-			}
-			catch (logic_error &)
-			{
-				cout << "erreur vous n'avez pas rentré un id valide";
-				goto DEB1;
-			}
+		}  */
+
+		string newPrenom = comp; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+
+		cout << " Son nom : " << endl;
+		cin >> comp;
+		string newNom = comp;
+
+		 if (verif_NomPersonne(newNom,newPrenom,Employers,Chomeurs) == false)
+		{
+			cout << " * Cette personne n'éxiste pas ou plus chez nous ! *" << endl;
+			goto DEB1;
+
+		}else{
+
 			for (size_t i = 0; i < Chomeurs.size(); i++)
 			{
-				if (Chomeurs[i].getIdPersonne() == id)
-				{
-					empl->addCollegue(id);
+				if (Chomeurs[i].getNom() == newNom && Chomeurs[i].getPrenom() == newPrenom)
+				{	
+					cout << " * Cette personne est sans emploi. Un collegue est une personne qui est employer ! *" << endl;
 				}
 			}
-			for (size_t i = 0; i < Employers.size(); i++)
-			{
-				if (Employers[i].getIdPersonne() == id)
-				{
-					empl->addCollegue(id);
-				}
-			}
-			goto DEB1;
-		}
-	}
-	else if (info == "3")
-	{
-		cout << "Entrer l'id de l'ancien collègue à ajouter : (Entrez r pour revenir en arriere) \n";
-		string comp;
-		cin >> comp;
-		if (comp == "r")
-			goto DEB1;
-		else
-		{
-			int id;
 
-			try
-			{
-				id = stoi(comp);
-			}
-			catch (logic_error &)
-			{
-				cout << "erreur vous n'avez pas rentré un id valide";
-				goto DEB1;
-			}
-			for (size_t i = 0; i < Chomeurs.size(); i++)
-			{
-				if (Chomeurs[i].getIdPersonne() == id)
-				{
-					empl->addAncienCollegue(id);
-				}
-			}
 			for (size_t i = 0; i < Employers.size(); i++)
 			{
-				if (Employers[i].getIdPersonne() == id)
-				{
+				if (Employers[i].getNom() == newNom && Employers[i].getPrenom() == newPrenom)
+				{	
+					int id = Employers[i].getIdPersonne(); 
 					empl->addAncienCollegue(id);
+					
+					Employers[i].addAncienCollegue(empl->getIdPersonne());
 				}
 			}
 
 			goto DEB1;
 		}
 	}
-	else if (info == "4")
+	else if (info == "3")   /*============CHANGE ANCIENS COLLEGUE============*/
+	{
+		string comp;
+		cout << "Entrer le nom et prenom de votre ancien collègue : (Entrez 2 fois q pour revenir en arriere) \n";
+		cout << " Son prénom : " << endl;
+		cin >> comp;
+
+		string newPrenom = comp; //convertion en string sinon erreur lors le la comparaison des infos retourner par les getter
+
+		cout << " Son nom : " << endl;
+		cin >> comp;
+		string newNom = comp;
+		
+		
+		if (verif_NomPersonne(newNom,newPrenom,Employers,Chomeurs) == false)
+		{
+			cout << " * Cette personne n'éxiste pas ou plus chez nous ! *" << endl;
+			goto DEB1;
+
+		}else{
+
+			for (size_t i = 0; i < Chomeurs.size(); i++)
+			{
+				if (Chomeurs[i].getNom() == newNom && Chomeurs[i].getPrenom() == newPrenom)
+				{	
+					int id = Chomeurs[i].getIdPersonne(); //on prend son id pour lajouter a la liste du nouveau profil
+					empl->addAncienCollegue(id);
+
+					/*il faut aussi ajoutez ce nouveau chomeur à la liste 
+					des anciens collègues de son soit disant nouveau 
+					anciens collègue (à transformer en demande d'amis)*/
+					Chomeurs[i].addAncienCollegue(empl->getIdPersonne());
+				}
+			}
+
+			for (size_t i = 0; i < Employers.size(); i++)
+			{
+				if (Employers[i].getNom() == newNom && Employers[i].getPrenom() == newPrenom)
+				{	
+					int id = Employers[i].getIdPersonne(); //on prend son id pour lajouter a la liste du nouveau profil
+					empl->addAncienCollegue(id);
+					
+					Employers[i].addAncienCollegue(empl->getIdPersonne());
+				}
+			}
+
+			goto DEB1;
+		}
+	}
+
+	else if (info == "4")   /*============CHANGE CODE============*/
 	{
 		cout << "Entrez le nouveau code postal : (Entrez r pour revenir en arriere) \n";
 		string code;
@@ -890,7 +923,7 @@ DEB1:
 		empl->setCode(code);
 		goto DEB1;
 	}
-	else if (info == "5")
+	else if (info == "5")    /*============CHANGE ENTREPRISE============*/
 	{
 		cout << "Entrez l'id de votre nouvelle entreprise' : (Entrez r pour revenir en arriere) \n";
 		string code;
@@ -901,7 +934,7 @@ DEB1:
 		{
 			id = stoi(code);
 		}
-		catch (logic_error &)
+		catch (logic_error &)   //AAAA COORIGER : AJOUT AVEC NOM DE LENTREPRISE ET DONC TEST SUR LE NOM ENTRER AVEC VALID_NOMENTREPRISE
 		{
 			cout << "erreur vous n'avez pas rentré un id d'entreprise valide\n";
 			goto DEB1;
@@ -938,6 +971,8 @@ DEB1:
 		goto DEB1;
 	}
 }
+
+
 
 void transition_chercheur_emploi()
 {
