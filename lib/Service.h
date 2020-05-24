@@ -26,8 +26,8 @@ vector<Employer> get_employers_de_entreprise(int id_entr, vector<Employer> &empl
 //Fonctions de recherches d'un poste pour un employé ou un chomeur
 vector<Poste> recherche_par_comp(string competence_recherche, vector<Poste> postes);
 vector<Poste> recherche_par_comp_CP(string competence_recherche, string CP, vector<Poste> postes, vector<Entreprise> entreprises);
-vector<Employer> recherche_employer_par_comp(string competence_recherche, vector<Employer> &employers);
-vector<Employer> recherche_employer_par_comp_CP(string competence_recherche, string CP, vector<Employer> &employers);
+vector<Chomeur> recherche_chomeur_par_comp(string competence_recherche, vector<Chomeur> &chomeurs);
+vector<Chomeur> recherche_chomeur_par_comp_CP(string competence_recherche, string CP, vector<Chomeur> &chomeurs);
 
 /*
  * RESTE à IMPLEMENTER RECHERCHE PERSONNE POUR UNE ENTREPRISE

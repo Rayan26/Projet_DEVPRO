@@ -18,94 +18,193 @@ using namespace std;
 
 int main()
 {
+     vector<Entreprise> Entreprises = Create_Entreprise();
+     vector<Employer> Employers = Create_Employer();
+     vector<Chomeur> Chomeurs = Create_Chomeur();
+     vector<Poste> Postes = Create_Poste();
 
-     //TEST FONCTION AFFICHAGE INFORMATION
-     // vector<string> competence(1, "C++");
-     /*
-    Personne rayan(1,"Nouveau","Chomeur","kallabr@gmail.com",13011,competence);
-    rayan.printInfo();
+     //TEST ADDOBJET
+     Chomeur chomtest;
+     chomtest.setId(55);
+     addChomeur(chomtest, Chomeurs, Employers);
 
-    //TEST FONCTION AJOUT COMPETENCE
-    string java("Java");
-    rayan.addCompetence(java);
-    rayan.printInfo();
+     bool isin = false;
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == 55)
+               isin = true;
+     }
+     assert(isin);
 
-    //TEST CHANGEMENT DE CODE
-    int newCode = 13009;
-    rayan.setCode(newCode);
-    rayan.printInfo();
-*/
-     /*    
-    vector<string> competence_julien(1,"Python");
-    Chomeur julien(3,"Raige-Verger", "Julien", "julien.raige@gmail.com", "06600", competence_julien);
-    julien.printInfo();
+     isin = false;
+     Chomeur chomtest2;
+     chomtest2.setId(9); // On teste si il est possible de creer deux personne avec le même id
+     chomtest2.setNom("aaaaaa");
+     addChomeur(chomtest2, Chomeurs, Employers);
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getNom() == "aaaaaa")
+               isin = true;
+     }
+     assert(!isin);
 
-    julien.setIdEntreprise(3) ;
+     delChomeur(Chomeurs, Employers, 55);
+     isin = false;
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == 55)
+               isin = true;
+     }
+     assert(!isin); // On teste si le chomeur a bien été supprimé
 
-    
-*/
+     //TEST CHANGEMENT DE CODE
+     Personne rayan;
+     string newCode = "13009";
+     rayan.setCode(newCode);
 
-     //Test du menu
-     affichage_menu_principal();
+     assert(rayan.getCode() == newCode);
 
-     //TEST GET_ENTREPRISE
-     // Entreprise *entre = get_entreprise(5, Entreprises);
-     // if (entre)
-     //      entre->printInfo();
-     // else
-     // {
-     //      cout<<"Aie";
-     //      return 0;
-     // }
+     // TEST FONCTION PERSONNE.SETIDENTREPRISE
+     Employer julien;
+     julien.setIdEntreprise(3);
+     assert(julien.getIdEntreprise() == 3);
+
+     Poste dev;
+     dev.setIdEntreprise(3);
+     assert(dev.getIdEntreprise() == 3);
+
+     //TEST GET_OBJET
+
+     //ENTRE
+     Entreprise addentre;
+     addentre.setId(1000);
+
+     addEntreprise(addentre, Entreprises);
+
+     Entreprise *entre = get_entreprise(1000, Entreprises);
+     assert(entre);
+     Entreprise *entre2 = get_entreprise(70, Entreprises);
+     assert(entre2 == NULL);
+
+     delEntreprise(Entreprises, Employers, 1000);
+
+     //EMPL
+     Employer addempl;
+     addempl.setId(1000);
+
+     addEmployer(addempl, Employers, Chomeurs);
+
+     Employer *empl = get_employers(1000, Employers);
+     assert(empl);
+     Employer *empl2 = get_employers(70, Employers);
+     assert(empl2 == NULL);
+
+     delEmployer(Employers, Chomeurs, Entreprises, 1000);
+
+     //CHOM
+     Chomeur addchom;
+     addchom.setId(1000);
+     addChomeur(addchom, Chomeurs, Employers);
+
+     Chomeur *chom = get_chomeur(1000, Chomeurs);
+     assert(chom);
+     Chomeur *chom2 = get_chomeur(70, Chomeurs);
+     assert(chom2 == NULL);
+
+     delChomeur(Chomeurs, Employers, 1000);
+
+     //POST
+     Poste addpost;
+     addpost.setId(1000);
+     addpost.setIdEntreprise(1);
+     addPoste(addpost, Postes);
+
+     Poste *poste = get_poste(1000, Postes);
+     assert(poste);
+     Poste *poste2 = get_poste(70, Postes);
+     assert(poste2 == NULL);
+
+     delPoste(Postes,Entreprises,1000);
+
 
      // //TEST GET_EMPLOYER_DE_LENTREPRISE
-     // vector<Employer> employer_de_lent = get_employers_de_entreprise(1, Employers);
-     // affichage_vecteur_employer(employer_de_lent);
+     addentre.addEmploye(3);
+     addentre.addEmploye(7);
+     addEntreprise(addentre,Entreprises);
 
-     //TEST GET_EMPLOYER
-     // Employer *empl = get_employers(5 ,Employers);
-     //  if (empl)
-     //      empl->printInfo();
-     // else
-     // {
-     //      cout<<"Aie ça existe ap" <<endl ;
-     //      return 0;
-     // }
+     vector<Employer> employer_de_lent = get_employers_de_entreprise(1000, Employers);
+     vector<Employer> test;
+     test.push_back(*get_employers(3, Employers));
+     test.push_back(*get_employers(7, Employers));
+     for (size_t i = 0; i < employer_de_lent.size(); i++)
+     {
+          assert(employer_de_lent[i].getIdPersonne() == test[i].getIdPersonne());
+     }
 
-     //TEST GET CHOMEUR
-     // Chomeur *chom = get_chomeur(2 ,Chomeurs);
-     //  if (chom)
-     //      chom->printInfo();
-     // else
-     // {
-     //      cout<<"Aie ça existe ap" <<endl ;
-     //      return 0;
-     // }
+     delEntreprise(Entreprises,Employers,1000);
+     addentre.deleteEmploye(3);
+     addentre.deleteEmploye(7);
+     addEntreprise(addentre,Entreprises);
 
-     // //TEST GET_POSTE
-     //      Poste *post = get_poste(5 ,Postes);
-     //       if (post)
-     //           post->printInfo();
-     //      else
-     //      {
-     //           cout<<"Aie ça existe ap" <<endl ;
-     //           return 0;
-     //      }
+     vector<Employer> employer_de_lent2 = get_employers_de_entreprise(70, Employers);
+     assert(employer_de_lent2.size() == 0);
 
-     //TEST RECHERCHEPAR_COMP
-     // vector<Poste> postes_recherche = recherche_par_comp("C",Postes);
-     // affichage_vecteur_Poste(postes_recherche);
+     delEntreprise(Entreprises,Employers,1000);
 
-     // //TEST RECHERCHE_COMP_CP
-     // vector<Poste> postes_recherche = recherche_par_comp_CP("C","75009",Postes,Entreprises);
-     // affichage_vecteur_Poste(postes_recherche);
+     //TEST RECHERCHE_PAR_COMP
+     vector<Poste> postes_recherche = recherche_par_comp("C", Postes);
+     vector<Poste> test2;
+     test2.push_back(*get_poste(2, Postes));
+     test2.push_back(*get_poste(5, Postes));
+     for (size_t i = 0; i < postes_recherche.size(); i++)
+     {
+          assert(postes_recherche[i].getId() == test2[i].getId());
+     }
+
+     vector<Poste> poste_recherche2 = recherche_par_comp("zz", Postes);
+     assert(poste_recherche2.size() == 0);
+
+     //TEST RECHERCHE_PAR_COMP_CP
+     vector<Poste> postes_recherche3 = recherche_par_comp_CP("C", "13005", Postes, Entreprises);
+     vector<Poste> test3;
+     test3.push_back(*get_poste(2, Postes));
+     for (size_t i = 0; i < postes_recherche3.size(); i++)
+     {
+          assert(postes_recherche3[i].getId() == test3[i].getId());
+     }
+
+     vector<Poste> poste_recherche4 = recherche_par_comp_CP("C", "12345", Postes, Entreprises);
+     assert(poste_recherche4.size() == 0);
+
+     // TEST RECHERCHE_EMPL_PAR_COMP
+     vector<Chomeur> chom_recherche = recherche_chomeur_par_comp("gag", Chomeurs);
+     vector<Chomeur> test4;
+     test4.push_back(*get_chomeur(9, Chomeurs));
+     for (size_t i = 0; i < chom_recherche.size(); i++)
+     {
+          assert(chom_recherche[i].getIdPersonne() == test4[i].getIdPersonne());
+     }
+
+     vector<Chomeur> chom_recherche2 = recherche_chomeur_par_comp("zz", Chomeurs);
+     assert(chom_recherche2.size() == 0);
+
+     // TEST RECHERCHE_EMPL_PAR_COMP_CP
+     vector<Chomeur> chom_recherche3 = recherche_chomeur_par_comp_CP("gag", "13009", Chomeurs);
+     vector<Chomeur> test5;
+     test5.push_back(*get_chomeur(9, Chomeurs));
+     for (size_t i = 0; i < chom_recherche3.size(); i++)
+     {
+          assert(chom_recherche3[i].getIdPersonne() == test5[i].getIdPersonne());
+     }
+
+     vector<Chomeur> chom_recherche4 = recherche_chomeur_par_comp_CP("gag", "12345", Chomeurs);
+     assert(chom_recherche4.size() == 0);
 
      //TEST ADDEMPLOYERCSV && TEST COLLEGUE
-     // Employer Michel(5, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
+
      // ajout_employer_entreprise(Michel, 1, Entreprises);
      // vector<Employer> employers_entreprise = get_employers_de_entreprise(1, Employers);
-     //affichage_vecteur_employer(employers_entreprise);
-     //addEmployerCSV(Michel,Employers);
+     // affichage_vecteur_employer(employers_entreprise);
 
      //TEST ADDCHOMEURCSV & ADDANCIENCOLLEGUE
      //Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);

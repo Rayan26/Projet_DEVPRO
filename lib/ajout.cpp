@@ -69,7 +69,7 @@ void addChomeur(const Chomeur &chom, std::vector<Chomeur> &chomeurs, vector<Empl
 
 void addPoste(const Poste &post, std::vector<Poste> &postes)
 {
-	for (int i = 0; i < (int)postes.size(); i++)
+	for (size_t i = 0; i < postes.size(); i++)
 	{
 		if (post.getId() == postes[i].getId())
 		{

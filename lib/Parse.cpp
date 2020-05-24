@@ -481,10 +481,14 @@ void addPosteCSV(const Poste &post, std::vector<Poste> &postes)
               << post.getId() << ',' << post.getTitre() << ',';
 
       vector<string> skills = post.get_competences();
-      fichier << skills[0];
-      for (size_t i = 1; i < skills.size(); i++)
+      if (skills.size() != 0)
       {
-         fichier << ';' << skills[i];
+
+         fichier << skills[0];
+         for (size_t i = 1; i < skills.size(); i++)
+         {
+            fichier << ';' << skills[i];
+         }
       }
 
       fichier << ',';
