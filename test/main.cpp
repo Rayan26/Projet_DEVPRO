@@ -18,6 +18,8 @@ using namespace std;
 
 int main()
 {
+     bool verif_test;
+
      vector<Entreprise> Entreprises = Create_Entreprise();
      vector<Employer> Employers = Create_Employer();
      vector<Chomeur> Chomeurs = Create_Chomeur();
@@ -124,13 +126,12 @@ int main()
      Poste *poste2 = get_poste(70, Postes);
      assert(poste2 == NULL);
 
-     delPoste(Postes,Entreprises,1000);
-
+     delPoste(Postes, Entreprises, 1000);
 
      // //TEST GET_EMPLOYER_DE_LENTREPRISE
      addentre.addEmploye(3);
      addentre.addEmploye(7);
-     addEntreprise(addentre,Entreprises);
+     addEntreprise(addentre, Entreprises);
 
      vector<Employer> employer_de_lent = get_employers_de_entreprise(1000, Employers);
      vector<Employer> test;
@@ -141,15 +142,15 @@ int main()
           assert(employer_de_lent[i].getIdPersonne() == test[i].getIdPersonne());
      }
 
-     delEntreprise(Entreprises,Employers,1000);
+     delEntreprise(Entreprises, Employers, 1000);
      addentre.deleteEmploye(3);
      addentre.deleteEmploye(7);
-     addEntreprise(addentre,Entreprises);
+     addEntreprise(addentre, Entreprises);
 
      vector<Employer> employer_de_lent2 = get_employers_de_entreprise(70, Employers);
      assert(employer_de_lent2.size() == 0);
 
-     delEntreprise(Entreprises,Employers,1000);
+     delEntreprise(Entreprises, Employers, 1000);
 
      //TEST RECHERCHE_PAR_COMP
      vector<Poste> postes_recherche = recherche_par_comp("C", Postes);
@@ -200,62 +201,136 @@ int main()
      vector<Chomeur> chom_recherche4 = recherche_chomeur_par_comp_CP("gag", "12345", Chomeurs);
      assert(chom_recherche4.size() == 0);
 
-     //TEST ADDEMPLOYERCSV && TEST COLLEGUE
+     //TEST ADDEMPLOYERCSV (OK)
+     // vector<string> skills_michou;
+     // skills_michou.push_back("thermodynamique");
+     // Employer Michou = new Employer(500, "Dupont", "Michou", "michou.dupont@gmail.com", "13009", skills_michou);
+     // addEmployerCSV(Michou, Employers);
 
-     // ajout_employer_entreprise(Michel, 1, Entreprises);
-     // vector<Employer> employers_entreprise = get_employers_de_entreprise(1, Employers);
-     // affichage_vecteur_employer(employers_entreprise);
-
-     //TEST ADDCHOMEURCSV & ADDANCIENCOLLEGUE
-     //Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
+     //TEST ADDCHOMEURCSV (OK)
+     // Employer Michel(6, "Michel", "Dumas", "michel@gmail.com", "13011", competence);
      // Michel.addAncienCollegue(2);
      // addChomeur(Michel,Chomeurs);
 
-     // vector<Employer> employers_entreprise = get_employers_de_entreprise(1,Employers);
-     // affichage_vecteur_employer(employers_entreprise);
-     //addEmployer(Michel, Employers, Chomeurs);
-
-     //TEST ADDENTREPRISECSV
+     //TEST ADDENTREPRISECSV (OK)
      // Entreprise MichelINC(8,"MichelINC","13009","michelinc@gmail.com");
      // addEntreprise(MichelINC,Entreprises);
 
      // Entreprise MigchelINC(5, "MicghelINC", "13009", "micghelinc@gmail.com");
      // addEntrepriseCSV(MigchelINC, Entreprises);
 
-     //TEST ADDPOSTECSV
+     // TEST ADDPOSTECSV (OK)
      // Poste developer(5,"developer",5);
      // developer.addCompetence("le style avant tout");
      // developer.addCompetence("c++");
      // addPosteCSV(developer,Postes);
 
-     // delEmployerCSV(12);
-     // delChomeurCSV(2);
-     // delEntrepriseCSV(1);
-     // delPosteCSV(0);
+     // TEST ADDANCIENCOLLEGUE
+     verif_test = false;
+     vector<string> empl_10_skills;
+     empl_10_skills.push_back("piano");
+     Employer *test_empl_10 = new Employer(20, "test20_nom", "test20_prenom", "test20@gmail.com", "13009", empl_10_skills);
+     test_empl_10->addAncienCollegue(1);
+     vector<int> ancien_collegue_empl_10 = test_empl_10->get_Anciens_collegues();
 
-     // affichage_vecteur_employer(Employers);
-     // delEmployer(Employers, Entreprises, 3);
-     // affichage_vecteur_employer(Employers);
-     // affichage_vecteur_employer(get_employers(2,Employers)->get_collegues())
-     // affichage_vecteur_employer(get_employers(5,Employers)->get_collegues())
+     assert(ancien_collegue_empl_10.size() != 0);
+     for (size_t i = 0; i < ancien_collegue_empl_10.size(); i++)
+     {
+          if (ancien_collegue_empl_10[i] == 1)
+               verif_test = true;
+     }
+     assert(verif_test == true);
 
-     // for (size_t i = 0; i < get_employers(2, Employers)->get_collegues().size(); i++)
-     // {
-     //      cout << get_employers(2, Employers)->get_collegues()[i] << endl;
-     // }
+     // TEST DELCSV (OK)
+     /* 
+     delEmployerCSV(12);
+     delChomeurCSV(2);
+     delEntrepriseCSV(1);
+     delPosteCSV(0);
+     */
 
-     // Employer *empl = get_employers(5, Employers);
-     // vector<int> collegues_inexistants = empl->get_collegues();
-     // if(collegues_inexistants[0])
-     //      cout<<"problème";
-     // for (int i = 0; i < (int)empl->get_collegues().size(); i++)
-     // {
-     //      // if (empl->get_collegues[i]!=3)
-     //      //      cout<< "c bon";
-     // }
+     // TEST DEL (employés, chomeurs...)
+     // Employé
+     verif_test = false;
+     addEmployer(*test_empl_10, Employers, Chomeurs);
+     for (size_t i = 0; i < Employers.size(); i++)
+     {
+          if (Employers[i].getIdPersonne() == test_empl_10->getIdPersonne())
+               verif_test = true;
+     }
+     assert(verif_test == true);
 
-     // TEST MajObjetCSV()
+     delEmployer(Employers, Chomeurs, Entreprises, test_empl_10->getIdPersonne());
+     for (size_t i = 0; i < Employers.size(); i++)
+     {
+          if (Employers[i].getIdPersonne() == test_empl_10->getIdPersonne())
+               verif_test = false;
+     }
+     assert(verif_test == true);
 
+     // Chomeur
+     verif_test = false;
+     vector<string> chom_10_skills;
+     chom_10_skills.push_back("piano");
+     Chomeur *test_chom_10 = new Chomeur(20, "testc20_nom", "testc20_prenom", "testc20@gmail.com", "13009", chom_10_skills);
+     addChomeur(*test_chom_10, Chomeurs, Employers);
+
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == test_chom_10->getIdPersonne())
+               verif_test = true;
+     }
+     assert(verif_test == true);
+
+     delChomeur(Chomeurs, Employers, test_chom_10->getIdPersonne());
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == test_chom_10->getIdPersonne())
+               verif_test = false;
+     }
+     assert(verif_test == true);
+
+     // Entreprise
+     verif_test = false;
+     Entreprise *test_entre_10 = new Entreprise(20, "test_entre_20", "33033", "entreprise20@gmail.com");
+     addEntreprise(*test_entre_10, Entreprises);
+
+     for (size_t i = 0; i < Entreprises.size(); i++)
+     {
+          if (Entreprises[i].getId() == test_entre_10->getId())
+               verif_test = true;
+     }
+     assert(verif_test == true);
+
+     delEntreprise(Entreprises, Employers, test_entre_10->getId());
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Entreprises[i].getId() == test_entre_10->getId())
+               verif_test = false;
+     }
+     assert(verif_test == true);
+
+     // Poste
+     verif_test = false;
+     Poste *test_poste_10 = new Poste(20, "musicien", 2);
+     addPoste(*test_poste_10, Postes);
+
+     for (size_t i = 0; i < Postes.size(); i++)
+     {
+          if (Postes[i].getId() == test_poste_10->getId())
+               verif_test = true;
+     }
+     assert(verif_test == true);
+
+     delPoste(Postes, Entreprises, test_poste_10->getId());
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Postes[i].getId() == test_poste_10->getId())
+               verif_test = false;
+     }
+     assert(verif_test == true);
+
+     // TEST MajObjetCSV() (OK)
      // Entreprise MichelINC(8, "MichelINC", "13009", "michelinc@gmail.com");
      // Entreprises.push_back(MichelINC);
      // MajCSVEntreprise(Entreprises);
@@ -274,36 +349,118 @@ int main()
      //ajout_employer_entreprise(Michel, 1, Entreprises);
      //Employers.push_back(Michel);
      //MajCSVEmployer(Employers);
-     // Michel.addCompetence("humour");
 
-     //Employer *empl1 = get_employers(2, Employers);
-     // empl1->addCompetence("humour");
-     // vector<string> skills = empl1->getSkill();
-     // cout << "skills[0] = " << skills[0] << "\n";
+     // TEST ADDCOMPETENCE
+     verif_test = false;
+     vector<string> empl_11_skills;
+     empl_11_skills.push_back("piano");
+     Employer *test_empl_11 = new Employer(20, "test11_nom", "test11_prenom", "test11@gmail.com", "13009", empl_11_skills);
+     for (size_t i = 0; i < (test_empl_11->getSkill()).size(); i++)
+     {
+          if (test_empl_11->getSkill()[i] == "saxophone")
+               verif_test = true;
+     }
+     assert(verif_test == false);
 
-     //delEntreprise(Entreprises, Employers, 2);
-     //delChomeur(Chomeurs, 5);
-     // Entreprise *entre2 = get_entreprise(2, Entreprises);
-     // entre2->printInfo();
-     // delEmployer(Employers, Chomeurs, Entreprises, 1);
-     // entre2->printInfo();
+     test_empl_11->addCompetence("saxophone");
+     for (size_t i = 0; i < (test_empl_11->getSkill()).size(); i++)
+     {
+          if (test_empl_11->getSkill()[i] == "saxophone")
+               verif_test = true;
+     }
+     assert(verif_test == true);
 
-     //////////////////// TESTER DELPOSTE ///////////////////////////
-     // vector<int> jobs = entre2->getJobs();
-     //delPoste(Postes, Entreprises, 2);
+     // TEST RECHERCHE ID DISPO
+     // Personne
+     verif_test = false;
+     int id_chom = rechercheIdDispo_Personne(Employers, Chomeurs);
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == id_chom)
+               verif_test = true;
+     }
+     for (size_t i = 0; i < Employers.size(); i++)
+     {
+          if (Employers[i].getIdPersonne() == id_chom)
+               verif_test = true;
+     }
+     assert(verif_test == false);
 
-     // //TEST RECHERCHE ID DISPO
-     // cout<<rechercheIdDispo_Chomeur(Chomeurs)<<endl;
-     // cout<<rechercheIdDispo_Employer(Employers)<<endl;
-     // cout<<rechercheIdDispo_Entreprise(Entreprises)<<endl;
-     // cout<<rechercheIdDispo_Poste(Postes)<<endl;
+     // Entreprise
+     int id_entre = rechercheIdDispo_Entreprise(Entreprises);
+     for (size_t i = 0; i < Entreprises.size(); i++)
+     {
+          if (Entreprises[i].getId() == id_entre)
+               verif_test = true;
+     }
+     assert(verif_test == false);
 
-     //transitionEmployer_Vers_Chomeur(4, Employers, Chomeurs, Entreprises);
-     //transitionChomeur_Vers_Employer(4, 2, Employers, Chomeurs, Entreprises);
-     // affichage_vecteur_employer(recherche_employer_par_comp("comedie", Employers));
-     //affichage_vecteur_employer(recherche_employer_par_comp_CP("comedie", "77700", Employers));
+     // Postes
+     int id_poste = rechercheIdDispo_Poste(Postes);
+     for (size_t i = 0; i < Postes.size(); i++)
+     {
+          if (Postes[i].getId() == id_poste)
+               verif_test = true;
+     }
+     assert(verif_test == false);
+
+     // TEST TRANSITIONS
+     // E -> C
+     for (size_t i = 0; i < Employers.size(); i++)
+     {
+          if (Employers[i].getIdPersonne() == 4)
+               verif_test = true;
+     }
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == 4)
+               verif_test = false;
+     }
+     assert(verif_test == true);
+
+     transitionEmployer_Vers_Chomeur(4, Employers, Chomeurs, Entreprises);
+
+     for (size_t i = 0; i < Employers.size(); i++)
+     {
+          if (Employers[i].getIdPersonne() == 4)
+               verif_test = true;
+     }
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == 4)
+               verif_test = false;
+     }
+     assert(verif_test == false);
+
+     // C -> E
+     for (size_t i = 0; i < Employers.size(); i++)
+     {
+          if (Employers[i].getIdPersonne() == 4)
+               verif_test = true;
+     }
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == 4)
+               verif_test = false;
+     }
+     assert(verif_test == false);
+
+     transitionChomeur_Vers_Employer(4, 2, Employers, Chomeurs, Entreprises);
+
+     for (size_t i = 0; i < Employers.size(); i++)
+     {
+          if (Employers[i].getIdPersonne() == 4)
+               verif_test = true;
+     }
+     for (size_t i = 0; i < Chomeurs.size(); i++)
+     {
+          if (Chomeurs[i].getIdPersonne() == 4)
+               verif_test = false;
+     }
+     assert(verif_test == true);
 
      // affichage_menu_principal();
 
+     cout << "Tous les tests passent, bravo! \n";
      return 0;
 }
