@@ -459,7 +459,7 @@ int main()
      }
      assert(verif_test == true);
 
-     // affichage_menu_principal();
+     affichage_menu_principal();
 
      cout << "Tous les tests passent, bravo! \n";
      return 0;

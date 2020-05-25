@@ -153,6 +153,16 @@ int onInputIntEntreprise()
 		rechercher_demandeur_emploi();
 	}
 
+	else if (input == '4')
+	{
+		supprimer_profil_entreprise();
+	}
+
+	else if (input == '5')
+	{
+		rechercher_demandeur_emploi();
+	}
+
 	return 1;
 }
 
@@ -313,7 +323,9 @@ void affichage_menu_intermediaire_entreprise()
 		 << "Vous voulez :" << endl;
 	cout << "1. Créer le profil d'un poste à pourvoir" << endl
 		 << "2. Supprimer le profil d'un poste maintenant pourvu " << endl
-		 << "3. Faire une recherche parmi les chercheurs d'emploi " << endl;
+		 << "3. Faire une recherche parmi les chercheurs d'emploi " << endl
+		 << "4. Supprimer le profil de votre entreprise " << endl
+		 << "5. Rechercher le profil d'un chercheur d'emploi " << endl;
 	cout << endl
 		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent) : ";
 	onInputIntEntreprise();
@@ -1381,17 +1393,153 @@ DEBSUPPREMPL:
 
 void supprimer_profil_entreprise()
 {
-	affichage_menu_intermediaire_entreprise();
+DEBSUPPRENTRE:
+	cout << "Vous allez supprimer le profil de votre entreprise, êtes vous sûr? (y pour continuer, n pour revenir en arrière) \n";
+	string input;
+	cin >> input;
+
+	if (input == "y")
+	{
+		Entreprise *entre = get_entreprise(idUtilisateur, Entreprises);
+		vector<int> postes_entre_id = entre->getJobs();
+
+		//avant de supprimer l'entreprise, il faut supprimer tous ses postes à pourvoir
+		for (size_t i = 0; i < postes_entre_id.size(); i++)
+		{
+			delPoste(Postes, Entreprises, postes_entre_id[i]);
+		}
+
+		delEntreprise(Entreprises, Employers, idUtilisateur);
+
+	DEBSUPPRENTRE2:
+		cout
+			<< "Profil supprimé, voulez-vous retourner au menu principal? (y pour oui, n pour quitter)\n";
+		string input2;
+		cin >> input2;
+		if (input2 == "y")
+		{
+			affichage_menu_principal();
+		}
+
+		else if (input2 == "n")
+		{
+			exit(0);
+		}
+		else
+		{
+			goto DEBSUPPRENTRE2;
+		}
+	}
+
+	else if (input == "n")
+		affichage_menu_intermediaire_entreprise();
+	else
+	{
+		goto DEBSUPPRENTRE;
+	}
 }
 
 void supprimer_poste()
 {
-	affichage_menu_intermediaire_entreprise();
+DEBSUPPRPOSTE:
+	Entreprise *entre = get_entreprise(idUtilisateur, Entreprises);
+	vector<int> postes_entre_id = entre->getJobs();
+	vector<Poste> postes_entre;
+
+	for (size_t i = 0; i < postes_entre_id.size(); i++)
+	{
+		postes_entre.push_back(*get_poste(postes_entre_id[i], Postes));
+	}
+
+	cout << "\n\nVoici les différents postes de votre entreprise : \n";
+	affichage_vecteur_Poste(postes_entre);
+	cout << "\nVeuillez rentrer l'ID du poste que vous souhaitez supprimer \n";
+	string input_poste;
+	cin >> input_poste;
+
+	int input_poste2;
+	input_poste2 = stoi(input_poste);
+	cout << "Vous allez supprimer le poste n° " << input_poste2 << ", êtes vous sûr? (y pour continuer, n pour revenir en arrière) \n";
+	string input;
+	cin >> input;
+
+	if (input == "y")
+	{
+		delPoste(Postes, Entreprises, input_poste2);
+	DEBSUPPRPOSTE2:
+		cout << "Poste supprimé, voulez-vous retourner au menu principal? (y pour oui, n pour quitter)\n";
+		string input2;
+		cin >> input2;
+		if (input2 == "y")
+		{
+			affichage_menu_principal();
+		}
+
+		else if (input2 == "n")
+		{
+			exit(0);
+		}
+		else
+		{
+			goto DEBSUPPRPOSTE2;
+		}
+	}
+
+	else if (input == "n")
+		affichage_menu_intermediaire_entreprise();
+	else
+	{
+		goto DEBSUPPRPOSTE;
+	}
 }
 
 /*================================SERVICES=====================================*/
 
 void rechercher_demandeur_emploi()
 {
-	affichage_menu_intermediaire_entreprise();
+DEBRECHEMPLOI:
+	cout << "\nVeuillez préciser votre recherche: uniquement par compétences, ou par compétences et code postal? \n"
+		 << " -> 1. Uniquement par Compétences \n"
+		 << " -> 2. Par Compétences et Code Postal \n";
+	string input;
+	cin >> input;
+
+	if (input == "1")
+	{
+		string comp_chomeur1;
+		cout << "\n Quelle compétence recherchez-vous? \n";
+		cin >> comp_chomeur1;
+
+		cout << "\n Voici les profils des chercheurs d'emplois correspondant : \n";
+		affichage_vecteur_chomeur(recherche_chomeur_par_comp(comp_chomeur1, Chomeurs));
+
+		cout << "\n \n Pour revenir en arrière: entrez 'r', pour quitter : entrez 'q'\n";
+		string new_input1;
+		cin >> new_input1;
+		if (new_input1 == "r")
+			goto DEBRECHEMPLOI;
+		else if (new_input1 == "q")
+			exit(0);
+	}
+
+	else if (input == "2")
+	{
+		string comp_chomeur2;
+		string cp;
+		cout << "\nQuelle compétence recherchez-vous? \n";
+		cin >> comp_chomeur2;
+		cout << "\nQuel Code Postal souhaitez-vous considérer? \n";
+		cin >> cp;
+
+		cout << "\nVoici les profils des chercheurs d'emplois correspondant : \n";
+		affichage_vecteur_chomeur(recherche_chomeur_par_comp_CP(comp_chomeur2, cp, Chomeurs));
+
+		cout << "\n \nPour revenir en arrière: entrez 'r', pour quitter : entrez 'q'\n";
+		string new_input1;
+		cin >> new_input1;
+		if (new_input1 == "r")
+			goto DEBRECHEMPLOI;
+		else if (new_input1 == "q")
+			exit(0);
+	}
 }
