@@ -51,9 +51,6 @@ int onInputEmployer();
  * Permet de créer un poste à pourvoir,
  * Permet de supprimer un poste à pourvoir,
  * Permet de faire une recherche parmis les demandeurs d'emplois
- * 
- * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
- * REPONSE Pas besoin, on a son id et la liste complète des entreprises en globale donc on pourra toujours y acceder
  */
 void affichage_menu_intermediaire_entreprise();
 int onInputIntEntreprise();
@@ -64,8 +61,6 @@ int onInputIntEntreprise();
  * Permet de transtionner vers employés
  * Permet de supprimer son profil
  * Permet de faire une recherche parmis les postes à pourvoir
- *  
- * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
  */
 void affichage_menu_intermediaire_chomeur();
 int onInputIntChomeur();
@@ -76,8 +71,6 @@ int onInputIntChomeur();
  * Permet de transtionner vers chercheur d'emploi
  * Permet de supprimer son profil
  * Permet de faire une recherche parmis les postes à pourvoir
- * 
- * COMMENTAIRE je pense qu'on devrait prendre l'objet en argument dans cette fonction 
  */
 void affichage_menu_intermediaire_employer();
 int onInputIntEmployer();
@@ -87,8 +80,7 @@ int onInputIntEmployer();
  * Lui attribuant un id disponible
  * Et demande les information necessaire à creer l'objet
  * puis appeler les fonctions  addObjet de ajout.h 
- * 
- * A IMPLEMENTER
+
  */
 void creer_profil_entreprise();
 void creer_profil_chomeur();
@@ -109,8 +101,6 @@ void identification_employer();
 /*
  * Permet de modifier les informations concernant la personne comme son CP ou son mail
  * Appeler ensuite majObjetCSV()
- * 
- * A IMPLEMENTER
  */
 void modification_profil_chomeur();
 void modification_profil_employer();
@@ -120,8 +110,6 @@ void transition_employer();
 /*
  * Appelle delOBJET de ajout.h
  * Puis retourne au menu principal 
- * 
- * A IMPLEMENTER
  */
 void supprimer_profil_chomeur();
 void supprimer_profil_employer();

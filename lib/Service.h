@@ -30,11 +30,6 @@ vector<Chomeur> recherche_chomeur_par_comp(string competence_recherche, vector<C
 vector<Chomeur> recherche_chomeur_par_comp_CP(string competence_recherche, string CP, vector<Chomeur> &chomeurs);
 
 /*
- * RESTE à IMPLEMENTER RECHERCHE PERSONNE POUR UNE ENTREPRISE
- */
-vector<Chomeur> rechercher_chomeur(string CP, vector<Chomeur> chomeurs);
-
-/*
  * Fonction permettant de rajouter un employé parmis les employés de l'entreprise
  */
 void ajout_employer_entreprise(Employer &empl, int id_entreprise, vector<Entreprise> &entreprises);

@@ -68,7 +68,6 @@ void Poste::printInfo() const
 		cout << "  " << _Competences[i - 1] << endl;
 	}
 
-	cout << "ID de l'entreprise chez qui le poste est à pourvoir : " << _idEntreprise << endl;
 }
 
 void affichage_vecteur_Poste(vector<Poste> post)

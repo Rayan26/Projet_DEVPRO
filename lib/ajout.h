@@ -41,6 +41,8 @@ int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employ
 int rechercheIdDispo_Entreprise(vector<Entreprise> &entreprises);
 int rechercheIdDispo_Poste(vector<Poste> &postes);
 
+
+
 bool verif_Mail(string mailAVerif, vector<Employer> &employers, vector<Chomeur> &chomeurs,vector<Entreprise> &entreprises);
 bool verif_NomPersonne(string nomAVerif, string prenomAVerif,vector<Employer> &employers, vector<Chomeur> &chomeurs);
 bool verif_NomEntreprise(string nomAVerif,vector<Entreprise> &entreprises);
