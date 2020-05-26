@@ -25,6 +25,7 @@ void addEmployer(const Employer &empl, std::vector<Employer> &employers, vector<
 	addEmployerCSV(empl, employers);
 
 	employers.push_back(empl);
+	Log journal("Ajout d'un employé à la base de donnée");
 }
 
 void addEntreprise(const Entreprise &entre, std::vector<Entreprise> &entreprises)
@@ -41,6 +42,7 @@ void addEntreprise(const Entreprise &entre, std::vector<Entreprise> &entreprises
 	addEntrepriseCSV(entre, entreprises);
 
 	entreprises.push_back(entre);
+	Log journal("Ajout d'une entreprise à la base de donnée");
 }
 void addChomeur(const Chomeur &chom, std::vector<Chomeur> &chomeurs, vector<Employer> &employers)
 {
@@ -65,6 +67,7 @@ void addChomeur(const Chomeur &chom, std::vector<Chomeur> &chomeurs, vector<Empl
 	addChomeurCSV(chom, chomeurs);
 
 	chomeurs.push_back(chom);
+	Log journal("Ajout d'un chomeur à la base de donnée");
 }
 
 void addPoste(const Poste &post, std::vector<Poste> &postes)
@@ -81,6 +84,7 @@ void addPoste(const Poste &post, std::vector<Poste> &postes)
 	addPosteCSV(post, postes);
 
 	postes.push_back(post);
+	Log journal("Ajout d'un poste à la base de donnée");
 }
 
 void delEmployer(vector<Employer> &employers, vector<Chomeur> &chomeurs, vector<Entreprise> &entreprises, int id)
@@ -146,6 +150,7 @@ void delEmployer(vector<Employer> &employers, vector<Chomeur> &chomeurs, vector<
 		MajCSVEmployer(employers);
 		MajCSVChomeur(chomeurs);
 	}
+	Log journal("Suppression d'un employé");
 }
 
 void delEntreprise(vector<Entreprise> &entreprises, vector<Employer> &employers, int id)
@@ -178,6 +183,7 @@ void delEntreprise(vector<Entreprise> &entreprises, vector<Employer> &employers,
 			cout << "L'entreprise possède encore des employers, impossible de la supprimer \n";
 		}
 	}
+	Log journal("Suppression d'une entreprise");
 }
 
 void delChomeur(vector<Chomeur> &chomeurs, vector<Employer> &employers, int id)
@@ -232,6 +238,7 @@ void delChomeur(vector<Chomeur> &chomeurs, vector<Employer> &employers, int id)
 
 	MajCSVChomeur(chomeurs);
 	MajCSVEmployer(employers);
+	Log journal("Suppression d'un chomeur");
 }
 
 void delPoste(vector<Poste> &postes, vector<Entreprise> &entreprises, int id)
@@ -262,6 +269,7 @@ void delPoste(vector<Poste> &postes, vector<Entreprise> &entreprises, int id)
 
 		MajCSVPoste(postes);
 	}
+	Log journal("Suppression d'un poste à pourvoir");
 }
 
 void transitionEmployer_Vers_Chomeur(int idEmployer, vector<Employer> &employers, vector<Chomeur> &chomeurs, vector<Entreprise> &entreprises)
@@ -281,6 +289,7 @@ void transitionEmployer_Vers_Chomeur(int idEmployer, vector<Employer> &employers
 
 	delEmployer(employers, chomeurs, entreprises, idEmployer);
 	addChomeur(*chom, chomeurs, employers);
+	Log journal("Un employé est devenu chomeur");
 }
 
 void transitionChomeur_Vers_Employer(int idChomeur, int idEntreprises, vector<Employer> &employers, vector<Chomeur> &chomeurs, vector<Entreprise> &entreprises)
@@ -306,6 +315,7 @@ void transitionChomeur_Vers_Employer(int idChomeur, int idEntreprises, vector<Em
 
 	delChomeur(chomeurs, employers, idChomeur);
 	addEmployer(*empl, employers, chomeurs);
+	Log journal("Un chomeur à trouvé un emploi !");
 }
 
 int rechercheIdDispo_Personne(vector<Employer> &employers , vector<Chomeur> &chomeurs)

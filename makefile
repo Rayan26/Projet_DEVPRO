@@ -36,17 +36,20 @@ build/menu.o: lib/menu.cpp | build/
 build/ajout.o: lib/ajout.cpp | build/
 	$(cc) -Wall -pedantic -Werror -g -c lib/ajout.cpp -I ./lib -o build/ajout.o
 
+build/log.o: lib/log.cpp | build/
+	$(cc) -Wall -pedantic -Werror -g -c lib/log.cpp -I ./lib -o build/log.o
+
 build/test.o: test/main.cpp | build/
 	$(cc) -Wall -pedantic -Werror -g -c test/main.cpp -I ./lib -o build/test.o
 
 build/main.o: run/main.cpp | build/
 	$(cc) -Wall -pedantic -Werror -g -c run/main.cpp -I ./lib -o build/main.o
 
-build/test: build/test.o build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o | build/
-	$(cc) -o build/test build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/test.o 
+build/test: build/test.o build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o | build/
+	$(cc) -o build/test build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o build/test.o 
 
-build/main: build/main.o build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o | build/
-	$(cc) -o build/main build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/main.o 
+build/main: build/main.o build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o | build/
+	$(cc) -o build/main build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o build/main.o 
 
 
 # S'assure de l'existence tout les programmes finaux (application, test, etc.)

@@ -19,7 +19,7 @@ using namespace std;
 int main()
 {
      bool verif_test;
-
+     Log journal(" Début des test");
      vector<Entreprise> Entreprises = Create_Entreprise();
      vector<Employer> Employers = Create_Employer();
      vector<Chomeur> Chomeurs = Create_Chomeur();
@@ -461,6 +461,6 @@ int main()
 
      // affichage_menu_principal();
 
-     cout << "Tous les tests passent, bravo! \n";
+     journal.msg("Aucun problème tous les test passent");
      return 0;
 }
