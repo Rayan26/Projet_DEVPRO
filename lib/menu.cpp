@@ -36,6 +36,11 @@ int onInputPrincipal()
 	{
 		affichage_menu_chomeur();
 	}
+	else
+	{
+		onInputPrincipal();
+	}
+	
 	return 1;
 }
 
@@ -63,6 +68,11 @@ int onInputEntreprise()
 	{
 		identification_entreprise();
 	}
+	else
+	{
+		onInputEntreprise();
+	}
+	
 
 	return 1;
 }
@@ -91,7 +101,11 @@ int onInputEmployer()
 	{
 		identification_employer();
 	}
-
+	else
+	{
+		onInputEmployer();
+	}
+	
 	return 1;
 }
 
@@ -119,6 +133,11 @@ int onInputChomeur()
 	{
 		identification_chomeur();
 	}
+	else
+	{
+		onInputChomeur();
+	}
+	
 
 	return 1;
 }
@@ -162,6 +181,11 @@ int onInputIntEntreprise()
 	{
 		rechercher_demandeur_emploi();
 	}
+	else
+	{
+		onInputIntEntreprise();
+	}
+	
 
 	return 1;
 }
@@ -195,7 +219,14 @@ int onInputIntChomeur()
 	{
 		supprimer_profil_chomeur();
 	}
-
+	else if (input == '4')
+	{
+		rechercher_poste_a_pourvoir();
+	}
+	else
+	{
+		onInputIntChomeur();
+	}
 	return 1;
 }
 
@@ -227,6 +258,14 @@ int onInputIntEmployer()
 	else if (input == '3')
 	{
 		supprimer_profil_employer();
+	}
+	else if (input == '4')
+	{
+		rechercher_poste_a_pourvoir();
+	}
+	else
+	{
+		onInputIntEmployer();
 	}
 
 	return 1;
@@ -1542,4 +1581,9 @@ DEBRECHEMPLOI:
 		else if (new_input1 == "q")
 			exit(0);
 	}
+}
+
+void rechercher_poste_a_pourvoir()
+{
+	
 }
