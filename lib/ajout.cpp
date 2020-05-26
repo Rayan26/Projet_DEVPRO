@@ -69,7 +69,7 @@ void addChomeur(const Chomeur &chom, std::vector<Chomeur> &chomeurs, vector<Empl
 
 void addPoste(const Poste &post, std::vector<Poste> &postes)
 {
-	for (int i = 0; i < (int)postes.size(); i++)
+	for (size_t i = 0; i < postes.size(); i++)
 	{
 		if (post.getId() == postes[i].getId())
 		{
@@ -308,7 +308,7 @@ void transitionChomeur_Vers_Employer(int idChomeur, int idEntreprises, vector<Em
 	addEmployer(*empl, employers, chomeurs);
 }
 
-int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employers)
+int rechercheIdDispo_Personne(vector<Employer> &employers , vector<Chomeur> &chomeurs)
 {
 	int id = 1;
 	for (size_t i = 0; i < chomeurs.size(); i++)
@@ -329,25 +329,6 @@ int rechercheIdDispo_Chomeur(vector<Chomeur> &chomeurs, vector<Employer> &employ
 	return id + 1;
 }
 
-int rechercheIdDispo_Employer(vector<Employer> &employers, vector<Chomeur> &chomeurs)
-{
-	int id = 1;
-	for (size_t i = 0; i < employers.size(); i++)
-	{
-		if (employers[i].getIdPersonne() >= id)
-		{
-			id = employers[i].getIdPersonne();
-		}
-	}
-	for (size_t i = 0; i < chomeurs.size(); i++)
-	{
-		if (chomeurs[i].getIdPersonne() >= id)
-		{
-			id = chomeurs[i].getIdPersonne();
-		}
-	}
-	return id + 1;
-}
 
 int rechercheIdDispo_Entreprise(vector<Entreprise> &entreprises)
 {
@@ -376,3 +357,72 @@ int rechercheIdDispo_Poste(vector<Poste> &postes)
 
 	return id + 1;
 }
+
+bool verif_Mail(string mailAVerif ,vector<Employer>& employers, vector<Chomeur>& chomeurs, vector<Entreprise>& entreprises)
+{
+		for (size_t i = 0; i < chomeurs.size(); i++)
+	{
+		if (chomeurs[i].getMail() == mailAVerif)
+		{
+			return false;
+		}
+	}
+
+	for (size_t i = 0; i < employers.size(); i++)
+	{
+		if (employers[i].getMail() == mailAVerif)
+		{
+			return false;
+		}
+	}
+
+	for (size_t i = 0; i < entreprises.size(); i++)
+	{
+		if (entreprises[i].getMail() == mailAVerif)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool verif_NomPersonne(string nomAVerif, string prenomAVerif,vector<Employer>& employers, vector<Chomeur>& chomeurs)
+{
+	for (size_t i = 0; i < chomeurs.size(); i++) //verifie que le nom existe.
+	{
+
+		if (chomeurs[i].getNom() == nomAVerif && chomeurs[i].getPrenom() == prenomAVerif)
+		{
+			return false;
+		}
+	}
+
+	for (size_t i = 0; i < employers.size(); i++) //verifie que si le nom existe.
+	{
+
+		if (employers[i].getNom() == nomAVerif && employers[i].getPrenom() == prenomAVerif)
+		{
+
+			return false;
+		}
+	}
+
+	return true;
+
+}
+
+bool verif_NomEntreprise(string nomAVerif, vector<Entreprise>& entreprises)
+{
+	for (size_t i = 0; i < entreprises.size(); i++)
+	{
+		if (entreprises[i].getNom() == nomAVerif)
+		{
+			return false;
+		}
+	}
+
+	return true;
+
+}
+

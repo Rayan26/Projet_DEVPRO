@@ -2,6 +2,10 @@
 
 using namespace std;
 
+Personne::Personne()
+{
+}
+
 Personne::Personne(int id, string nom, string prenom, string mail, string code, vector<string> const &skill) : _id(id), _nom(nom), _prenom(prenom), _mail(mail), _code(code), _skill(skill)
 {
 }
@@ -100,9 +104,17 @@ void Personne::addCollegue(int const newcollegue)
 void Personne::addAncienCollegue(int const Anciencollegue)
 {
     bool verif = false;
+
     for (size_t i = 0; i < _IdCollegue.size(); i++)
     {
         if (_IdCollegue[i] == Anciencollegue)
+        {
+            verif = true;
+        }
+    }
+    for (size_t i = 0; i < _IdAncienCollegue.size(); i++)
+    {
+        if (_IdAncienCollegue[i] == Anciencollegue)
         {
             verif = true;
         }
@@ -126,10 +138,10 @@ void Personne::printInfo() const
         cout << "Compétence " << i << " : " << _skill[i - 1] << endl;
     }
 
-    for (size_t i(1); i <= _IdCollegue.size(); ++i)
-    {
-        cout << "ID du collègue n°" << i << " : " << _IdCollegue[i - 1] << endl;
-    }
+    // for (size_t i(1); i <= _IdCollegue.size(); ++i)
+    // {
+    //     cout << "ID du collègue n°" << i << " : " << _IdCollegue[i - 1] << endl;
+    // }
 }
 
 std::vector<int> Personne::get_collegues() const

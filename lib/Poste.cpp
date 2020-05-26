@@ -2,7 +2,15 @@
 
 using namespace std;
 
+Poste::Poste()
+{
+}
+
 Poste::Poste(int id, std::string Titre, int idEntreprise) : _id(id), _Titre(Titre), _idEntreprise(idEntreprise)
+{
+}
+
+Poste::Poste(const Poste &poste) : _id(poste.getId()), _Titre(poste.getTitre()), _idEntreprise(poste.getIdEntreprise()), _Competences(poste.get_competences())
 {
 }
 
@@ -60,14 +68,12 @@ void Poste::printInfo() const
 		cout << "  " << _Competences[i - 1] << endl;
 	}
 
-	cout << "ID de l'entreprise chez qui le poste est à pourvoir : " << _idEntreprise << endl;
 }
 
 void affichage_vecteur_Poste(vector<Poste> post)
 {
-  for (int i = 0; i < (int)post.size(); i++)
-  {
-    post[i].printInfo();
-  }
+	for (int i = 0; i < (int)post.size(); i++)
+	{
+		post[i].printInfo();
+	}
 }
-

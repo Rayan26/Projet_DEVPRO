@@ -108,41 +108,41 @@ vector<Poste> recherche_par_comp_CP(string competence_recherche, string CP, vect
 	return liste_poste_correspondants;
 }
 
-vector<Employer> recherche_employer_par_comp(string competence_recherche, vector<Employer> &employers)
+vector<Chomeur> recherche_chomeur_par_comp(string competence_recherche, vector<Chomeur> &chomeurs)
 {
-	vector<Employer> liste_employer_correspondant;
+	vector<Chomeur> liste_chomeur_correspondant;
 
-	for (size_t i = 0; i < employers.size(); i++)
+	for (size_t i = 0; i < chomeurs.size(); i++)
 	{
-		for (size_t j = 0; j < employers[i].getSkill().size(); j++)
+		for (size_t j = 0; j < chomeurs[i].getSkill().size(); j++)
 		{
-			if (competence_recherche.compare(employers[i].getSkill()[j]) == 0)
+			if (competence_recherche.compare(chomeurs[i].getSkill()[j]) == 0)
 			{
-				liste_employer_correspondant.push_back(employers[i]);
+				liste_chomeur_correspondant.push_back(chomeurs[i]);
 			}
 		}
 	}
-	return liste_employer_correspondant;
+	return liste_chomeur_correspondant;
 }
 
-vector<Employer> recherche_employer_par_comp_CP(string competence_recherche, string CP, vector<Employer> &employers)
+vector<Chomeur> recherche_chomeur_par_comp_CP(string competence_recherche, string CP, vector<Chomeur> &chomeurs)
 {
-	vector<Employer> liste_employer_correspondant;
+	vector<Chomeur> liste_chomeur_correspondant;
 
-	for (size_t i = 0; i < employers.size(); i++)
+	for (size_t i = 0; i < chomeurs.size(); i++)
 	{
-		for (size_t j = 0; j < employers[i].getSkill().size(); j++)
+		for (size_t j = 0; j < chomeurs[i].getSkill().size(); j++)
 		{
-			if (competence_recherche.compare(employers[i].getSkill()[j]) == 0)
+			if (competence_recherche.compare(chomeurs[i].getSkill()[j]) == 0)
 			{
-				if (employers[i].getCode() == CP)
+				if (chomeurs[i].getCode() == CP)
 				{
-					liste_employer_correspondant.push_back(employers[i]);
+					liste_chomeur_correspondant.push_back(chomeurs[i]);
 				}
 			}
 		}
 	}
-	return liste_employer_correspondant;
+	return liste_chomeur_correspondant;
 }
 
 void ajout_employer_entreprise(Employer &empl, int id_entreprise, vector<Entreprise> &entreprises)
