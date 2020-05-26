@@ -1,0 +1,34 @@
+2020-05-26.18:47:05 :  Début des test
+2020-05-26.18:47:05 : Aucun problème tous les test passent
+2020-05-26.18:51:15 :  Début des test
+2020-05-26.18:51:15 : Aucun problème tous les test passent
+2020-05-26.19:12:38 :  Début des test
+2020-05-26.19:12:38 : Ajout d'un chomeur à la base de donnée
+2020-05-26.19:12:38 : Suppression d'un chomeur
+2020-05-26.19:12:38 : Ajout d'une entreprise à la base de donnée
+2020-05-26.19:12:38 : Suppression d'une entreprise
+2020-05-26.19:12:38 : Ajout d'un employé à la base de donnée
+2020-05-26.19:12:38 : Suppression d'un employé
+2020-05-26.19:12:38 : Ajout d'un chomeur à la base de donnée
+2020-05-26.19:12:38 : Suppression d'un chomeur
+2020-05-26.19:12:38 : Ajout d'un poste à la base de donnée
+2020-05-26.19:12:38 : Suppression d'un poste à pourvoir
+2020-05-26.19:12:38 : Ajout d'une entreprise à la base de donnée
+2020-05-26.19:12:38 : Suppression d'une entreprise
+2020-05-26.19:12:38 : Ajout d'une entreprise à la base de donnée
+2020-05-26.19:12:38 : Suppression d'une entreprise
+2020-05-26.19:12:38 : Ajout d'un employé à la base de donnée
+2020-05-26.19:12:38 : Suppression d'un employé
+2020-05-26.19:12:38 : Ajout d'un chomeur à la base de donnée
+2020-05-26.19:12:38 : Suppression d'un chomeur
+2020-05-26.19:12:38 : Ajout d'une entreprise à la base de donnée
+2020-05-26.19:12:38 : Suppression d'une entreprise
+2020-05-26.19:12:38 : Ajout d'un poste à la base de donnée
+2020-05-26.19:12:38 : Suppression d'un poste à pourvoir
+2020-05-26.19:12:38 : Suppression d'un employé
+2020-05-26.19:12:38 : Ajout d'un chomeur à la base de donnée
+2020-05-26.19:12:38 : Un employé est devenu chomeur
+2020-05-26.19:12:38 : Suppression d'un chomeur
+2020-05-26.19:12:38 : Ajout d'un employé à la base de donnée
+2020-05-26.19:12:38 : Un chomeur à trouvé un emploi !
+2020-05-26.19:12:38 : Aucun problème tous les test passent
