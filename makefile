@@ -48,15 +48,15 @@ build/main.o: run/main.cpp | build/
 build/test: build/test.o build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o | build/
 	$(cc) -o build/test build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o build/test.o 
 
-build/main: build/main.o build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o | build/
-	$(cc) -o build/main build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o build/main.o 
+build/LuminIn: build/main.o build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o | build/
+	$(cc) -o build/LuminIn build/Poste.o build/Entreprise.o build/Personne.o build/Chomeur.o build/Employer.o build/Parse.o build/Service.o build/menu.o build/ajout.o build/log.o build/main.o 
 
 
 # S'assure de l'existence tout les programmes finaux (application, test, etc.)
 # Par exemple : all: build/test build/appli
 test: build/test
 
-run: build/main
+run: build/LuminIn
 
 all: test
 
