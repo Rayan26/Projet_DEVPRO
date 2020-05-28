@@ -464,5 +464,5 @@ int main()
 
      
      journal.msg("Aucun problème tous les test passent");
-     return  0;
+     return 0;
 }
