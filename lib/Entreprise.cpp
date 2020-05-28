@@ -73,7 +73,6 @@ void Entreprise::printInfo() const
 {
 
 	cout << "" << endl;
-	cout << "ID : " << _id << endl;
 	cout << "Entreprise : " << _nom << endl;
 	cout << "Mail : " << _mail << endl;
 	cout << "Code Postal : " << _code << endl;

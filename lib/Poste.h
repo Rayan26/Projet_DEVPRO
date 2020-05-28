@@ -43,6 +43,5 @@ private:
 /*
  *  Affiche le vecteur de toutes les Postes existant dans la BDD dynamique
  */
-void affichage_vecteur_Poste(std::vector<Poste> empl);
 
 #endif

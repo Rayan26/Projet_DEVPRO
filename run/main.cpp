@@ -1,6 +1,5 @@
 #include "menu.h"
 
-
 int main()
 {
 	Log journal("Lancement du programme");

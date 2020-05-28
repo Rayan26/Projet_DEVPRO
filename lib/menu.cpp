@@ -40,7 +40,7 @@ int onInputPrincipal()
 	{
 		onInputPrincipal();
 	}
-	
+
 	return 1;
 }
 
@@ -72,7 +72,6 @@ int onInputEntreprise()
 	{
 		onInputEntreprise();
 	}
-	
 
 	return 1;
 }
@@ -105,7 +104,7 @@ int onInputEmployer()
 	{
 		onInputEmployer();
 	}
-	
+
 	return 1;
 }
 
@@ -137,7 +136,6 @@ int onInputChomeur()
 	{
 		onInputChomeur();
 	}
-	
 
 	return 1;
 }
@@ -185,7 +183,6 @@ int onInputIntEntreprise()
 	{
 		onInputIntEntreprise();
 	}
-	
 
 	return 1;
 }
@@ -222,6 +219,10 @@ int onInputIntChomeur()
 	else if (input == '4')
 	{
 		rechercher_poste_a_pourvoir();
+	}
+	else if (input == '5')
+	{
+		rechercher_parmi_ancien_collegue();
 	}
 	else
 	{
@@ -262,6 +263,10 @@ int onInputIntEmployer()
 	else if (input == '4')
 	{
 		rechercher_poste_a_pourvoir();
+	}
+	else if (input == '5')
+	{
+		rechercher_parmi_ancien_collegue();
 	}
 	else
 	{
@@ -384,7 +389,8 @@ void affichage_menu_intermediaire_chomeur()
 	cout << "1. Modifier votre profil" << endl
 		 << "2. Faire une transition vers employé" << endl
 		 << "3. Supprimer son profil" << endl
-		 << "4. Faire une recherche de poste à pourvoir";
+		 << "4. Faire une recherche de poste à pourvoir" << endl
+		 << "5. Rechercher parmi vos anciens collègues" << endl;
 	cout << endl
 		 << "\nVotre choix ('q' pour quitter, 'p' pour menu précédent) : ";
 	onInputIntChomeur();
@@ -405,7 +411,8 @@ void affichage_menu_intermediaire_employer()
 	cout << "1. Modifier votre profil" << endl
 		 << "2. Faire une transition vers chercheur d'emploi" << endl
 		 << "3. Supprimer son profil" << endl
-		 << "4. Faire une recherche de poste à pourvoir";
+		 << "4. Faire une recherche de poste à pourvoir" << endl
+		 << "5. Rechercher parmi vos anciens collègues" << endl;
 	cout << endl
 		 << "Votre choix ('q' pour quitter, 'p' pour menu précédent) : ";
 	onInputIntEmployer();
@@ -1491,7 +1498,7 @@ DEBSUPPRPOSTE:
 	}
 
 	cout << "\n\nVoici les différents postes de votre entreprise : \n";
-	affichage_vecteur_Poste(postes_entre);
+	affichage_vecteur_Poste(postes_entre, Entreprises);
 	cout << "\nVeuillez rentrer l'ID du poste que vous souhaitez supprimer \n";
 	string input_poste;
 	cin >> input_poste;
@@ -1585,5 +1592,138 @@ DEBRECHEMPLOI:
 
 void rechercher_poste_a_pourvoir()
 {
-	
+DEBRECHPOSTE:
+	cout << "\nVeuillez préciser votre recherche de poste: uniquement par compétences, ou par compétences et code postal? \n"
+		 << " -> 1. Uniquement par Compétences \n"
+		 << " -> 2. Par Compétences et Code Postal \n";
+	string input;
+	cin >> input;
+
+	if (input == "1")
+	{
+		string comp_chomeur1;
+		cout << "\n Pour quelle compétence souhaitez vous trouver un job? \n";
+		cin >> comp_chomeur1;
+
+		cout << "\n Voici les jobs correspondant : \n";
+		affichage_vecteur_Poste(recherche_par_comp(comp_chomeur1, Postes), Entreprises);
+		if ((recherche_par_comp(comp_chomeur1, Postes), Entreprises).size() == 0)
+			cout << "Il n'existe pas de postes correspondants \n\n";
+
+		cout << "\n \n Pour revenir en arrière: entrez 'r', pour quitter : entrez 'q'\n";
+		string new_input1;
+		cin >> new_input1;
+		if (new_input1 == "r")
+			goto DEBRECHPOSTE;
+		else if (new_input1 == "q")
+			exit(0);
+	}
+
+	else if (input == "2")
+	{
+		string comp_chomeur2;
+		string cp;
+		cout << "\nPour quelle compétence souhaitez vous trouver un job? \n";
+		cin >> comp_chomeur2;
+		cout << "\nQuel Code Postal souhaitez-vous considérer? \n";
+		cin >> cp;
+
+		cout << "\nVoici les postes correspondant : \n";
+		affichage_vecteur_Poste(recherche_par_comp_CP(comp_chomeur2, cp, Postes, Entreprises), Entreprises);
+		if ((recherche_par_comp_CP(comp_chomeur2, cp, Postes, Entreprises), Entreprises).size() == 0)
+			cout << "Il n'existe pas de postes correspondants \n\n";
+		cout << "\n \nPour revenir en arrière: entrez 'r', pour quitter : entrez 'q'\n";
+		string new_input1;
+		cin >> new_input1;
+		if (new_input1 == "r")
+			goto DEBRECHPOSTE;
+		else if (new_input1 == "q")
+			exit(0);
+	}
+}
+
+void rechercher_parmi_ancien_collegue()
+{
+	system("clear");
+DEBRECHANCIENCOLLEGUE:
+	cout << "\nVoulez vous chercher vos anciens collègues par entreprise ou par compétence? \n"
+		 << " -> 1. Par entreprise \n"
+		 << " -> 2. Par compétence \n";
+	string input;
+	cin >> input;
+
+	Employer *empl;
+	Chomeur *chom;
+	vector<int> id_ancien_collegues;
+
+	bool verifempl = false;
+
+	for (size_t i = 0; i < Employers.size(); i++)
+	{
+		if (Employers[i].getIdPersonne() == idUtilisateur)
+		{
+			verifempl = true;
+		}
+	}
+
+	if (verifempl == true)
+	{
+		empl = get_employers(idUtilisateur, Employers);
+		id_ancien_collegues = empl->get_Anciens_collegues();
+	}
+
+	else
+	{
+		chom = get_chomeur(idUtilisateur, Chomeurs);
+		id_ancien_collegues = chom->get_Anciens_collegues();
+	}
+
+	if (input == "1")
+	{
+		cout << "Veuillez saisir le nom de l'entreprise \n";
+		string input_entre;
+		cin >> input_entre;
+		cout << "Voici la liste de vos anciens collègues correspondant : \n";
+		recherche_ancien_collegue_entreprise(id_ancien_collegues, Employers, Entreprises, input_entre);
+
+	DEBDEBDEB:
+		cout << "\n \n Pour revenir en arrière: entrez 'r', pour revenir au menu principal, entrez 'p', pour quitter : entrez 'q'\n";
+		string new_input1;
+		cin >> new_input1;
+
+		if (new_input1 == "r")
+			goto DEBRECHANCIENCOLLEGUE;
+		else if (new_input1 == "q")
+			exit(0);
+		else if (new_input1 == "p")
+			affichage_menu_principal();
+		else
+		{
+			goto DEBDEBDEB;
+		}
+	}
+	else if (input == "2")
+	{
+		cout << "Veuillez saisir la compétence recherchée \n";
+		string input_comp;
+		cin >> input_comp;
+		cout << "Voici la liste de vos anciens collègues correspondant : \n";
+		recherche_ancien_collegue_competence(id_ancien_collegues, Employers, Chomeurs, input_comp);
+
+	DEBDEBDEB1:
+		cout << "\n \n Pour revenir en arrière: entrez 'r', pour revenir au menu principal, entrez 'p', pour quitter : entrez 'q'\n";
+		string new_input1;
+		cin >> new_input1;
+
+		if (new_input1 == "r")
+			goto DEBRECHANCIENCOLLEGUE;
+		else if (new_input1 == "q")
+			exit(0);
+		else if (new_input1 == "p")
+			affichage_menu_principal();
+		else
+		{
+			goto DEBDEBDEB1;
+		}
+	}
 }
