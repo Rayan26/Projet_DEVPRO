@@ -459,8 +459,10 @@ int main()
      }
      assert(verif_test == true);
 
-     // affichage_menu_principal();
+     //affichage_menu_principal();
 
+
+     
      journal.msg("Aucun problème tous les test passent");
      return 0;
 }

@@ -59,21 +59,11 @@ void Poste::addCompetence(string const newcompetence)
 void Poste::printInfo() const
 {
 	cout << "" << endl;
-	cout << "ID du poste : " << _id << endl;
 	cout << "Titre du poste : " << _Titre << endl;
 
 	cout << " Compétence requise pour ce poste : " << endl;
 	for (size_t i(1); i <= _Competences.size(); ++i)
 	{
 		cout << "  " << _Competences[i - 1] << endl;
-	}
-
-}
-
-void affichage_vecteur_Poste(vector<Poste> post)
-{
-	for (int i = 0; i < (int)post.size(); i++)
-	{
-		post[i].printInfo();
 	}
 }

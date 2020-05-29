@@ -152,3 +152,81 @@ void ajout_employer_entreprise(Employer &empl, int id_entreprise, vector<Entrepr
 	assert(entre);
 	entre->addEmploye(empl.getIdPersonne());
 }
+
+void affichage_vecteur_Poste(vector<Poste> post, vector<Entreprise> entres)
+{
+	for (int i = 0; i < (int)post.size(); i++)
+	{
+		post[i].printInfo();
+		Entreprise *entre = get_entreprise(post[i].getIdEntreprise(), entres);
+		cout << "Entreprise : " << entre->getNom() << "\n \n";
+	}
+}
+
+void recherche_ancien_collegue_entreprise(vector<int> ancien_collegues, vector<Employer> Employers, vector<Entreprise> Entreprises, string nom_entreprise)
+{
+	int id_entreprise;
+	bool verif = false;
+	for (size_t i = 0; i < Entreprises.size(); i++)
+	{
+		if (Entreprises[i].getNom() == nom_entreprise)
+		{
+			verif = true;
+			id_entreprise = Entreprises[i].getId();
+		}
+	}
+
+	if (verif == false)
+	{
+		cout << "L'entreprise en question n'existe pas \n";
+	}
+
+	else
+	{
+		for (size_t i = 0; i < ancien_collegues.size(); i++)
+		{
+			Employer *empl = get_employers(ancien_collegues[i], Employers);
+			if (empl != NULL)
+			{
+				if (empl->getIdEntreprise() == id_entreprise)
+				{
+					empl->printInfo();
+				}
+			}
+		}
+	}
+}
+
+void recherche_ancien_collegue_competence(vector<int> ancien_collegues, vector<Employer> Employers, vector<Chomeur> Chomeurs, string competence)
+{
+	vector<string> competences;
+
+	for (size_t i = 0; i < ancien_collegues.size(); i++)
+	{
+		Employer *empl = get_employers(ancien_collegues[i], Employers);
+		if (empl != NULL)
+		{
+			competences = empl->getSkill();
+			for (size_t i = 0; i < competences.size(); i++)
+			{
+				if (competences[i] == competence)
+				{
+					empl->printInfo();
+				}
+			}
+		}
+
+		Chomeur *chom = get_chomeur(ancien_collegues[i], Chomeurs);
+		if (chom != NULL)
+		{
+			competences = chom->getSkill();
+			for (size_t i = 0; i < competences.size(); i++)
+			{
+				if (competences[i] == competence)
+				{
+					chom->printInfo();
+				}
+			}
+		}
+	}
+}

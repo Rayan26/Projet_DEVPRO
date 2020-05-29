@@ -128,7 +128,6 @@ void Personne::addAncienCollegue(int const Anciencollegue)
 void Personne::printInfo() const
 {
     cout << "" << endl;
-    cout << "ID de la personne : " << _id << endl;
     cout << "Monsieur : " << _nom << "  " << _prenom << endl;
     cout << "Mail : " << _mail << endl;
     cout << "Code Postal : " << _code << endl;

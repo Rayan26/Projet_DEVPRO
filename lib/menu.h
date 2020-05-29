@@ -118,3 +118,4 @@ void supprimer_poste();
 
 void rechercher_demandeur_emploi();
 void rechercher_poste_a_pourvoir();
+void rechercher_parmi_ancien_collegue();

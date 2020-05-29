@@ -1,7 +1,7 @@
-
-1,Untel,Michel,m_untel@google.com,13010,C++;Python,,2,2
-2,Mouse,Mickey,mickey@mickeyville.gov,77701,comedie,1,3,3
+id,nom,prenom,mail,code postal,competences,collegues,anciens collegues,entreprise
+1,Untel,Michel,m_untel@google.com,13010,C++;Python;muscu,,2,2
+2,Mouse,Mickey,mickey@mickeyville.gov,77701,comedie;muscu,1,3,3
 3,Mouse,Minnie,minnie@mickeyville.gov,77700,comedie;chant,2,,1
 7,Dumas,Jd,jd.dumas@gmail.com,13500,c++;gag;comedie;farceur,,,1
 8,Zouave,Marie-Pierre,marie.pierre@gmail.com,06600,tennis-de-table,,,2
-4,Duck,Donald,donal.duck@canardville.gov,77700,gag,1;8,2;3,2
+4,Duck,Donald,donal.duck@canardville.gov,77700,gag,1;8,2;3;10,2
